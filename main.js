@@ -121,12 +121,20 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.disabled = true;
             btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Sending…`;
 
+            const phone = form.querySelector('#phone')?.value || '';
+            const service = form.querySelector('#service')?.value || '';
+            const message = form.querySelector('#message')?.value || '';
+
+            // Robust Fallback: Append phone and service directly to the message body. 
+            // Even if the user's EmailJS template only has {{message}}, they will never lose the phone or service details.
+            const enhancedMessage = `${message}\n\n---\n[Client Details]\nPhone: ${phone}\nService Requested: ${service}`;
+
             const formData = {
                 from_name:    form.querySelector('#name')?.value    || '',
                 from_email:   form.querySelector('#email')?.value   || '',
-                phone:        form.querySelector('#phone')?.value   || '',
-                service:      form.querySelector('#service')?.value || '',
-                message:      form.querySelector('#message')?.value || '',
+                phone:        phone,
+                service:      service,
+                message:      enhancedMessage,
             };
 
             try {
@@ -156,6 +164,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 4000);
             }
         });
+
+        // ── Auto-fill Form fields from URL Query Parameters ──
+        const urlParams = new URLSearchParams(window.location.search);
+        const pkg = urlParams.get('package');
+        const caregiver = urlParams.get('caregiver');
+        
+        if (pkg) {
+            const serviceSelect = form.querySelector('#service');
+            if (serviceSelect) {
+                // If package query is set, we select the 'other' or a default option
+                serviceSelect.value = 'other';
+            }
+            const messageTextarea = form.querySelector('#message');
+            if (messageTextarea) {
+                messageTextarea.value = `Hello Haven Hands, I would like to inquire about the ${pkg} Package and get matched with a caregiver.`;
+            }
+        }
+        
+        if (caregiver) {
+            const messageTextarea = form.querySelector('#message');
+            if (messageTextarea) {
+                messageTextarea.value = `Hello Haven Hands, I am interested in requesting an interview with caregiver: ${caregiver}.`;
+            }
+        }
     }
 
     /* ── Smooth scroll for anchor links ── */
