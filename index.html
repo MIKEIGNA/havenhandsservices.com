@@ -69,6 +69,15 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
+
+<!-- SPLASH SCREEN -->
+<div class="splash-screen" id="splashScreen">
+    <div class="splash-content">
+        <img src="logo.png" alt="Haven Hands Logo" class="splash-logo">
+        <div class="splash-text">Haven Hands</div>
+    </div>
+</div>
+
 <div class="site-wrapper">
 
 <!-- ══════════════════════════════════════
@@ -83,8 +92,20 @@
             <li><a href="index.html" class="active">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="services.html">Services</a></li>
-            <li><a href="workers.html">Our Workers</a></li>
-            <li><a href="pricing.html">Pricing</a></li>
+            <li class="has-dropdown">
+                <a href="workers.html">Workers</a>
+                <div class="dropdown-menu">
+                    <a href="workers.html">Available Caregivers</a>
+                    <a href="caregivers.html">Apply as Caregiver</a>
+                </div>
+            </li>
+            <li class="has-dropdown">
+                <a href="pricing.html">Pricing</a>
+                <div class="dropdown-menu">
+                    <a href="pricing.html#employers">For Employers</a>
+                    <a href="pricing.html#training">Training Program</a>
+                </div>
+            </li>
             <li><a href="blog/index.html">Blog</a></li>
             <li><a href="contact.html" class="btn btn-primary btn-sm">Get Started</a></li>
         </ul>
@@ -100,63 +121,17 @@
 <section class="hero" id="home">
     <div class="container hero-grid">
         <div class="hero-text" data-reveal="left">
-            <h1>Finding the right househelp<br><span>shouldn't feel like a gamble</span></h1>
+            <h1>Karibu — tafuta mtu sahihi<br><span>kwa nyumba yako</span></h1>
             <p class="hero-sub">We connect Nairobi families with caregivers who've been properly vetted, trained, and are genuinely good at what they do. No guesswork. No stress.</p>
             <div class="hero-ctas">
-                <a href="contact.html" class="btn btn-primary btn-lg">Talk to Us</a>
-                <a href="workers.html" class="btn btn-outline btn-lg">See Who's Available</a>
+                <a href="workers.html" class="btn btn-primary btn-lg">See Who's Available</a>
+                <a href="contact.html" class="btn btn-outline btn-lg">Talk to Us</a>
             </div>
         </div>
         <div class="hero-img-wrap" data-reveal="right">
             <div class="img-frame">
                 <img src="hero-new.jpg" alt="Professional caregiver in a Nairobi home" loading="eager">
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     SERVICES OVERVIEW
-══════════════════════════════════════ -->
-<section class="section-pad bg-off-white" id="services">
-    <div class="container">
-        <div class="section-header centered" data-reveal>
-            <span class="section-tag">What We Do</span>
-            <h2 class="section-title">The kind of help <span>your home actually needs</span></h2>
-            <p class="section-intro">Whether it's a nanny for the kids, someone to keep the house running, or care for an elderly parent — we have people for that.</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card" data-reveal data-delay="100">
-                <div class="service-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                </div>
-                <h3>House Helps</h3>
-                <p>Cooking, cleaning, laundry, grocery runs — the person who keeps your household running while you're at work or handling other things.</p>
-            </div>
-            <div class="service-card" data-reveal data-delay="200">
-                <div class="service-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                </div>
-                <h3>Nannies</h3>
-                <p>People who genuinely love working with children. They handle school runs, homework, meals, and keep your kids safe and happy.</p>
-            </div>
-            <div class="service-card" data-reveal data-delay="300">
-                <div class="service-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                </div>
-                <h3>Elderly Care</h3>
-                <p>Compassionate support for aging parents or grandparents — medication reminders, companionship, light housekeeping, and daily assistance.</p>
-            </div>
-            <div class="service-card" data-reveal data-delay="400">
-                <div class="service-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                </div>
-                <h3>Caregiver Training</h3>
-                <p>We also train caregivers ourselves — everything from first aid and kitchen hygiene to professional communication and financial basics.</p>
-            </div>
-        </div>
-        <div class="text-center mt-4" data-reveal>
-            <a href="services.html" class="btn btn-outline">Learn More</a>
         </div>
     </div>
 </section>
@@ -169,28 +144,23 @@
         <div class="section-header centered" data-reveal>
             <span class="section-tag">How It Works</span>
             <h2 class="section-title">It's actually pretty <span>straightforward</span></h2>
-            <p class="section-intro">No long forms. No complicated process. Just tell us what you need and we'll sort it out.</p>
+            <p class="section-intro">No long forms. No complicated process. Just three simple steps.</p>
         </div>
         <div class="steps-grid">
             <div class="step-card" data-reveal data-delay="100">
                 <div class="step-num">1</div>
-                <h4>Tell us what you need</h4>
-                <p>Call, WhatsApp, or fill in the form. Let us know what kind of help you're looking for and any specific requirements.</p>
+                <h4>Browse profiles</h4>
+                <p>Look through our caregivers. See who's available, their experience, and what they're good at.</p>
             </div>
             <div class="step-card" data-reveal data-delay="200">
                 <div class="step-num">2</div>
-                <h4>We shortlist for you</h4>
-                <p>Within a few days, we'll send you 2-3 caregivers who match what you're looking for. All vetted, all trained.</p>
+                <h4>Request an interview</h4>
+                <p>Found someone you like? Request an interview directly through WhatsApp. We'll arrange the details.</p>
             </div>
             <div class="step-card" data-reveal data-delay="300">
                 <div class="step-num">3</div>
-                <h4>You interview and choose</h4>
-                <p>Meet the candidates, ask your questions, and pick the one you're comfortable with. No pressure at all.</p>
-            </div>
-            <div class="step-card" data-reveal data-delay="400">
-                <div class="step-num">4</div>
                 <h4>We follow up</h4>
-                <p>After placement, we check in with both you and the caregiver to make sure everything is working well.</p>
+                <p>After placement, we check in to make sure everything is working well for both you and the caregiver.</p>
             </div>
         </div>
     </div>
@@ -249,6 +219,7 @@
                 </div>
                 <div class="worker-info">
                     <span class="worker-type">House Help</span>
+                    <span class="worker-status available">Available</span>
                     <div class="worker-name">Grace M.</div>
                     <div class="worker-exp">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -256,7 +227,7 @@
                     </div>
                     <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">Good with cooking, cleaning, and keeping a house organised. Previously worked in Kilimani.</p>
                     <div class="worker-actions">
-                        <a href="contact.html?caregiver=Grace%20M" class="btn btn-primary btn-sm">Request Interview</a>
+                        <a href="https://wa.me/254118971254?text=Hello%20Haven%20Hands%2C%20I%27d%20like%20to%20request%20an%20interview%20with%20Grace%20M.%20for%20a%20House%20Help%20role." target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Request Interview</a>
                     </div>
                 </div>
             </div>
@@ -267,6 +238,7 @@
                 </div>
                 <div class="worker-info">
                     <span class="worker-type">Nanny</span>
+                    <span class="worker-status available">Available</span>
                     <div class="worker-name">Faith W.</div>
                     <div class="worker-exp">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -274,7 +246,7 @@
                     </div>
                     <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">Great with young children. Knows first aid, does homework help, and prepares healthy meals. Parents love her.</p>
                     <div class="worker-actions">
-                        <a href="contact.html?caregiver=Faith%20W" class="btn btn-primary btn-sm">Request Interview</a>
+                        <a href="https://wa.me/254118971254?text=Hello%20Haven%20Hands%2C%20I%27d%20like%20to%20request%20an%20interview%20with%20Faith%20W.%20for%20a%20Nanny%20role." target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Request Interview</a>
                     </div>
                 </div>
             </div>
@@ -285,6 +257,7 @@
                 </div>
                 <div class="worker-info">
                     <span class="worker-type">Domestic Manager</span>
+                    <span class="worker-status booked">Booked for Interview</span>
                     <div class="worker-name">Joyce A.</div>
                     <div class="worker-exp">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -292,7 +265,7 @@
                     </div>
                     <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">Can run an entire household. Meal prep, elderly care, managing other staff — she's done it all. Based in Karen.</p>
                     <div class="worker-actions">
-                        <a href="contact.html?caregiver=Joyce%20A" class="btn btn-primary btn-sm">Request Interview</a>
+                        <a href="https://wa.me/254118971254?text=Hello%20Haven%20Hands%2C%20I%27d%20like%20to%20request%20an%20interview%20with%20Joyce%20A.%20for%20a%20Domestic%20Manager%20role." target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Request Interview</a>
                     </div>
                 </div>
             </div>

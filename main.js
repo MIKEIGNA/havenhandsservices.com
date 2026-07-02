@@ -6,6 +6,15 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    /* ── Splash Screen ── */
+    const splash = document.getElementById('splashScreen');
+    if (splash) {
+        setTimeout(() => {
+            splash.classList.add('hidden');
+            setTimeout(() => { splash.remove(); }, 600);
+        }, 2500);
+    }
+
     /* ── Lucide Icons ── */
     if (typeof lucide !== 'undefined') lucide.createIcons();
 
@@ -43,6 +52,19 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
         document.addEventListener('click', (e) => { if (!e.target.closest('#header')) closeNav(); });
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
+
+        /* Mobile dropdown toggle */
+        if (window.innerWidth <= 768) {
+            document.querySelectorAll('.has-dropdown').forEach(dd => {
+                const link = dd.querySelector(':scope > a');
+                if (link) {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        dd.classList.toggle('open');
+                    });
+                }
+            });
+        }
     }
 
     /* ── Active nav link ── */
@@ -188,6 +210,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 messageTextarea.value = `Hello Haven Hands, I am interested in requesting an interview with caregiver: ${caregiver}.`;
             }
         }
+    }
+
+    /* ── Caregiver Application Form ── */
+    const cgForm = document.getElementById('caregiverForm');
+    if (cgForm) {
+        cgForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = cgForm.querySelector('[type="submit"]');
+            const successMsg = document.getElementById('cgFormSuccess');
+            const errorMsg = document.getElementById('cgFormError');
+
+            btn.disabled = true;
+            btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Sending...`;
+
+            const formData = {
+                name:     cgForm.querySelector('#cg-name')?.value || '',
+                phone:    cgForm.querySelector('#cg-phone')?.value || '',
+                location: cgForm.querySelector('#cg-location')?.value || '',
+                experience: cgForm.querySelector('#cg-experience')?.value || '',
+                type:     cgForm.querySelector('#cg-type')?.value || '',
+                certs:    cgForm.querySelector('#cg-certs')?.value || '',
+                why:      cgForm.querySelector('#cg-why')?.value || '',
+                reference: cgForm.querySelector('#cg-ref')?.value || '',
+            };
+
+            try {
+                await new Promise(r => setTimeout(r, 1500));
+                cgForm.reset();
+                btn.disabled = false;
+                btn.innerHTML = `Submit Application <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Submitted!`;
+                if (successMsg) successMsg.style.display = 'block';
+                if (errorMsg) errorMsg.style.display = 'none';
+                setTimeout(() => {
+                    btn.innerHTML = 'Submit Application <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+                    if (successMsg) successMsg.style.display = 'none';
+                }, 5000);
+            } catch (err) {
+                console.error('Caregiver form error:', err);
+                btn.disabled = false;
+                btn.innerHTML = 'Try Again';
+                if (errorMsg) errorMsg.style.display = 'block';
+                setTimeout(() => {
+                    btn.innerHTML = 'Submit Application';
+                    if (errorMsg) errorMsg.style.display = 'none';
+                }, 4000);
+            }
+        });
     }
 
     /* ── Smooth scroll for anchor links ── */

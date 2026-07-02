@@ -45,8 +45,20 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="services.html">Services</a></li>
-            <li><a href="workers.html">Our Workers</a></li>
-            <li><a href="pricing.html" class="active">Pricing</a></li>
+            <li class="has-dropdown">
+                <a href="workers.html">Workers</a>
+                <div class="dropdown-menu">
+                    <a href="workers.html">Available Caregivers</a>
+                    <a href="caregivers.html">Apply as Caregiver</a>
+                </div>
+            </li>
+            <li class="has-dropdown">
+                <a href="pricing.html" class="active">Pricing</a>
+                <div class="dropdown-menu">
+                    <a href="pricing.html#employers">For Employers</a>
+                    <a href="pricing.html#training">Training Program</a>
+                </div>
+            </li>
             <li><a href="blog/index.html">Blog</a></li>
             <li><a href="contact.html" class="btn btn-primary btn-sm">Get Started</a></li>
         </ul>
@@ -62,9 +74,13 @@
 <section class="page-hero">
     <div class="container page-hero-grid">
         <div class="page-hero-content" data-reveal="left">
-            <span class="section-tag">Affordable Packages</span>
-            <h1>Our Placement <span>Pricing Plans</span></h1>
-            <p class="sub">Transparent, flat-rate placement packages for trusted domestic helpers. No hidden fees, no agency commission cuts on caregiver salaries.</p>
+            <span class="section-tag">Transparent Pricing</span>
+            <h1>What it costs <span>to get started</span></h1>
+            <p class="sub">No hidden fees. No commission cuts on caregiver salaries. Choose what works for your family.</p>
+            <div class="hero-ctas">
+                <a href="#employers" class="btn btn-primary">For Employers</a>
+                <a href="#training" class="btn btn-outline">For Caregivers</a>
+            </div>
         </div>
         <div class="page-hero-img" data-reveal="right">
             <img src="hero-new.jpg" alt="Affordable nanny and housekeeper placement Kenya">
@@ -72,13 +88,13 @@
     </div>
 </section>
 
-<!-- PRICING SECTION -->
-<section class="section-pad">
+<!-- FOR EMPLOYERS -->
+<section class="section-pad" id="employers">
     <div class="container">
         <div class="section-header centered" data-reveal>
-            <span class="section-tag">Packages</span>
-            <h2 class="section-title">Domestic Manager &amp; Nannies</h2>
-            <p class="section-intro">Choose the right vetting and training tier for your family's needs.</p>
+            <span class="section-tag">For Employers</span>
+            <h2 class="section-title">Placement <span>Packages</span></h2>
+            <p class="section-intro">Choose the vetting and training tier for your family's needs. One-time fee, no monthly charges.</p>
         </div>
 
         <div class="pricing-grid">
@@ -180,17 +196,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- PRICING FAQ -->
-<section class="section-pad bg-light" id="faq">
-    <div class="container container-narrow">
-        <div class="section-header centered" data-reveal>
-            <span class="section-tag">Pricing Questions</span>
-            <h2 class="section-title">Pricing &amp; <span>Packages FAQ</span></h2>
-        </div>
-        <div class="faq-list" data-reveal>
+        <div class="faq-list" style="margin-top: 3rem;" data-reveal>
             <div class="faq-item open">
                 <div class="faq-q">
                     <span>What does the placement fee cover?</span>
@@ -211,6 +218,81 @@
                     <span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
                 </div>
                 <div class="faq-a"><p>With our Gold package, we offer a free replacement guarantee within the first 3 months of placement. If the match is not successful for any reason, we will match you with another candidate at no additional cost.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOR CAREGIVERS — TRAINING -->
+<section class="section-pad bg-light" id="training">
+    <div class="container">
+        <div class="section-header centered" data-reveal>
+            <span class="section-tag">For Caregivers</span>
+            <h2 class="section-title">Training <span>Program</span></h2>
+            <p class="section-intro">Want to join Haven Hands? Here's what the training costs and what you get.</p>
+        </div>
+        <div class="container-narrow" data-reveal>
+            <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h3 style="margin: 0;">Registration Fee</h3>
+                        <p style="color: var(--text-muted); margin: 0.25rem 0 0;">One-time, non-refundable</p>
+                    </div>
+                    <div style="font-size: 1.75rem; font-weight: 700; color: var(--primary);">KES 500</div>
+                </div>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="padding: 0.5rem 0; border-top: 1px solid var(--border-light); display: flex; align-items: center; gap: 0.75rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Background check processing
+                    </li>
+                    <li style="padding: 0.5rem 0; border-top: 1px solid var(--border-light); display: flex; align-items: center; gap: 0.75rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Profile creation and listing
+                    </li>
+                    <li style="padding: 0.5rem 0; border-top: 1px solid var(--border-light); display: flex; align-items: center; gap: 0.75rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Access to 2-week training program
+                    </li>
+                </ul>
+            </div>
+            <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem;">
+                <h4 style="margin-bottom: 0.75rem;">What's Included in Training</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">10 modules covering everything from professional communication to financial literacy. Delivered over 2 weeks in-person.</p>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <span style="color: var(--primary); font-weight: 600;">01</span> Professional Communication &amp; Etiquette
+                    </li>
+                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <span style="color: var(--primary); font-weight: 600;">02</span> Housekeeping &amp; Home Management
+                    </li>
+                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <span style="color: var(--primary); font-weight: 600;">03</span> Childcare Support Basics
+                    </li>
+                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <span style="color: var(--primary); font-weight: 600;">04</span> Digital Literacy Skills
+                    </li>
+                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <span style="color: var(--primary); font-weight: 600;">05</span> First Aid &amp; Home Safety
+                    </li>
+                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <span style="color: var(--primary); font-weight: 600;">06</span> Food Handling &amp; Kitchen Hygiene
+                    </li>
+                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <span style="color: var(--primary); font-weight: 600;">07</span> Operation of Household Appliances
+                    </li>
+                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <span style="color: var(--primary); font-weight: 600;">08</span> Laundry &amp; Garment Care
+                    </li>
+                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <span style="color: var(--primary); font-weight: 600;">09</span> Mindset Transformation &amp; Professionalism
+                    </li>
+                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <span style="color: var(--primary); font-weight: 600;">10</span> Financial Literacy &amp; Personal Growth
+                    </li>
+                </ul>
+            </div>
+            <div class="text-center" style="margin-top: 2rem;">
+                <a href="caregivers.html" class="btn btn-primary btn-lg">Apply as Caregiver</a>
             </div>
         </div>
     </div>
