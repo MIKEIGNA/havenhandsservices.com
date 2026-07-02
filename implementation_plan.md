@@ -5,7 +5,7 @@
 A complete rebuild of **havenhandsservices.com** as a clean, new set of static HTML/CSS/JS files in the same directory. The revamped site will use the brand-correct teal palette (`#006A71`), feature all the new deliverables (Workers/housekeeper profiles, blog section, WhatsApp integration, branded contact form, testimonials, "How It Works", trust badges), and be structured so that any non-technical person can edit content easily.
 
 > [!IMPORTANT]
-> **No PHP — Pure HTML/CSS/JS**: PHP is not needed and adds deployment friction. A static site can do everything required (blog, profiles, contact form via EmailJS). Blog articles will be separate HTML files in a `blog/` folder — easy to duplicate and edit. Caregiver profiles will be editable card snippets in a single `workers.html` file.
+> **No PHP — Pure HTML/CSS/JS**: PHP is not needed and adds deployment friction. A static site can do everything required (blog, profiles, contact form via EmailJS). Blog articles will be separate HTML files in a `blog/` folder — easy to duplicate and edit. Staff profiles will be editable card snippets in a single `workers.html` file.
 
 > [!IMPORTANT]
 > **Separate new build, original preserved**: All new files will be created fresh in the same root directory. The old files (index.html, style1bce.css, etc.) will remain untouched until you're ready to swap in.
@@ -19,7 +19,7 @@ A complete rebuild of **havenhandsservices.com** as a clean, new set of static H
 | **Wrong brand colors** | CSS uses purple/pink HSL instead of `#006A71` teal |
 | **Google Form CTA** | Sends users off-site — kills conversions |
 | **No testimonials** | Zero social proof shown anywhere |
-| **No caregiver profile cards** | "Caregivers" page only talks about training, no actual worker listings |
+| **No Staff profile cards** | "Staff" page only talks about training, no actual worker listings |
 | **No blog section** | Missed major SEO opportunity |
 | **No WhatsApp button** | Direct communication channel missing |
 | **No "How It Works"** | Process is unclear, creates friction |
@@ -37,8 +37,8 @@ havenhandsservices.com/
 ├── index.html          ← Revamped homepage (replaces current)
 ├── about.html          ← Revamped about page
 ├── services.html       ← Revamped services page
-├── workers.html        ← NEW: Housekeeper profiles (replaces caregivers.html concept)
-├── caregivers.html     ← Revamped: For job-seekers / join us
+├── workers.html        ← NEW: Housekeeper profiles (replaces Staff.html concept)
+├── Staff.html     ← Revamped: For job-seekers / join us
 ├── pricing.html        ← Revamped pricing page
 ├── contact.html        ← Revamped contact with branded form + WhatsApp
 ├── blog/
@@ -76,12 +76,12 @@ Enhanced JS: sticky header, mobile menu, scroll animations, contact form (EmailJ
 
 ### [NEW] index.html — Homepage
 Sections:
-1. **Hero** — Strong headline, sub-text, two CTAs ("Find a Caregiver" → contact, "See Our Workers" → workers.html), hero image
+1. **Hero** — Strong headline, sub-text, two CTAs ("Find a Staff" → contact, "See Our Workers" → workers.html), hero image
 2. **Trust Strip** — Logos/stats: "100+ Placements", "3–7 Day Match", "Background Checked", "Nairobi-Based"
 3. **Services Overview** — Cards: Full-time House Help, Professional Nannies, Childcare Support
 4. **How It Works** — 4-step process: Consult → Match → Interview → Place
 5. **Why Haven Hands** — 3 feature cards: Thorough Vetting, Expert Training, Ongoing Support
-6. **Featured Caregivers** — 3 preview profile cards linking to workers.html
+6. **Featured Staff** — 3 preview profile cards linking to workers.html
 7. **Testimonials** — 3–4 client testimonial cards with stars and names
 8. **Blog Preview** — 3 latest article cards linking to blog/
 9. **WhatsApp CTA** — Banner with direct WhatsApp link
@@ -91,12 +91,12 @@ Sections:
 
 ---
 
-### [NEW] workers.html — Housekeeper/Caregiver Profiles (Client-facing)
+### [NEW] workers.html — Housekeeper/Staff Profiles (Client-facing)
 > [!NOTE]
 > This is the major new page. Each card represents a real or sample worker. Structure is made dead-simple for editing — just copy-paste a `<div class="worker-card">` block and change the name/details.
 
 Sections:
-1. **Page Hero** — "Meet Our Caregivers" headline, filter bar
+1. **Page Hero** — "Meet Our Staff" headline, filter bar
 2. **Filter Controls** — Buttons: All | Nanny | House Help | Childcare (JS-powered filter)
 3. **Worker Grid** — Cards with: photo placeholder, name, specialty tag, experience, skills chips, "Request Interview" button (→ WhatsApp or contact.html)
 4. **CTA** — "Don't see the right fit? We'll find them for you."
@@ -115,14 +115,14 @@ Sections:
 - Category, date, author
 - Table of contents
 - Related articles at bottom
-- CTA at end: "Need a caregiver? Contact us"
+- CTA at end: "Need a Staff? Contact us"
 
 ---
 
 ### [MODIFY] about.html — Fully Revamped
 - Correct brand colors
 - Mission/Vision cards
-- Stats counter section (years, placements, caregivers trained)
+- Stats counter section (years, placements, Staff trained)
 - Team/founder section
 
 ### [MODIFY] services.html — Fully Revamped
@@ -142,7 +142,7 @@ Sections:
 - WhatsApp button prominent: "Chat on WhatsApp"
 - Contact info cards
 
-### [MODIFY] caregivers.html — For Job Seekers
+### [MODIFY] Staff.html — For Job Seekers
 - "Join Our Team" focus
 - Full training modules (all 10 from brief)
 - Application flow

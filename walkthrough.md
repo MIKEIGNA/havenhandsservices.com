@@ -23,11 +23,11 @@ I have successfully revamped the Haven Hands website (`havenhandsservices.com`).
 - Replaced the external Google Forms link with a modern, integrated contact form on `contact.html`.
 - Powered by the existing EmailJS configurations (`config.js`) for direct inbox delivery.
 - **Robust Email Details Fallback**: Since the new contact form requests the client's **Phone Number** and **Requested Service Type**, the script dynamically appends these details at the bottom of the email message body. This ensures that even if your current EmailJS template is not configured with fields like `{{phone}}` or `{{service}}`, you will still receive all of this crucial client information inside the main email body!
-- **URL Parameter Pre-fill**: On `workers.html` and `pricing.html`, when a user clicks "Request Interview" or "Choose Plan", it redirects them to the contact page with parameters like `?caregiver=Grace%20M` or `?package=Gold`. The contact form's JavaScript automatically reads these parameters and pre-fills the message box, guiding the user's conversion pathway.
+- **URL Parameter Pre-fill**: On `workers.html` and `pricing.html`, when a user clicks "Request Interview" or "Choose Plan", it redirects them to the contact page with parameters like `?Staff=Grace%20M` or `?package=Gold`. The contact form's JavaScript automatically reads these parameters and pre-fills the message box, guiding the user's conversion pathway.
 - Success and error states built dynamically with smooth validation alerts.
 
-### 5. Housekeeper/Caregiver Profiles
-- A client-facing `workers.html` featuring individual caregiver profile cards.
+### 5. Housekeeper/Staff Profiles
+- A client-facing `workers.html` featuring individual Staff profile cards.
 - Integrated filters (All / House Help / Nannies / Domestic Managers) using simple, fast JavaScript datasets.
 - Profile cards are structured simply, allowing any developer or non-technical editor to duplicate card blocks.
 
@@ -41,7 +41,7 @@ I have successfully revamped the Haven Hands website (`havenhandsservices.com`).
 
 No database knowledge, servers, or PHP are needed. To edit content, simply open the files in any text editor and edit the plain text.
 
-### How to Add/Edit Caregiver Profiles in `workers.html`
+### How to Add/Edit Staff Profiles in `workers.html`
 1. Open [workers.html](file:///c:/Users/Jovi/Documents/havenhandsservices.com/workers.html).
 2. Find the comment: `<!-- ✏️ EDIT WORKERS: To add a new worker, copy one .worker-card block below... -->`
 3. Copy one of the `<div class="worker-card" data-type="type-here">` blocks.

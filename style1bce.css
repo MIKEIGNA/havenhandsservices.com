@@ -822,7 +822,7 @@ nav {
 .styled-image,
 .hero-img,
 .about-img,
-.caregiver-img {
+.Staff-img {
     width: 100%;
     height: auto;
     border-radius: 40px;
@@ -2641,7 +2641,7 @@ nav {
         grid-template-columns: 1fr;
     }
 
-    /* ── Staggered values (caregivers training) ── */
+    /* ── Staggered values (Staff training) ── */
     .staggered-values {
         gap: 0.75rem;
     }

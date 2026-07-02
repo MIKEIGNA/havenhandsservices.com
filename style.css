@@ -318,7 +318,7 @@ body:has(.splash-screen:not(.hidden)) {
 }
 
 .splash-logo {
-    width: 200px;
+    width: 400px;
     height: auto;
     position: relative;
     z-index: 1;
@@ -1296,7 +1296,7 @@ body:has(.splash-screen:not(.hidden)) {
     margin-top: 0.1rem;
 }
 
-/* ── Worker / Caregiver Profile Cards ── */
+/* ── Worker / Staff Profile Cards ── */
 .workers-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));

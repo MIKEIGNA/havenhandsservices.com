@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroTypewriter = document.getElementById('heroTypewriter');
     if (heroTypewriter) {
         const phrases = [
-            'We connect Nairobi families with caregivers who\'ve been properly vetted, trained, and are genuinely good at what they do.',
+            'We connect Nairobi families with Staff who\'ve been properly vetted, trained, and are genuinely good at what they do.',
             'No guesswork. No stress. Just the right person for your home.',
             'Browse profiles, request interviews via WhatsApp, and we handle the rest.',
-            'Every caregiver is background-checked, trained, and ready to work.'
+            'Every Staff is background-checked, trained, and ready to work.'
         ];
         let phraseIndex = 0;
         let charIndex = 0;
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ── Worker / Caregiver Filter ── */
+    /* ── Worker / Staff Filter ── */
     const filterTabs = document.querySelectorAll('.filter-tab');
     const workerCards = document.querySelectorAll('.worker-card[data-type]');
 
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // ── Auto-fill Form fields from URL Query Parameters ──
         const urlParams = new URLSearchParams(window.location.search);
         const pkg = urlParams.get('package');
-        const caregiver = urlParams.get('caregiver');
+        const Staff = urlParams.get('Staff');
         
         if (pkg) {
             const serviceSelect = form.querySelector('#service');
@@ -302,20 +302,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const messageTextarea = form.querySelector('#message');
             if (messageTextarea) {
-                messageTextarea.value = `Hello Haven Hands, I would like to inquire about the ${pkg} Package and get matched with a caregiver.`;
+                messageTextarea.value = `Hello Haven Hands, I would like to inquire about the ${pkg} Package and get matched with a Staff.`;
             }
         }
         
-        if (caregiver) {
+        if (Staff) {
             const messageTextarea = form.querySelector('#message');
             if (messageTextarea) {
-                messageTextarea.value = `Hello Haven Hands, I am interested in requesting an interview with caregiver: ${caregiver}.`;
+                messageTextarea.value = `Hello Haven Hands, I am interested in requesting an interview with Staff: ${Staff}.`;
             }
         }
     }
 
-    /* ── Caregiver Application Form ── */
-    const cgForm = document.getElementById('caregiverForm');
+    /* ── Staff Application Form ── */
+    const cgForm = document.getElementById('StaffForm');
     if (cgForm) {
         cgForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (successMsg) successMsg.style.display = 'none';
                 }, 5000);
             } catch (err) {
-                console.error('Caregiver form error:', err);
+                console.error('Staff form error:', err);
                 btn.disabled = false;
                 btn.innerHTML = 'Try Again';
                 if (errorMsg) errorMsg.style.display = 'block';
