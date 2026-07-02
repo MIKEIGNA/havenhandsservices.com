@@ -71,12 +71,36 @@
 <body>
 
 <!-- SPLASH SCREEN -->
-<!-- <div class="splash-screen" id="splashScreen">
-    <div class="splash-content">
-        <img src="logo.png" alt="Haven Hands Logo" class="splash-logo">
-        <div class="splash-text">Haven Hands</div>
+<div class="splash-screen" id="splashScreen">
+    <div class="splash-bg-shapes">
+        <div class="splash-shape splash-shape-1"></div>
+        <div class="splash-shape splash-shape-2"></div>
+        <div class="splash-shape splash-shape-3"></div>
     </div>
-</div> -->
+    <div class="splash-content">
+        <div class="splash-logo-wrap">
+            <div class="splash-logo-glow"></div>
+            <img src="logo.png" alt="Haven Hands Logo" class="splash-logo">
+        </div>
+        <div class="splash-text">
+            <span class="splash-letter" style="--i:0">H</span>
+            <span class="splash-letter" style="--i:1">a</span>
+            <span class="splash-letter" style="--i:2">v</span>
+            <span class="splash-letter" style="--i:3">e</span>
+            <span class="splash-letter" style="--i:4">n</span>
+            <span class="splash-letter" style="--i:5">&nbsp;</span>
+            <span class="splash-letter" style="--i:6">H</span>
+            <span class="splash-letter" style="--i:7">a</span>
+            <span class="splash-letter" style="--i:8">n</span>
+            <span class="splash-letter" style="--i:9">d</span>
+            <span class="splash-letter" style="--i:10">s</span>
+        </div>
+        <div class="splash-tagline">Professional Home Care Services</div>
+    </div>
+    <div class="splash-loader">
+        <div class="splash-loader-bar"></div>
+    </div>
+</div>
 
 <div class="site-wrapper">
 
@@ -119,18 +143,72 @@
 
 <!-- HERO -->
 <section class="hero" id="home">
+    <div class="hero-bg-shapes">
+        <div class="hero-shape hero-shape-1"></div>
+        <div class="hero-shape hero-shape-2"></div>
+        <div class="hero-shape hero-shape-3"></div>
+    </div>
     <div class="container hero-grid">
-        <div class="hero-text" data-reveal="left">
-            <h1>Karibu — tafuta mtu sahihi<br><span>kwa nyumba yako</span></h1>
-            <p class="hero-sub">We connect Nairobi families with caregivers who've been properly vetted, trained, and are genuinely good at what they do. No guesswork. No stress.</p>
+        <div class="hero-text">
+            <div class="hero-badge-new">
+                <span class="badge-dot"></span>
+                Trusted by 200+ Nairobi Families
+            </div>
+            <h1 class="hero-title">
+                <span class="hero-line">Karibu —</span>
+                <span class="hero-line hero-line-accent">tafuta mtu sahihi</span>
+                <span class="hero-line">kwa nyumba yako</span>
+            </h1>
+            <p class="hero-sub" id="heroTypewriter"></p>
             <div class="hero-ctas">
-                <a href="workers.html" class="btn btn-primary btn-lg">See Who's Available</a>
-                <a href="contact.html" class="btn btn-outline btn-lg">Talk to Us</a>
+                <a href="workers.html" class="btn btn-primary btn-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    See Who's Available
+                </a>
+                <a href="contact.html" class="btn btn-glass btn-lg">
+                    Talk to Us
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="stat-num">200+</span>
+                    <span class="stat-label">Families Served</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-num">98%</span>
+                    <span class="stat-label">Satisfaction Rate</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-num">50+</span>
+                    <span class="stat-label">Trained Caregivers</span>
+                </div>
             </div>
         </div>
-        <div class="hero-img-wrap" data-reveal="right">
-            <div class="img-frame">
-                <img src="hero-new.jpg" alt="Professional caregiver in a Nairobi home" loading="eager">
+        <div class="hero-visual">
+            <div class="hero-img-wrapper">
+                <div class="hero-img-glow"></div>
+                <div class="hero-img-frame">
+                    <img src="hero-new.jpg" alt="Professional caregiver in a Nairobi home" loading="eager">
+                </div>
+                <div class="hero-float-card hero-float-1">
+                    <div class="float-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <div class="float-text">
+                        <span class="float-label">Verified</span>
+                        <span class="float-value">ID & Background Checked</span>
+                    </div>
+                </div>
+                <div class="hero-float-card hero-float-2">
+                    <div class="float-icon float-icon-green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <div class="float-text">
+                        <span class="float-label">Trained</span>
+                        <span class="float-value">10-Module Program</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

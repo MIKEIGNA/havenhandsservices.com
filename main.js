@@ -15,6 +15,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2500);
     }
 
+    /* ── Hero Typewriter Effect ── */
+    const heroTypewriter = document.getElementById('heroTypewriter');
+    if (heroTypewriter) {
+        const phrases = [
+            'We connect Nairobi families with caregivers who\'ve been properly vetted, trained, and are genuinely good at what they do.',
+            'No guesswork. No stress. Just the right person for your home.',
+            'Browse profiles, request interviews via WhatsApp, and we handle the rest.',
+            'Every caregiver is background-checked, trained, and ready to work.'
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 30;
+
+        function typeWriter() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                heroTypewriter.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 15;
+            } else {
+                heroTypewriter.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 30;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typeSpeed = 3000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+
+        setTimeout(typeWriter, 1500);
+    }
+
     /* ── Lucide Icons ── */
     if (typeof lucide !== 'undefined') lucide.createIcons();
 
