@@ -2239,8 +2239,8 @@ body:has(.splash-screen:not(.hidden)) {
 
 /* ── Footer ── */
 .footer {
-    background: var(--dark);
-    color: rgba(255,255,255,0.75);
+    background: linear-gradient(135deg, #006A71 0%, #004d52 100%);
+    color: rgba(255,255,255,0.85);
     padding: 64px 0 0;
 }
 .footer-grid {

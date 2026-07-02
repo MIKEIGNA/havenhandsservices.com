@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             splash.classList.add('hidden');
             setTimeout(() => { splash.remove(); }, 500);
-        }, 1500);
+        }, 5000);
     }
 
     /* ── Hero Typewriter Effect ── */
