@@ -1,0 +1,5 @@
+name,section,price,unit,features,featured,buttonStyle,buttonLink,buttonText,order
+Silver Package,employers,KES 5000,one-time,"3 caregiver profiles|Basic background check|Phone interview coordination|1 replacement guarantee",no,primary,contact.html,Get Started,1
+Gold Package,employers,KES 8000,one-time,"5 caregiver profiles|Full background check|In-person interview coordination|3 replacement guarantee|1 month follow-up",yes,primary,contact.html,Get Started,2
+Bronze Package,employers,KES 3000,one-time,"2 caregiver profiles|Basic reference check|WhatsApp introduction",no,outline,contact.html,Get Started,3
+Caregiver Registration,training,KES 500,registration fee,"Professional training program|10-module curriculum|Certification|Job placement assistance|Ongoing support",yes,primary,contact.html,Apply Now,1

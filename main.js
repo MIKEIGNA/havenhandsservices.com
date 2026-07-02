@@ -104,15 +104,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ── Worker / Caregiver Filter ── */
     const filterTabs = document.querySelectorAll('.filter-tab');
-    const workerCards = document.querySelectorAll('.worker-card[data-type]');
 
-    if (filterTabs.length && workerCards.length) {
+    if (filterTabs.length) {
         filterTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 filterTabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 const type = tab.dataset.filter;
-                workerCards.forEach(card => {
+                document.querySelectorAll('.worker-card[data-type]').forEach(card => {
                     if (type === 'all' || card.dataset.type === type) {
                         card.style.display = '';
                         setTimeout(() => { card.style.opacity = '1'; card.style.transform = ''; }, 10);
@@ -302,11 +301,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ── Blog search (blog listing page) ── */
     const blogSearch = document.getElementById('blogSearch');
-    const blogCards  = document.querySelectorAll('.blog-card[data-title]');
-    if (blogSearch && blogCards.length) {
+    if (blogSearch) {
         blogSearch.addEventListener('input', () => {
             const q = blogSearch.value.toLowerCase();
-            blogCards.forEach(card => {
+            document.querySelectorAll('.blog-card[data-title]').forEach(card => {
                 const visible = card.dataset.title.toLowerCase().includes(q);
                 card.style.display = visible ? '' : 'none';
             });

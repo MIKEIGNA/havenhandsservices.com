@@ -3,64 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Caregivers | Haven Hands — Book Nannies &amp; House Helps in Nairobi</title>
-    <meta name="description" content="Meet our verified, background-checked, and trained house helps, nannies, and caregivers in Nairobi. Request interviews directly with selected candidates.">
-    <link rel="icon" type="image/png" href="logo.png">
+    <title>Blog Post | Haven Hands</title>
+    <link rel="icon" type="image/png" href="../logo.png">
     <meta name="theme-color" content="#006A71">
-
-    <!-- GEO / SEO -->
-    <meta name="geo.region" content="KE">
-    <meta name="geo.placename" content="Nairobi">
-    <meta name="geo.position" content="-1.286389;36.817223">
-    <meta name="ICBM" content="-1.286389, 36.817223">
-    <link rel="canonical" href="https://havenhandsservices.com/workers.html">
-    <link rel="alternate" hreflang="en-ke" href="https://havenhandsservices.com/workers.html">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="en_KE">
-    <meta property="og:url" content="https://havenhandsservices.com/workers.html">
-    <meta property="og:title" content="Our Caregivers | Haven Hands — Book Nannies &amp; House Helps">
-    <meta property="og:description" content="View profiles of verified, professionally trained caregivers available for immediate match in Nairobi.">
-    <meta property="og:image" content="https://havenhandsservices.com/hero-new.jpg">
-
-    <!-- Fonts & CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <!-- Lucide Icons -->
+    <link rel="stylesheet" href="../style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
+<body class="blog-page">
 <div class="site-wrapper">
 
 <!-- HEADER -->
 <header id="header">
     <nav class="container">
-        <a href="index.html" class="logo" aria-label="Haven Hands Home">
-            <img src="logo.png" alt="Haven Hands Logo" class="logo-img">
+        <a href="../index.html" class="logo" aria-label="Haven Hands Home">
+            <img src="../logo.png" alt="Haven Hands Logo" class="logo-img">
         </a>
         <ul class="nav-links" id="navLinks">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../services.html">Services</a></li>
             <li class="has-dropdown">
-                <a href="workers.html" class="active">Workers</a>
+                <a href="../workers.html">Workers</a>
                 <div class="dropdown-menu">
-                    <a href="workers.html">Available Caregivers</a>
-                    <a href="caregivers.html">Apply as Caregiver</a>
+                    <a href="../workers.html">Available Caregivers</a>
+                    <a href="../caregivers.html">Apply as Caregiver</a>
                 </div>
             </li>
             <li class="has-dropdown">
-                <a href="pricing.html">Pricing</a>
+                <a href="../pricing.html">Pricing</a>
                 <div class="dropdown-menu">
-                    <a href="pricing.html#employers">For Employers</a>
-                    <a href="pricing.html#training">Training Program</a>
+                    <a href="../pricing.html#employers">For Employers</a>
+                    <a href="../pricing.html#training">Training Program</a>
                 </div>
             </li>
-            <li><a href="blog/index.html">Blog</a></li>
-            <li><a href="contact.html" class="btn btn-primary btn-sm">Get Started</a></li>
+            <li><a href="../blog/index.html" class="active">Blog</a></li>
+            <li><a href="../contact.html" class="btn btn-primary btn-sm">Get Started</a></li>
         </ul>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
             <span></span><span></span><span></span>
@@ -70,49 +50,30 @@
 
 <main>
 
-<!-- PAGE HERO -->
-<section class="page-hero">
-    <div class="container page-hero-grid">
-        <div class="page-hero-content" data-reveal="left">
-            <span class="section-tag">Available Caregivers</span>
-            <h1>People who are<br><span>ready to start</span></h1>
-            <p class="sub">These are real people — vetted, trained, and available. Browse their profiles and request an interview when you're ready.</p>
-        </div>
-        <div class="page-hero-img" data-reveal="right">
-            <img src="about-new.jpg" alt="Haven Hands caregivers">
-        </div>
-    </div>
-</section>
-
-<!-- WORKERS SECTION -->
+<!-- BLOG POST CONTENT (loaded dynamically from Google Sheet) -->
 <section class="section-pad">
-    <div class="container">
-        <!-- Filter Tabs -->
-        <div class="filter-tabs" data-reveal>
-            <button class="filter-tab active" data-filter="all">All Profiles</button>
-            <button class="filter-tab" data-filter="househelp">House Helps</button>
-            <button class="filter-tab" data-filter="nanny">Nannies</button>
-            <button class="filter-tab" data-filter="manager">Domestic Managers</button>
-        </div>
-
-        <!-- ✏️ EDIT WORKERS: To add a new worker, edit the Google Sheet instead! -->
-        <div class="workers-grid" id="workers-grid"></div>
-    </div>
-</section>
-
-<!-- DON'T SEE THE RIGHT FIT? -->
-<section class="section-pad bg-light">
-    <div class="container">
-        <div class="cta-banner" data-reveal>
-            <h2>Don't see what you're looking for?</h2>
-            <p>We add new caregivers to our pool regularly. Tell us exactly what you need and we'll find the right match for you.</p>
-            <div class="cta-actions">
-                <a href="contact.html" class="btn btn-white btn-lg">Request Custom Match</a>
-                <a href="https://wa.me/254118971254?text=Hello%20Haven%20Hands%2C%20I%20am%20looking%20for%20a%20specific%20type%20of%20caregiver." target="_blank" rel="noopener noreferrer" class="btn btn-outline-white btn-lg">
-                    Inquire via WhatsApp
-                </a>
+    <div class="container container-narrow">
+        <div id="blog-post-content">
+            <div class="skeleton-card" style="padding: 2rem;">
+                <div class="skeleton-line short"></div>
+                <div class="skeleton-line long" style="height: 24px; margin: 1rem 0;"></div>
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line medium"></div>
+                <div class="skeleton-line long"></div>
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line medium"></div>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- BACK TO BLOG -->
+<section class="section-pad-sm bg-light">
+    <div class="container text-center">
+        <a href="../blog/index.html" class="btn btn-outline">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back to All Articles
+        </a>
     </div>
 </section>
 
@@ -123,7 +84,7 @@
     <div class="container">
         <div class="footer-grid">
             <div class="footer-brand">
-                <img src="logo.png" alt="Haven Hands Logo" class="logo-img">
+                <img src="../logo.png" alt="Haven Hands Logo" class="logo-img">
                 <p>Matching Nairobi families with trained, verified, and ethical caregivers for the modern home. Because every home deserves peace of mind.</p>
                 <div class="footer-socials">
                     <a href="https://www.instagram.com/havenhandsservices" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -140,22 +101,12 @@
             <div class="footer-col">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="services.html">Our Services</a></li>
-                    <li><a href="workers.html">Our Workers</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="blog/index.html">Blog</a></li>
-                    <li><a href="caregivers.html">Join as Caregiver</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="services.html">Full-time House Helps</a></li>
-                    <li><a href="services.html">Professional Nannies</a></li>
-                    <li><a href="services.html">Elderly Care</a></li>
-                    <li><a href="services.html">Caregiver Training</a></li>
-                    <li><a href="caregivers.html">Apply as Caregiver</a></li>
+                    <li><a href="../about.html">About Us</a></li>
+                    <li><a href="../services.html">Our Services</a></li>
+                    <li><a href="../workers.html">Our Workers</a></li>
+                    <li><a href="../pricing.html">Pricing</a></li>
+                    <li><a href="../blog/index.html">Blog</a></li>
+                    <li><a href="../caregivers.html">Join as Caregiver</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -193,8 +144,8 @@
     </svg>
 </a>
 
-<script src="data.js"></script>
-<script src="main.js"></script>
+<script src="../data.js"></script>
+<script src="../main.js"></script>
 </div>
 </body>
 </html>
