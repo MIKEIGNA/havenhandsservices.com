@@ -379,15 +379,52 @@
 <!-- ══════════════════════════════════════
      TESTIMONIALS
 ══════════════════════════════════════ -->
-<section class="section-pad bg-light" id="testimonials">
+<section class="section-pad-sm" id="testimonials">
     <div class="container">
-        <div class="section-header centered" data-reveal>
-            <span class="section-tag">From Our Families</span>
-            <h2 class="section-title">What people <span>have said</span></h2>
+        <div class="testimonials-strip">
+            <div class="testimonials-strip-header">
+                <span class="section-tag">From Our Families</span>
+                <button class="btn btn-outline btn-sm" id="readAllTestimonials">Read All Reviews</button>
+            </div>
+            <div class="testimonials-compact">
+                <div class="testimonial-compact" data-reveal data-delay="100">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-quote">"Grace has been with us for 8 months now and my kids actually ask for her when she's off."</p>
+                    <div class="testimonial-author-mini">
+                        <div class="t-avatar-sm">SK</div>
+                        <span>Sarah K., Kilimani</span>
+                    </div>
+                </div>
+                <div class="testimonial-compact" data-reveal data-delay="200">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-quote">"They actually called me back to check if everything was fine after the first week."</p>
+                    <div class="testimonial-author-mini">
+                        <div class="t-avatar-sm">AM</div>
+                        <span>Amina M., Westlands</span>
+                    </div>
+                </div>
+                <div class="testimonial-compact" data-reveal data-delay="300">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-quote">"Mum actually looks forward to her visits. That's all I needed."</p>
+                    <div class="testimonial-author-mini">
+                        <div class="t-avatar-sm">JO</div>
+                        <span>James O., Karen</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="testimonials-grid">
-            <div class="testimonial-card" data-reveal data-delay="100">
-                <p class="t-text">"We'd gone through three househelps in one year before finding Haven Hands. Grace has been with us for 8 months now and my kids actually ask for her when she's off. That says a lot."</p>
+    </div>
+</section>
+
+<!-- Testimonials Modal -->
+<div class="testimonials-modal" id="testimonialsModal">
+    <div class="testimonials-modal-content">
+        <button class="modal-close" id="closeTestimonialsModal">&times;</button>
+        <h3>What Our Families Say</h3>
+        <div class="testimonials-modal-list">
+            <div class="testimonial-full">
+                <div class="testimonial-stars">★★★★★</div>
+                <p>"We'd gone through three househelps in one year before finding Haven Hands. Grace has been with us for 8 months now and my kids actually ask for her when she's off. That says a lot."</p>
                 <div class="t-author">
                     <div class="t-avatar">SK</div>
                     <div>
@@ -396,8 +433,9 @@
                     </div>
                 </div>
             </div>
-            <div class="testimonial-card" data-reveal data-delay="200">
-                <p class="t-text">"I was sceptical about using an agency but the vetting process convinced me. They actually called me back to check if everything was fine after the first week. That follow-up matters."</p>
+            <div class="testimonial-full">
+                <div class="testimonial-stars">★★★★★</div>
+                <p>"I was sceptical about using an agency but the vetting process convinced me. They actually called me back to check if everything was fine after the first week. That follow-up matters."</p>
                 <div class="t-author">
                     <div class="t-avatar">AM</div>
                     <div>
@@ -406,8 +444,9 @@
                     </div>
                 </div>
             </div>
-            <div class="testimonial-card" data-reveal data-delay="300">
-                <p class="t-text">"My mum needed someone during the day while I'm at work. The caregiver they found is patient and kind — mum actually looks forward to her visits. That's all I needed."</p>
+            <div class="testimonial-full">
+                <div class="testimonial-stars">★★★★★</div>
+                <p>"My mum needed someone during the day while I'm at work. The caregiver they found is patient and kind — mum actually looks forward to her visits. That's all I needed."</p>
                 <div class="t-author">
                     <div class="t-avatar">JO</div>
                     <div>
@@ -418,7 +457,7 @@
             </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- ══════════════════════════════════════
      BLOG PREVIEW

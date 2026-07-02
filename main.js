@@ -162,6 +162,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    /* ── Testimonials Modal ── */
+    const readAllBtn = document.getElementById('readAllTestimonials');
+    const testimonialsModal = document.getElementById('testimonialsModal');
+    const closeTestimonialsModal = document.getElementById('closeTestimonialsModal');
+
+    if (readAllBtn && testimonialsModal) {
+        readAllBtn.addEventListener('click', () => {
+            testimonialsModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Also open when clicking compact testimonials
+        document.querySelectorAll('.testimonial-compact').forEach(card => {
+            card.addEventListener('click', () => {
+                testimonialsModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    }
+
+    if (closeTestimonialsModal && testimonialsModal) {
+        closeTestimonialsModal.addEventListener('click', () => {
+            testimonialsModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        testimonialsModal.addEventListener('click', (e) => {
+            if (e.target === testimonialsModal) {
+                testimonialsModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && testimonialsModal.classList.contains('active')) {
+                testimonialsModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
     /* ── Worker / Caregiver Filter ── */
     const filterTabs = document.querySelectorAll('.filter-tab');
     const workerCards = document.querySelectorAll('.worker-card[data-type]');
