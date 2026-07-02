@@ -37,8 +37,8 @@ havenhandsservices.com/
 ├── index.html          ← Revamped homepage (replaces current)
 ├── about.html          ← Revamped about page
 ├── services.html       ← Revamped services page
-├── workers.html        ← NEW: Housekeeper profiles (replaces Staff.html concept)
-├── Staff.html     ← Revamped: For job-seekers / join us
+├── workers.html        ← NEW: Housekeeper profiles (replaces workers.html concept)
+├── workers.html     ← Revamped: For job-seekers / join us
 ├── pricing.html        ← Revamped pricing page
 ├── contact.html        ← Revamped contact with branded form + WhatsApp
 ├── blog/
@@ -142,7 +142,7 @@ Sections:
 - WhatsApp button prominent: "Chat on WhatsApp"
 - Contact info cards
 
-### [MODIFY] Staff.html — For Job Seekers
+### [MODIFY] workers.html — For Job Seekers
 - "Join Our Team" focus
 - Full training modules (all 10 from brief)
 - Application flow
