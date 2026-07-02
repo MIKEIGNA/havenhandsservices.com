@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (splash) {
         setTimeout(() => {
             splash.classList.add('hidden');
-            setTimeout(() => { splash.remove(); }, 600);
-        }, 2500);
+            setTimeout(() => { splash.remove(); }, 500);
+        }, 1500);
     }
 
     /* ── Hero Typewriter Effect ── */
@@ -57,6 +57,37 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(typeWriter, 1500);
     }
 
+    /* ── Hero Gallery Slider ── */
+    const galleryCards = document.querySelectorAll('.gallery-card');
+    const galleryDots = document.querySelectorAll('.gallery-dot');
+    if (galleryCards.length && galleryDots.length) {
+        let currentSlide = 0;
+        const totalSlides = galleryCards.length;
+
+        function updateGallery(index) {
+            galleryCards.forEach((card, i) => {
+                card.classList.remove('active');
+                if (i === index) {
+                    card.classList.add('active');
+                }
+            });
+            galleryDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            currentSlide = index;
+        }
+
+        galleryDots.forEach((dot, i) => {
+            dot.addEventListener('click', () => updateGallery(i));
+        });
+
+        // Auto-slide
+        setInterval(() => {
+            const next = (currentSlide + 1) % totalSlides;
+            updateGallery(next);
+        }, 4000);
+    }
+
     /* ── Lucide Icons ── */
     if (typeof lucide !== 'undefined') lucide.createIcons();
 
@@ -72,46 +103,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ── Mobile Menu ── */
     const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks   = document.querySelector('.nav-links');
+    const mobileNav   = document.getElementById('mobileNav');
 
     function closeNav() {
-        if (!menuToggle || !navLinks) return;
+        if (!menuToggle || !mobileNav) return;
         menuToggle.classList.remove('open');
-        navLinks.classList.remove('open');
+        mobileNav.classList.remove('active');
         menuToggle.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
     }
 
-    if (menuToggle && navLinks) {
+    if (menuToggle && mobileNav) {
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isOpen = navLinks.classList.toggle('open');
+            const isOpen = mobileNav.classList.toggle('active');
             menuToggle.classList.toggle('open', isOpen);
             menuToggle.setAttribute('aria-expanded', String(isOpen));
             document.body.style.overflow = isOpen ? 'hidden' : '';
         });
-        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
-        document.addEventListener('click', (e) => { if (!e.target.closest('#header')) closeNav(); });
+        mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+        document.addEventListener('click', (e) => { if (!e.target.closest('#header') && !e.target.closest('.mobile-nav-overlay')) closeNav(); });
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
-
-        /* Mobile dropdown toggle */
-        if (window.innerWidth <= 768) {
-            document.querySelectorAll('.has-dropdown').forEach(dd => {
-                const link = dd.querySelector(':scope > a');
-                if (link) {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        dd.classList.toggle('open');
-                    });
-                }
-            });
-        }
     }
 
     /* ── Active nav link ── */
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.nav-links a').forEach(a => {
+    document.querySelectorAll('.nav-link-alt, .mobile-link').forEach(a => {
         const href = a.getAttribute('href');
         if (href && (href === currentPage || href.includes(currentPage))) {
             a.classList.add('active');

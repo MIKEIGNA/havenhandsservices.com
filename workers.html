@@ -37,36 +37,61 @@
 
 <!-- HEADER -->
 <header id="header">
-    <nav class="container">
-        <a href="index.html" class="logo" aria-label="Haven Hands Home">
-            <img src="logo.png" alt="Haven Hands Logo" class="logo-img">
-        </a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li class="has-dropdown">
-                <a href="workers.html" class="active">Workers</a>
-                <div class="dropdown-menu">
-                    <a href="workers.html">Find Caregivers</a>
-                    <a href="caregivers.html">Jobs</a>
+    <nav class="container nav-center">
+        <div class="nav-left">
+            <a href="about.html" class="nav-link-alt">About</a>
+            <a href="services.html" class="nav-link-alt">Services</a>
+            <div class="nav-dropdown">
+                <a href="workers.html" class="nav-link-alt active">Caregivers</a>
+                <div class="nav-dropdown-menu">
+                    <a href="workers.html">Available Caregivers</a>
+                    <a href="caregivers.html">Apply as Caregiver</a>
                 </div>
-            </li>
-            <li class="has-dropdown">
-                <a href="pricing.html">Pricing</a>
-                <div class="dropdown-menu">
+            </div>
+        </div>
+        <a href="index.html" class="logo-center" aria-label="Haven Hands Home">
+            <img src="logo.png" alt="Haven Hands Logo" class="logo-img-center">
+        </a>
+        <div class="nav-right">
+            <div class="nav-dropdown">
+                <a href="pricing.html" class="nav-link-alt">Pricing</a>
+                <div class="nav-dropdown-menu">
                     <a href="pricing.html#employers">For Employers</a>
                     <a href="pricing.html#training">Training Program</a>
                 </div>
-            </li>
-            <li><a href="blog/index.html">Blog</a></li>
-            <li><a href="contact.html" class="btn btn-primary btn-sm">Contact Us</a></li>
-        </ul>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
+            </div>
+            <a href="blog/index.html" class="nav-link-alt">Blog</a>
+            <a href="contact.html" class="btn btn-primary btn-nav">Contact</a>
+        </div>
     </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
 </header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="mobileNav">
+    <div class="mobile-nav-content">
+        <a href="index.html" class="mobile-nav-logo">
+            <img src="logo.png" alt="Haven Hands Logo">
+        </a>
+        <div class="mobile-nav-links">
+            <a href="index.html" class="mobile-link">Home</a>
+            <a href="about.html" class="mobile-link">About</a>
+            <a href="services.html" class="mobile-link">Services</a>
+            <a href="workers.html" class="mobile-link active">Caregivers</a>
+            <a href="caregivers.html" class="mobile-link">Apply as Caregiver</a>
+            <a href="pricing.html" class="mobile-link">Pricing</a>
+            <a href="blog/index.html" class="mobile-link">Blog</a>
+        </div>
+        <a href="contact.html" class="btn btn-primary btn-full btn-mobile">Get Started</a>
+        <div class="mobile-nav-socials">
+            <a href="https://wa.me/254118971254" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href="https://www.instagram.com/havenhandsservices" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.tiktok.com/@havenhandsservices" target="_blank" rel="noopener noreferrer">TikTok</a>
+        </div>
+    </div>
+</div>
 
 <main>
 

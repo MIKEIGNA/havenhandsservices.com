@@ -108,48 +108,69 @@
      HEADER
 ══════════════════════════════════════ -->
 <header id="header">
-    <nav class="container">
-        <a href="index.html" class="logo" aria-label="Haven Hands Home">
-            <img src="logo.png" alt="Haven Hands Logo" class="logo-img">
-        </a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li class="has-dropdown">
-                <a href="workers.html">Workers</a>
-                <div class="dropdown-menu">
-                    <a href="workers.html">Find Caregivers</a>
-                    <a href="caregivers.html">Jobs</a>
+    <nav class="container nav-center">
+        <div class="nav-left">
+            <a href="about.html" class="nav-link-alt">About</a>
+            <a href="services.html" class="nav-link-alt">Services</a>
+            <div class="nav-dropdown">
+                <a href="workers.html" class="nav-link-alt">Caregivers</a>
+                <div class="nav-dropdown-menu">
+                    <a href="workers.html">Available Caregivers</a>
+                    <a href="caregivers.html">Apply as Caregiver</a>
                 </div>
-            </li>
-            <li class="has-dropdown">
-                <a href="pricing.html">Pricing</a>
-                <div class="dropdown-menu">
+            </div>
+        </div>
+        <a href="index.html" class="logo-center" aria-label="Haven Hands Home">
+            <img src="logo.png" alt="Haven Hands Logo" class="logo-img-center">
+        </a>
+        <div class="nav-right">
+            <div class="nav-dropdown">
+                <a href="pricing.html" class="nav-link-alt">Pricing</a>
+                <div class="nav-dropdown-menu">
                     <a href="pricing.html#employers">For Employers</a>
                     <a href="pricing.html#training">Training Program</a>
                 </div>
-            </li>
-            <li><a href="blog/index.html">Blog</a></li>
-            <li><a href="contact.html" class="btn btn-primary btn-sm">Contact Us</a></li>
-        </ul>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
+            </div>
+            <a href="blog/index.html" class="nav-link-alt">Blog</a>
+            <a href="contact.html" class="btn btn-primary btn-nav">Contact</a>
+        </div>
     </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
 </header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="mobileNav">
+    <div class="mobile-nav-content">
+        <a href="index.html" class="mobile-nav-logo">
+            <img src="logo.png" alt="Haven Hands Logo">
+        </a>
+        <div class="mobile-nav-links">
+            <a href="index.html" class="mobile-link active">Home</a>
+            <a href="about.html" class="mobile-link">About</a>
+            <a href="services.html" class="mobile-link">Services</a>
+            <a href="workers.html" class="mobile-link">Caregivers</a>
+            <a href="pricing.html" class="mobile-link">Pricing</a>
+            <a href="blog/index.html" class="mobile-link">Blog</a>
+            <a href="caregivers.html" class="mobile-link">Apply as Caregiver</a>
+        </div>
+        <a href="contact.html" class="btn btn-primary btn-full btn-mobile">Get Started</a>
+        <div class="mobile-nav-socials">
+            <a href="https://wa.me/254118971254" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href="https://www.instagram.com/havenhandsservices" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.tiktok.com/@havenhandsservices" target="_blank" rel="noopener noreferrer">TikTok</a>
+        </div>
+    </div>
+</div>
 
 <main>
 
 <!-- HERO -->
 <section class="hero" id="home">
-    <div class="hero-bg-shapes">
-        <div class="hero-shape hero-shape-1"></div>
-        <div class="hero-shape hero-shape-2"></div>
-        <div class="hero-shape hero-shape-3"></div>
-    </div>
-    <div class="container hero-grid">
-        <div class="hero-text">
+    <div class="hero-bg-pattern"></div>
+    <div class="container hero-layout">
+        <div class="hero-content">
             <div class="hero-badge-new">
                 <span class="badge-dot"></span>
                 Trusted by 200+ Nairobi Families
@@ -177,38 +198,39 @@
                 </div>
                 <div class="hero-stat">
                     <span class="stat-num">98%</span>
-                    <span class="stat-label">Satisfaction Rate</span>
+                    <span class="stat-label">Satisfaction</span>
                 </div>
                 <div class="hero-stat">
                     <span class="stat-num">50+</span>
-                    <span class="stat-label">Trained Caregivers</span>
+                    <span class="stat-label">Caregivers</span>
                 </div>
             </div>
         </div>
-        <div class="hero-visual">
-            <div class="hero-img-wrapper">
-                <div class="hero-img-glow"></div>
-                <div class="hero-img-frame">
-                    <img src="hero-new.jpg" alt="Professional caregiver in a Nairobi home" loading="eager">
-                </div>
-                <div class="hero-float-card hero-float-1">
-                    <div class="float-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    </div>
-                    <div class="float-text">
-                        <span class="float-label">Verified</span>
-                        <span class="float-value">ID & Background Checked</span>
+        <div class="hero-gallery">
+            <div class="gallery-stack">
+                <div class="gallery-card gallery-card-1">
+                    <img src="hero-new.jpg" alt="Professional caregiver" loading="eager">
+                    <div class="gallery-overlay">
+                        <span class="gallery-tag">Professional Care</span>
                     </div>
                 </div>
-                <div class="hero-float-card hero-float-2">
-                    <div class="float-icon float-icon-green">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    </div>
-                    <div class="float-text">
-                        <span class="float-label">Trained</span>
-                        <span class="float-value">10-Module Program</span>
+                <div class="gallery-card gallery-card-2">
+                    <img src="worker-1.jpg" alt="Happy family" loading="eager">
+                    <div class="gallery-overlay">
+                        <span class="gallery-tag">Verified & Trained</span>
                     </div>
                 </div>
+                <div class="gallery-card gallery-card-3">
+                    <img src="worker-2.jpg" alt="Home services" loading="eager">
+                    <div class="gallery-overlay">
+                        <span class="gallery-tag">Trusted by Families</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-indicators">
+                <button class="gallery-dot active" data-slide="0"></button>
+                <button class="gallery-dot" data-slide="1"></button>
+                <button class="gallery-dot" data-slide="2"></button>
             </div>
         </div>
     </div>
