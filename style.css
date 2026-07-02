@@ -1194,6 +1194,60 @@ body:has(.splash-screen:not(.hidden)) {
 .why-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
 .why-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
 
+/* ── Training Preview Grid ── */
+.training-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    gap: 1.25rem;
+}
+.training-preview-card {
+    padding: 1.75rem;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-light);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.training-preview-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--grad-primary);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.training-preview-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+.training-preview-card:hover::before {
+    opacity: 1;
+}
+.training-preview-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+    opacity: 0.2;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+}
+.training-preview-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+.training-preview-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
 /* ── Split Section ── */
 .split-section {
     display: grid;
