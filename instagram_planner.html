@@ -22,10 +22,35 @@
         .controls {
             margin-bottom: 30px;
             background: white;
-            padding: 15px 25px;
+            padding: 20px 25px;
             border: 1px solid #dbdbdb;
             border-radius: 8px;
             text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            width: 100%;
+            max-width: 550px;
+            box-sizing: border-box;
+        }
+        .control-group {
+            margin-bottom: 15px;
+        }
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+        label.setting-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #262626;
+            margin-right: 10px;
+        }
+        select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #dbdbdb;
+            background-color: #fff;
+            font-size: 14px;
+            color: #262626;
+            cursor: pointer;
         }
         input[type="file"] {
             display: none;
@@ -34,7 +59,7 @@
             background-color: #0095f6;
             color: white;
             padding: 10px 20px;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
             display: inline-block;
@@ -42,14 +67,22 @@
         .upload-btn:hover {
             background-color: #1877f2;
         }
-        /* Instagram Feed Simulation Container */
+        /* Layout Wrapper to Simulate Feed Views */
         .feed-container {
             width: 100%;
-            max-width: 600px;
             background: white;
             border: 1px solid #dbdbdb;
             border-radius: 3px;
             padding-bottom: 20px;
+            box-sizing: border-box;
+            transition: max-width 0.3s ease;
+        }
+        /* Dynamic Max Width Classes for Layout Simulation */
+        .view-mobile {
+            max-width: 400px; /* Standard smartphone canvas viewport width */
+        }
+        .view-desktop {
+            max-width: 935px; /* Instagram native desktop column viewport limit */
         }
         .profile-header {
             height: 50px;
@@ -59,19 +92,27 @@
             padding: 0 15px;
             font-weight: 600;
             color: #262626;
+            font-size: 14px;
         }
-        /* 3-Column Instagram Grid Layout */
+        /* Dynamic Grid Layout */
         .grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
             gap: 3px;
             padding: 3px;
             background-color: #fff;
+            transition: grid-template-columns 0.2s ease;
+        }
+        /* Modifier layout system via javascript triggers */
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .grid-cols-4 {
+            grid-template-columns: repeat(4, 1fr);
         }
         .grid-item {
             position: relative;
             width: 100%;
-            padding-top: 100%; /* Forces exact square 1:1 aspect ratio */
+            padding-top: 100%; /* Forces strict 1:1 asset squares */
             background-color: #efefef;
             cursor: grab;
             overflow: hidden;
@@ -115,24 +156,77 @@
     <h1>Feed Planner</h1>
 
     <div class="controls">
-        <label for="imageLoader" class="upload-btn">📷 Upload Posters</label>
-        <input type="file" id="imageLoader" multiple accept="image/*">
-        <p style="font-size: 12px; color: #8e8e8e; margin-top: 8px; margin-bottom: 0;">Select multiple files at once. Drag squares to reorder.</p>
+        <div class="control-group">
+            <label for="imageLoader" class="upload-btn">📷 Upload Posters</label>
+            <input type="file" id="imageLoader" multiple accept="image/*">
+        </div>
+        
+        <div class="control-group" style="margin-top: 15px; display: flex; justify-content: center; gap: 20px;">
+            <div>
+                <label class="setting-label">Grid Layout:</label>
+                <select id="gridSelect">
+                    <option value="grid-cols-3">3 Columns (Standard)</option>
+                    <option value="grid-cols-4">4 Columns</option>
+                </select>
+            </div>
+            <div>
+                <label class="setting-label">Screen View:</label>
+                <select id="viewSelect">
+                    <option value="view-mobile">Mobile Device View</option>
+                    <option value="view-desktop">Desktop Monitor View</option>
+                </select>
+            </div>
+        </div>
     </div>
 
-    <div class="feed-container">
-        <div class="profile-header">✨ Your Visual Preview Layout</div>
-        <div class="grid" id="instagramGrid">
-            <!-- Uploaded images appear here -->
+    <!-- Container class changes layout size dynamically -->
+    <div class="feed-container view-mobile" id="feedContainer">
+        <div class="profile-header" id="headerText">✨ Mobile View Grid Layout</div>
+        <div class="grid grid-cols-3" id="instagramGrid">
+            <!-- Uploaded elements load inside matrix loop dynamically -->
         </div>
     </div>
 
     <script>
         const imageLoader = document.getElementById('imageLoader');
         const grid = document.getElementById('instagramGrid');
+        const gridSelect = document.getElementById('gridSelect');
+        const viewSelect = document.getElementById('viewSelect');
+        const feedContainer = document.getElementById('feedContainer');
+        const headerText = document.getElementById('headerText');
         let draggedItem = null;
 
-        // Process uploaded files locally via Base64 strings (No server required)
+        // Grid Matrix Mutation Engine
+        gridSelect.addEventListener('change', function() {
+            if (this.value === 'grid-cols-3') {
+                grid.classList.remove('grid-cols-4');
+                grid.classList.add('grid-cols-3');
+            } else {
+                grid.classList.remove('grid-cols-3');
+                grid.classList.add('grid-cols-4');
+            }
+            updateHeaderText();
+        });
+
+        // Viewport Mutation Engine
+        viewSelect.addEventListener('change', function() {
+            if (this.value === 'view-mobile') {
+                feedContainer.classList.remove('view-desktop');
+                feedContainer.classList.add('view-mobile');
+            } else {
+                feedContainer.classList.remove('view-mobile');
+                feedContainer.classList.add('view-desktop');
+            }
+            updateHeaderText();
+        });
+
+        function updateHeaderText() {
+            const currentView = viewSelect.value === 'view-mobile' ? 'Mobile' : 'Desktop';
+            const currentCols = gridSelect.value === 'grid-cols-3' ? '3 Columns' : '4 Columns';
+            headerText.innerText = `✨ ${currentView} View — ${currentCols} Matrix`;
+        }
+
+        // Process asset streams locally without server requirements
         imageLoader.addEventListener('change', function(e) {
             const files = e.target.files;
             
@@ -146,11 +240,9 @@
                 }
                 reader.readAsDataURL(file);
             }
-            // Reset input so the same file can be uploaded again if deleted
             imageLoader.value = '';
         });
 
-        // Generate the DOM structure for a grid cell
         function createGridItem(imageSrc) {
             const item = document.createElement('div');
             item.classList.add('grid-item');
@@ -169,7 +261,7 @@
             };
             item.appendChild(deleteBtn);
 
-            // Drag and Drop Logic
+            // Drag and Drop Engine Core
             item.addEventListener('dragstart', function() {
                 draggedItem = item;
                 setTimeout(() => item.style.opacity = '0.4', 0);
@@ -185,7 +277,6 @@
             item.addEventListener('drop', function(e) {
                 e.preventDefault();
                 if (this !== draggedItem) {
-                    // Swap positions dynamically within the grid matrix
                     let allItems = Array.from(grid.children);
                     let draggedIndex = allItems.indexOf(draggedItem);
                     let targetIndex = allItems.indexOf(this);
@@ -198,7 +289,6 @@
                 }
             });
 
-            // Prepend so newest uploaded images appear at the top like actual IG
             grid.insertBefore(item, grid.firstChild);
         }
     </script>
