@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Instagram Grid Visualizer</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #262626;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .controls {
+            margin-bottom: 30px;
+            background: white;
+            padding: 15px 25px;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            text-align: center;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .upload-btn {
+            background-color: #0095f6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .upload-btn:hover {
+            background-color: #1877f2;
+        }
+        /* Instagram Feed Simulation Container */
+        .feed-container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            padding-bottom: 20px;
+        }
+        .profile-header {
+            height: 50px;
+            border-bottom: 1px solid #dbdbdb;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            font-weight: 600;
+            color: #262626;
+        }
+        /* 3-Column Instagram Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px;
+            padding: 3px;
+            background-color: #fff;
+        }
+        .grid-item {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; /* Forces exact square 1:1 aspect ratio */
+            background-color: #efefef;
+            cursor: grab;
+            overflow: hidden;
+        }
+        .grid-item:active {
+            cursor: grabbing;
+        }
+        .grid-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            user-select: none;
+        }
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        .delete-btn:hover {
+            background: rgba(255, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Feed Planner</h1>
+
+    <div class="controls">
+        <label for="imageLoader" class="upload-btn">📷 Upload Posters</label>
+        <input type="file" id="imageLoader" multiple accept="image/*">
+        <p style="font-size: 12px; color: #8e8e8e; margin-top: 8px; margin-bottom: 0;">Select multiple files at once. Drag squares to reorder.</p>
+    </div>
+
+    <div class="feed-container">
+        <div class="profile-header">✨ Your Visual Preview Layout</div>
+        <div class="grid" id="instagramGrid">
+            <!-- Uploaded images appear here -->
+        </div>
+    </div>
+
+    <script>
+        const imageLoader = document.getElementById('imageLoader');
+        const grid = document.getElementById('instagramGrid');
+        let draggedItem = null;
+
+        // Process uploaded files locally via Base64 strings (No server required)
+        imageLoader.addEventListener('change', function(e) {
+            const files = e.target.files;
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (!file.type.match('image.*')) continue;
+
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    createGridItem(event.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+            // Reset input so the same file can be uploaded again if deleted
+            imageLoader.value = '';
+        });
+
+        // Generate the DOM structure for a grid cell
+        function createGridItem(imageSrc) {
+            const item = document.createElement('div');
+            item.classList.add('grid-item');
+            item.setAttribute('draggable', true);
+
+            const img = document.createElement('img');
+            img.src = imageSrc;
+            item.appendChild(img);
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.classList.add('delete-btn');
+            deleteBtn.innerHTML = '✕';
+            deleteBtn.onclick = function(e) {
+                e.stopPropagation();
+                item.remove();
+            };
+            item.appendChild(deleteBtn);
+
+            // Drag and Drop Logic
+            item.addEventListener('dragstart', function() {
+                draggedItem = item;
+                setTimeout(() => item.style.opacity = '0.4', 0);
+            });
+
+            item.addEventListener('dragend', function() {
+                setTimeout(() => item.style.opacity = '1', 0);
+                draggedItem = null;
+            });
+
+            item.addEventListener('dragover', e => e.preventDefault());
+
+            item.addEventListener('drop', function(e) {
+                e.preventDefault();
+                if (this !== draggedItem) {
+                    // Swap positions dynamically within the grid matrix
+                    let allItems = Array.from(grid.children);
+                    let draggedIndex = allItems.indexOf(draggedItem);
+                    let targetIndex = allItems.indexOf(this);
+
+                    if (draggedIndex < targetIndex) {
+                        grid.insertBefore(draggedItem, this.nextSibling);
+                    } else {
+                        grid.insertBefore(draggedItem, this);
+                    }
+                }
+            });
+
+            // Prepend so newest uploaded images appear at the top like actual IG
+            grid.insertBefore(item, grid.firstChild);
+        }
+    </script>
+</body>
+</html>
