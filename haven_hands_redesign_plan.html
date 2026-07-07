@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haven Hands — Redesign Audit & Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #f8fafa; color: #2d4546; line-height: 1.6; font-size: 15px; }
+  .page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1 { font-size: 28px; font-weight: 600; color: #1a2e2f; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .subtitle { font-size: 15px; color: #5a7273; margin-bottom: 40px; }
+  .section { margin-bottom: 48px; }
+  .section-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #006A71; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #d4e8e9; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .card { background: #fff; border: 1px solid #d4e8e9; border-radius: 12px; padding: 18px 20px; }
+  .card-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #5a7273; margin-bottom: 6px; }
+  .card-value { font-size: 15px; font-weight: 600; color: #1a2e2f; }
+  .card-sub { font-size: 13px; color: #5a7273; margin-top: 6px; line-height: 1.65; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 6px; margin: 2px 3px 2px 0; }
+  .tag-bad { background: #fee2e2; color: #b91c1c; }
+  .tag-ok { background: #fef3c7; color: #92400e; }
+  .tag-good { background: #d1fae5; color: #065f46; }
+  .tag-info { background: #e0f2fe; color: #0c4a6e; }
+  .issue-list { background: #fff; border: 1px solid #d4e8e9; border-radius: 12px; overflow: hidden; }
+  .issue-row { display: flex; gap: 16px; padding: 16px 20px; border-bottom: 1px solid #f0f7f7; align-items: flex-start; }
+  .issue-row:last-child { border-bottom: none; }
+  .issue-num { font-size: 12px; font-weight: 600; color: #a6c8c9; min-width: 24px; padding-top: 2px; }
+  .issue-body { flex: 1; }
+  .issue-title { font-size: 14px; font-weight: 600; color: #1a2e2f; margin-bottom: 4px; }
+  .issue-desc { font-size: 13px; color: #5a7273; line-height: 1.6; }
+  .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .badge-high { background: #fee2e2; color: #b91c1c; }
+  .badge-mid { background: #fef3c7; color: #92400e; }
+  .badge-low { background: #f0f9ff; color: #0369a1; }
+  .before-after { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #d4e8e9; border-radius: 12px; overflow: hidden; }
+  .ba-col { padding: 20px; }
+  .ba-col:first-child { background: #fef2f2; border-right: 1px solid #fecaca; }
+  .ba-col:last-child { background: #f0fdf4; }
+  .ba-head { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+  .ba-col:first-child .ba-head { color: #b91c1c; }
+  .ba-col:last-child .ba-head { color: #065f46; }
+  .ba-item { font-size: 13px; padding: 5px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; color: #374151; }
+  .ba-icon { flex-shrink: 0; font-size: 12px; margin-top: 1px; }
+  .swatch-row { display: flex; gap: 6px; margin-top: 10px; }
+  .swatch { width: 30px; height: 30px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.06); }
+  /* Hero mockup */
+  .hero-mock { border: 1px solid #d4e8e9; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,106,113,0.08); }
+  .hero-nav { background: #fff; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #f0f7f7; }
+  .nav-logo { font-size: 14px; font-weight: 700; color: #006A71; }
+  .nav-links { display: flex; gap: 20px; }
+  .nav-link { font-size: 12px; color: #5a7273; }
+  .nav-cta { font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 20px; background: #006A71; color: #fff; }
+  .hero-body { background: #fff; padding: 36px 28px 28px; display: grid; grid-template-columns: 1fr 320px; gap: 32px; align-items: center; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; color: #5a7273; border: 1px solid #d4e8e9; border-radius: 20px; padding: 4px 12px; margin-bottom: 16px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; display: inline-block; }
+  .hero-h1 { font-size: 26px; font-weight: 700; color: #1a2e2f; line-height: 1.25; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .hero-h1 em { font-style: normal; color: #006A71; }
+  .hero-sub { font-size: 14px; color: #5a7273; line-height: 1.7; margin-bottom: 20px; }
+  .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-primary { font-size: 13px; font-weight: 600; padding: 10px 18px; border-radius: 20px; background: #006A71; color: #fff; }
+  .btn-secondary { font-size: 13px; font-weight: 600; padding: 10px 18px; border-radius: 20px; border: 1.5px solid #d4e8e9; color: #2d4546; background: #fff; }
+  .hero-stats { display: flex; gap: 24px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #f0f7f7; }
+  .stat-n { font-size: 20px; font-weight: 700; color: #006A71; }
+  .stat-l { font-size: 11px; color: #5a7273; margin-top: 2px; }
+  .hero-image { background: linear-gradient(135deg, #e6f4f5 0%, #d0ebed 100%); border-radius: 12px; height: 280px; display: flex; align-items: center; justify-content: center; color: #5a7273; font-size: 13px; text-align: center; padding: 20px; border: 1px solid #d4e8e9; }
+  .trust-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .chip { font-size: 11px; color: #5a7273; background: #f0f7f7; border: 1px solid #d4e8e9; border-radius: 20px; padding: 4px 10px; }
+  .cta-band { background: #006A71; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .cta-text { font-size: 13px; color: rgba(255,255,255,0.9); }
+  .cta-btn { font-size: 12px; font-weight: 600; padding: 7px 16px; border-radius: 8px; background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+  /* Priority bars */
+  .priority-item { margin-bottom: 14px; }
+  .priority-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; }
+  .priority-label strong { color: #1a2e2f; }
+  .priority-label span { color: #5a7273; font-size: 12px; }
+  .bar-track { height: 5px; background: #e6f4f5; border-radius: 3px; }
+  .bar-fill { height: 100%; border-radius: 3px; }
+  .bar-red { background: #ef4444; }
+  .bar-amber { background: #f59e0b; }
+  .bar-green { background: #10b981; }
+  @media (max-width: 680px) {
+    .grid2, .grid3, .before-after, .hero-body { grid-template-columns: 1fr; }
+    .hero-image { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>Haven Hands — Redesign Audit & Plan</h1>
+  <p class="subtitle">Analysis of havenhandsservices.com against msichana.co.ke and nestara.co.ke, with a Nairobi-focused redesign strategy.</p>
+
+  <!-- SITE COMPARISON -->
+  <div class="section">
+    <div class="section-title">Site comparison at a glance</div>
+    <div class="grid3">
+      <div class="card">
+        <div class="card-label">Your site</div>
+        <div class="card-value">havenhandsservices.com</div>
+        <div class="card-sub">Over-designed, templated SaaS feel. Splash screen, animated gallery stacks, gradient blobs — reads as "AI-built" rather than locally authentic. The color scheme is solid, the content is good, but the presentation buries it in decoration.</div>
+        <div style="margin-top:10px">
+          <span class="tag tag-bad">Splash screen</span>
+          <span class="tag tag-bad">Too many effects</span>
+          <span class="tag tag-bad">Generic hero</span>
+          <span class="tag tag-good">Good color scheme</span>
+          <span class="tag tag-good">Good content</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Reference: Msichana</div>
+        <div class="card-value">msichana.co.ke</div>
+        <div class="card-sub">Clean and confident. Staff profiles as the hero. Bootstrap foundation with custom personality. Speaks plainly and directly in a Nairobi context — "housegirl", "nanny", real Nairobi neighborhood names. Earns trust fast.</div>
+        <div style="margin-top:10px">
+          <span class="tag tag-good">Staff-first layout</span>
+          <span class="tag tag-good">No gimmicks</span>
+          <span class="tag tag-good">Direct copy</span>
+          <span class="tag tag-good">Local language</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Reference: Nestara</div>
+        <div class="card-value">nestara.co.ke</div>
+        <div class="card-sub">Premium, warm, editorial. Story-driven copy ("Your Circle of Care"). Testimonials are long and human — real names, real situations. Simple Zoho Sites layout — proof that great words on a simple page beats complex design.</div>
+        <div style="margin-top:10px">
+          <span class="tag tag-good">Story-first copy</span>
+          <span class="tag tag-good">Real testimonials</span>
+          <span class="tag tag-good">Premium feel</span>
+          <span class="tag tag-good">Simple layout</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ISSUES -->
+  <div class="section">
+    <div class="section-title">What's wrong — ranked by impact</div>
+    <div class="issue-list">
+      <div class="issue-row">
+        <div class="issue-num">01</div>
+        <div class="issue-body">
+          <div class="issue-title">The splash screen must go</div>
+          <div class="issue-desc">A loading animation with a progress bar before homepage content is an SaaS app pattern — not a domestic staffing agency in Nairobi. It delays trust and signals "this was built with a template." Both Msichana and Nestara load directly into the page with no intro animation.</div>
+          <span class="badge badge-high">Highest impact</span>
+        </div>
+      </div>
+      <div class="issue-row">
+        <div class="issue-num">02</div>
+        <div class="issue-body">
+          <div class="issue-title">The hero gallery stack is exaggerated decoration</div>
+          <div class="issue-desc">Three overlapping rotated image cards with badge overlays and slide dots reads as a tech startup landing page, not a Nairobi service business. Msichana puts staff profile cards front and center — functional, not decorative. Nestara uses no hero image at all, just strong copy. Replace with one clean, real photo or a simple two-column text + image layout.</div>
+          <span class="badge badge-high">Highest impact</span>
+        </div>
+      </div>
+      <div class="issue-row">
+        <div class="issue-num">03</div>
+        <div class="issue-body">
+          <div class="issue-title">The Swahili headline is the right instinct, wrong execution</div>
+          <div class="issue-desc">"Karibu — tafuta mtu sahihi kwa nyumba yako" in the hero is genuinely good — but it sits in isolation. Everything else on the page is English. This reads as pasted-on cultural flavoring rather than authentic bilingualism. Either commit (more Swahili throughout — WhatsApp greetings, service names, footer tagline) or use English with warmth naturally ("Welcome — find the right person for your home" and weave Swahili into copy organically like Msichana does).</div>
+          <span class="badge badge-mid">Medium impact</span>
+        </div>
+      </div>
+      <div class="issue-row">
+        <div class="issue-num">04</div>
+        <div class="issue-body">
+          <div class="issue-title">Section pill badges make every section feel like a SaaS feature list</div>
+          <div class="issue-desc">Badges like "Our Curriculum", "How It Works", "What People Say" floating in small teal pill shapes above every heading is a design tic from startup landing page templates. Neither Msichana nor Nestara use them. The heading itself carries the weight. Removing these will immediately make the page feel less generic.</div>
+          <span class="badge badge-mid">Medium impact</span>
+        </div>
+      </div>
+      <div class="issue-row">
+        <div class="issue-num">05</div>
+        <div class="issue-body">
+          <div class="issue-title">Numbered training pillars 01–04 mimic a startup feature grid</div>
+          <div class="issue-desc">Large "01, 02, 03, 04" numbers before each training area (Professional Communication, Housekeeping, First Aid, Childcare) is a direct copy of the SaaS "feature section" template pattern. For a domestic staffing service, this reads as corporate and cold. Nestara describes their values in flowing prose. Msichana lists services plainly with no decorative numbering. Replace with a clean card list or prose paragraph.</div>
+          <span class="badge badge-mid">Medium impact</span>
+        </div>
+      </div>
+      <div class="issue-row">
+        <div class="issue-num">06</div>
+        <div class="issue-body">
+          <div class="issue-title">Hero typewriter animation reduces trust, not builds it</div>
+          <div class="issue-desc">The rotating subtitle text that types and erases itself ("Trusted Nannies in Nairobi → Verified House Helps → ...") is a visual trick that delays the actual message. Nestara's hero says one thing confidently: "Your Circle of Care." Msichana says one thing: here are real people available now. A single, static sentence that tells families exactly what you do and how fast will outperform an animation every time.</div>
+          <span class="badge badge-low">Low impact</span>
+        </div>
+      </div>
+      <div class="issue-row">
+        <div class="issue-num">07</div>
+        <div class="issue-body">
+          <div class="issue-title">Hero background gradient makes it look like a healthcare product</div>
+          <div class="issue-desc">The teal gradient wash across the hero section (--grad-hero: linear-gradient from #f0f7f7 to #e0f0f1) is pleasant but generic. Your teal #006A71 is strongest as a button color or accent — not as an atmospheric background. Both reference sites use clean white or near-white backgrounds throughout, making the brand color pop when it does appear. Switch the hero background to pure white (#ffffff) or warm off-white (#fafafa).</div>
+          <span class="badge badge-low">Low impact</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT TO KEEP -->
+  <div class="section">
+    <div class="section-title">What to keep — these are already working</div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-label">Color palette ✓ Keep as-is</div>
+        <div class="card-sub">Your teal #006A71 is distinctive, professional, and ownable. Uncommon enough that it doesn't read as generic green. Use it for buttons, links, nav, and key accents — just not as a full background wash.</div>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#006A71"></div>
+          <div class="swatch" style="background:#00a3ad"></div>
+          <div class="swatch" style="background:#e6f4f5"></div>
+          <div class="swatch" style="background:#1a2e2f"></div>
+          <div class="swatch" style="background:#f8fafa"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Typography ✓ Keep as-is</div>
+        <div class="card-sub">Outfit (headings) + Inter (body) is a strong, contemporary pair. The fonts are not the problem — the over-styling around them is. Keep these, but reduce heading weights from 800 to 600–700 for a less aggressive feel.</div>
+        <div style="margin-top:10px">
+          <div style="font-size:20px;font-weight:700;color:#1a2e2f;line-height:1.2">Outfit — clean, modern</div>
+          <div style="font-size:13px;color:#5a7273;margin-top:4px">Inter — readable, neutral body text that pairs well</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Page architecture ✓ Keep as-is</div>
+        <div class="card-sub">Hero → How it works → Training → Staff → Testimonials → Pricing → CTA is a solid, proven flow for a staffing service. The structure is right — it's the visual execution that's too heavy. Don't restructure, simplify.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">SEO + Nairobi signals ✓ Keep + extend</div>
+        <div class="card-sub">Schema markup, geo meta tags (KE, Nairobi, GPS coordinates), WhatsApp integration, and the Swahili hero copy are genuinely smart SEO and trust moves. Keep all of these and extend them — add more neighborhood names, Swahili content, and local references throughout.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEFORE AFTER -->
+  <div class="section">
+    <div class="section-title">Specific changes: before → after</div>
+    <div class="before-after">
+      <div class="ba-col">
+        <div class="ba-head">❌ Remove this</div>
+        <div class="ba-item"><span class="ba-icon">✕</span>Splash screen with animated progress bar</div>
+        <div class="ba-item"><span class="ba-icon">✕</span>Three-card stacked hero gallery with rotation & slide dots</div>
+        <div class="ba-item"><span class="ba-icon">✕</span>Hero subtitle typewriter animation</div>
+        <div class="ba-item"><span class="ba-icon">✕</span>Section pill badges ("Our Curriculum", "How It Works")</div>
+        <div class="ba-item"><span class="ba-icon">✕</span>Large "01 02 03 04" numbered training blocks</div>
+        <div class="ba-item"><span class="ba-icon">✕</span>Teal gradient background wash on hero</div>
+        <div class="ba-item"><span class="ba-icon">✕</span>Animated badge dot on "Trusted by 200+" chip</div>
+        <div class="ba-item"><span class="ba-icon">✕</span>Glass/blur effects on cards (backdrop-filter)</div>
+        <div class="ba-item"><span class="ba-icon">✕</span>Hero background pattern overlay (hero-bg-pattern)</div>
+      </div>
+      <div class="ba-col">
+        <div class="ba-head">✅ Replace with this</div>
+        <div class="ba-item"><span class="ba-icon">✓</span>Page loads directly — no splash, no delay</div>
+        <div class="ba-item"><span class="ba-icon">✓</span>Single clean photo of a real staff member (right column), or remove gallery entirely</div>
+        <div class="ba-item"><span class="ba-icon">✓</span>One confident static sentence about placement in 3–7 days</div>
+        <div class="ba-item"><span class="ba-icon">✓</span>Plain bold section headings with generous white space above</div>
+        <div class="ba-item"><span class="ba-icon">✓</span>Simple text list or prose paragraph describing training areas</div>
+        <div class="ba-item"><span class="ba-icon">✓</span>Pure white (#fff) hero background, teal reserved for buttons only</div>
+        <div class="ba-item"><span class="ba-icon">✓</span>Inline stat in hero copy: "Over 200 Nairobi families trust us"</div>
+        <div class="ba-item"><span class="ba-icon">✓</span>Flat white cards with clean 1px border</div>
+        <div class="ba-item"><span class="ba-icon">✓</span>Clean white background, no texture or pattern needed</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO WIREFRAME -->
+  <div class="section">
+    <div class="section-title">Proposed hero redesign — concept wireframe</div>
+    <div class="hero-mock">
+      <div class="hero-nav">
+        <span class="nav-logo">Haven Hands</span>
+        <div class="nav-links">
+          <span class="nav-link">Services</span>
+          <span class="nav-link">Our Staff</span>
+          <span class="nav-link">Pricing</span>
+          <span class="nav-link">Blog</span>
+        </div>
+        <span class="nav-cta">WhatsApp us →</span>
+      </div>
+      <div class="hero-body">
+        <div>
+          <div class="hero-badge"><span class="dot"></span>Placing staff in Nairobi since 2023</div>
+          <div class="hero-h1">Trusted nannies &amp; house helps for <em>Nairobi families</em></div>
+          <div class="hero-sub">Background-checked, trained professionals placed within 3–7 days. Over 200 families in Nairobi's best estates trust Haven Hands to find the right person for their home.</div>
+          <div class="hero-btns">
+            <div class="btn-primary">Browse available staff</div>
+            <div class="btn-secondary">WhatsApp us now</div>
+          </div>
+          <div class="hero-stats">
+            <div><div class="stat-n">200+</div><div class="stat-l">Families placed</div></div>
+            <div><div class="stat-n">3–7 days</div><div class="stat-l">Average placement</div></div>
+            <div><div class="stat-n">98%</div><div class="stat-l">Satisfaction rate</div></div>
+          </div>
+          <div class="trust-chips">
+            <div class="chip">Kilimani</div>
+            <div class="chip">Westlands</div>
+            <div class="chip">Karen</div>
+            <div class="chip">Runda</div>
+            <div class="chip">Lavington</div>
+            <div class="chip">Muthaiga</div>
+            <div class="chip">Parklands</div>
+          </div>
+        </div>
+        <div class="hero-image">
+          📷 Single portrait photo<br>of a real Haven Hands staff member<br><br><small style="color:#8aa3a5">No stacked cards, no rotation.<br>One real face builds trust.</small>
+        </div>
+      </div>
+      <div class="cta-band">
+        <div class="cta-text">Need someone urgently? We can interview candidates for you this week.</div>
+        <div class="cta-btn">Get matched today</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:#5a7273;margin-top:8px">The neighborhood chips (Kilimani, Karen, Westlands...) are a key trust signal for Nairobi families searching online — they immediately see "this is for people like me." No animation, no JS needed.</p>
+  </div>
+
+  <!-- NAIROBI ADDITIONS -->
+  <div class="section">
+    <div class="section-title">Nairobi-specific improvements to add</div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-label">M-Pesa payment mention</div>
+        <div class="card-sub">Msichana has an entire article about M-Pesa domestic payments. Add a single line in your pricing section: "Payment via M-Pesa or bank transfer accepted." This immediately signals local relevance and removes a friction point for potential clients.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Nairobi neighborhood targeting</div>
+        <div class="card-sub">Add "Areas we serve: Westlands, Karen, Kilimani, Runda, Lavington, Muthaiga, Parklands, Spring Valley, Gigiri, Kileleshwa." These are the families searching for domestic staff online. Msichana uses these keywords in article titles for SEO — you should too.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Real testimonials, Nestara-style</div>
+        <div class="card-sub">Nestara's testimonials are 5–6 sentences with real emotions ("I missed her first steps..."). Your current testimonials are short and generic. Ask 3 satisfied clients for a longer story. Use their first name and neighborhood: "Mary N., Lavington." This is the single biggest trust signal on any service site.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">WhatsApp as the primary CTA</div>
+        <div class="card-sub">Both Msichana and Nestara treat WhatsApp as the main contact path — not a form. In Nairobi, WhatsApp is how business is done. Make your +254118971254 wa.me link the most prominent button on every page. The "Contact" form is secondary.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">More authentic copy tone</div>
+        <div class="card-sub">Currently your copy uses phrases like "Unlock the care your family deserves" — Nestara-adjacent but slightly generic. Look at how Msichana writes: plain, direct, human. "Find a housegirl in Nairobi." "Hire a trained nanny this week." Confident simplicity builds more trust than aspirational language.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Staff profile page improvement</div>
+        <div class="card-sub">Msichana's housegirl profiles with photos, experience, and location are their entire product. Your workers.html should be the most polished page on the site — real photos, clear availability, experience highlights, neighborhood preference. That's what converts a visitor into a client.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIORITY ORDER -->
+  <div class="section">
+    <div class="section-title">What to fix first — priority order</div>
+    <div class="card">
+      <div class="priority-item">
+        <div class="priority-label"><strong>1. Remove splash screen + gallery stack (index.html)</strong><span>~2–3 hours</span></div>
+        <div class="bar-track"><div class="bar-fill bar-red" style="width:96%"></div></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-label"><strong>2. Simplify hero — remove typewriter, add static copy + neighborhood chips</strong><span>~1–2 hours</span></div>
+        <div class="bar-track"><div class="bar-fill bar-red" style="width:88%"></div></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-label"><strong>3. Remove all section pill badges (.section-tag elements)</strong><span>~30 min</span></div>
+        <div class="bar-track"><div class="bar-fill bar-red" style="width:78%"></div></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-label"><strong>4. Replace numbered training blocks with clean prose or flat list</strong><span>~1 hour</span></div>
+        <div class="bar-track"><div class="bar-fill bar-amber" style="width:65%"></div></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-label"><strong>5. Set hero background to pure white — kill the teal gradient</strong><span>~15 min</span></div>
+        <div class="bar-track"><div class="bar-fill bar-amber" style="width:55%"></div></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-label"><strong>6. Replace short testimonials with 3 long, named, located stories</strong><span>~3 hours (writing + client outreach)</span></div>
+        <div class="bar-track"><div class="bar-fill bar-amber" style="width:48%"></div></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-label"><strong>7. Add M-Pesa mention + neighborhood list to pricing page</strong><span>~30 min</span></div>
+        <div class="bar-track"><div class="bar-fill bar-green" style="width:35%"></div></div>
+      </div>
+      <div class="priority-item" style="margin-bottom:0">
+        <div class="priority-label"><strong>8. Improve staff profile photos and cards on workers.html</strong><span>~4 hours</span></div>
+        <div class="bar-track"><div class="bar-fill bar-green" style="width:25%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section">
+    <div class="section-title">The core principle of this redesign</div>
+    <div class="card" style="border-left: 4px solid #006A71; background: #e6f4f5;">
+      <div style="font-size:15px;color:#1a2e2f;line-height:1.7;">
+        <strong>Your current site tries to look impressive. The redesign should try to look trustworthy.</strong>
+        <br><br>
+        Msichana and Nestara succeed because they feel like you're talking to a real person in Nairobi who can solve your problem — not looking at a product page. They use plain language, real names, local neighborhood references, and WhatsApp as the primary contact method.
+        <br><br>
+        Your color scheme and font choice are already good. Your content (training program, vetting process, staff profiles) is genuinely strong. The problem is that it's all wrapped in design flourishes that signal "template" and "generic startup" rather than "trusted local service in Nairobi."
+        <br><br>
+        Strip the decoration. Let the content breathe. Make WhatsApp the primary CTA. Name the neighborhoods you serve. And get those long, human testimonials. That's the redesign.
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:12px;color:#a6c8c9;margin-top:32px;text-align:center">Haven Hands Redesign Plan — Generated July 2026</p>
+
+</div>
+</body>
+</html>
