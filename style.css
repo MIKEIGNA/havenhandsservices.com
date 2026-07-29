@@ -2789,7 +2789,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     position: absolute;
     inset: 0;
     background-size: cover;
-    background-position: center;
+    background-position: 50% 25%;
     opacity: 0;
     transition: opacity 0.8s ease;
     display: flex;
@@ -2802,7 +2802,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(0,77,82,0.85) 0%, rgba(0,106,113,0.7) 100%);
+    background: linear-gradient(135deg, rgba(0,77,82,0.7) 0%, rgba(0,106,113,0.55) 100%);
 }
 .hero-slide-content {
     position: relative;
