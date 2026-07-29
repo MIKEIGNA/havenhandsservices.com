@@ -104,12 +104,35 @@
             <h1>Tafuta kazi ya nyumba <span>leo</span></h1>
             <p class="sub">Join Haven Hands as a professional Staff. Get trained, get placed, and build a real career in domestic care.</p>
             <div class="hero-ctas">
-                <a href="#apply" class="btn btn-primary">Apply Now</a>
+                <a href="#apply" class="btn btn-primary">Start Your Application</a>
                 <a href="#qualifications" class="btn btn-outline">Check Qualifications</a>
             </div>
         </div>
         <div class="page-hero-img" data-reveal="right">
-            <img src="onehaven.jpg" alt="Join Haven Hands Staff team">
+            <img src="new_photos/staff.jpeg" alt="Join Haven Hands Staff team">
+        </div>
+    </div>
+</section>
+
+<!-- APPLICATION PROCESS (simple, after hero) -->
+<section class="section-pad-sm" id="process">
+    <div class="container">
+        <div class="steps-grid-thin">
+            <div class="step-thin" data-reveal>
+                <div class="step-num-sm">1</div>
+                <h4>Apply Online</h4>
+                <p>Fill in the form or WhatsApp us.</p>
+            </div>
+            <div class="step-thin" data-reveal data-delay="100">
+                <div class="step-num-sm">2</div>
+                <h4>Vetting &amp; Training</h4>
+                <p>Background checks + training.</p>
+            </div>
+            <div class="step-thin" data-reveal data-delay="200">
+                <div class="step-num-sm">3</div>
+                <h4>Placement</h4>
+                <p>Get matched with a family.</p>
+            </div>
         </div>
     </div>
 </section>
@@ -120,7 +143,7 @@
         <div class="section-header centered" data-reveal>
             <span class="section-tag">Before You Apply</span>
             <h2 class="section-title">Do you <span>qualify?</span></h2>
-            <p class="section-intro">Check if you meet the basic requirements. Don't worry if you don't have everything — we'll guide you through the process.</p>
+            <p class="section-intro">Check if you meet the basic requirements. Don't worry if you don't have everything — contact us, we'll guide you through the process.</p>
         </div>
         <div class="container-narrow" data-reveal>
             <div style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem;">
@@ -132,11 +155,15 @@
                     </li>
                     <li style="padding: 0.6rem 0; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 0.75rem;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <span>Include at least a one-page CV</span>
+                    </li>
+                    <li style="padding: 0.6rem 0; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 0.75rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                         <span>Registration fee: KES 500 (non-refundable)</span>
                     </li>
                     <li style="padding: 0.6rem 0; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 0.75rem;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                        <span>Willingness to undergo 2-week training</span>
+                        <span>Willingness to undergo basic initial training</span>
                     </li>
                     <li style="padding: 0.6rem 0; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 0.75rem;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -278,28 +305,61 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="cg-type">Position You're Interested In *</label>
-                <select id="cg-type" name="type" required>
-                    <option value="">Select...</option>
-                    <option value="househelp">House Help</option>
-                    <option value="nanny">Nanny</option>
-                    <option value="manager">Domestic Manager</option>
-                    <option value="elderly">Elderly Care</option>
-                    <option value="any">Any Available</option>
-                </select>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cg-gender">Gender *</label>
+                    <select id="cg-gender" name="gender" required>
+                        <option value="">Select...</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cg-age">Age *</label>
+                    <input type="number" id="cg-age" name="age" required min="18" max="70" placeholder="e.g. 28">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cg-education">Level of Education *</label>
+                    <select id="cg-education" name="education" required>
+                        <option value="">Select...</option>
+                        <option value="primary">Primary School</option>
+                        <option value="secondary">Secondary School</option>
+                        <option value="diploma">Diploma</option>
+                        <option value="degree">Degree</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cg-type">Position You're Interested In *</label>
+                    <select id="cg-type" name="type" required>
+                        <option value="">Select...</option>
+                        <option value="househelp">House Manager</option>
+                        <option value="nanny">Nanny</option>
+                        <option value="babysitter">Babysitter</option>
+                        <option value="manager">Domestic Manager</option>
+                        <option value="elderly">Elderly Care</option>
+                        <option value="driver">Driver</option>
+                        <option value="gardener">Gardener</option>
+                        <option value="petsitter">Pet Sitter</option>
+                        <option value="any">Any Available</option>
+                    </select>
+                </div>
             </div>
             <div class="form-group">
                 <label for="cg-certs">Certifications (if any)</label>
                 <input type="text" id="cg-certs" name="certs" placeholder="e.g. First Aid, Food Hygiene">
             </div>
             <div class="form-group">
-                <label for="cg-why">Why do you want to join Haven Hands? *</label>
-                <textarea id="cg-why" name="why" rows="4" required placeholder="Tell us a bit about yourself and what you're looking for..."></textarea>
+                <label for="cg-passport">Upload a Passport Photo *</label>
+                <input type="file" id="cg-passport" name="passport" accept="image/*" required class="form-file">
+                <small style="color: var(--text-muted); font-size: 0.8rem;">JPG or PNG, max 2MB</small>
             </div>
             <div class="form-group">
-                <label for="cg-ref">Reference Name & Phone</label>
-                <input type="text" id="cg-ref" name="reference" placeholder="e.g. Sarah K. — 0700 123 456">
+                <label for="cg-cv">Upload Your CV *</label>
+                <input type="file" id="cg-cv" name="cv" accept=".pdf,.doc,.docx" required class="form-file">
+                <small style="color: var(--text-muted); font-size: 0.8rem;">PDF or Word document, max 5MB</small>
             </div>
             <button type="submit" class="btn btn-primary btn-full btn-lg">
                 Submit Application
@@ -309,37 +369,12 @@
             <p id="cgFormError" style="display:none; text-align:center; color: #dc2626; font-weight: 600; margin-top: 1rem;">Something went wrong. Please try again or WhatsApp us directly.</p>
         </form>
         <div class="text-center" style="margin-top: 1.5rem;">
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Prefer WhatsApp? <a href="https://wa.me/254118971254?text=Hello%20Haven%20Hands%2C%20I%20would%20like%20to%20apply%20as%20a%20Staff." style="color: var(--primary); font-weight: 600;">Message us directly</a></p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Need Support? <a href="https://wa.me/254118971254?text=Hello%20Haven%20Hands%2C%20I%20would%20like%20to%20apply%20as%20a%20Staff." style="color: var(--primary); font-weight: 600;">Message us directly on WhatsApp</a></p>
         </div>
     </div>
 </section>
 
-<!-- HOW TO APPLY -->
-<section class="section-pad">
-    <div class="container">
-        <div class="section-header centered" data-reveal>
-            <span class="section-tag">Start Today</span>
-            <h2 class="section-title">Our Application <span>Process</span></h2>
-        </div>
-        <div class="steps-grid">
-            <div class="step-card" data-reveal>
-                <div class="step-num">1</div>
-                <h4>Apply Online</h4>
-                <p>Fill in the form above or send a message on WhatsApp with your details and experience.</p>
-            </div>
-            <div class="step-card" data-reveal data-delay="100">
-                <div class="step-num">2</div>
-                <h4>Vetting &amp; Training</h4>
-                <p>Complete background checks followed by our intensive 2-week training program.</p>
-            </div>
-            <div class="step-card" data-reveal data-delay="200">
-                <div class="step-num">3</div>
-                <h4>Matching &amp; Placement</h4>
-                <p>Get interviewed and placed with a family that respects and values your skills.</p>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 </main>
 

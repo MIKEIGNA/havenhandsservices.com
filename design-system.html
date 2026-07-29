@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haven Hands — Design System</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* ── Design System page styles (not part of site — for docs only) ── */
+        body.ds-body { background: #f4f6f8; padding: 0; font-family: 'Inter', sans-serif; color: #1a2e2f; }
+        .ds-wrap { max-width: 1280px; margin: 0 auto; padding: 0 2rem 4rem; }
+        .ds-header { background: linear-gradient(135deg, #006A71 0%, #004d52 100%); color: #fff; padding: 3rem 2rem; margin-bottom: 3rem; }
+        .ds-header h1 { font-family: 'Outfit', sans-serif; font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .ds-header p { opacity: 0.8; font-size: 1.05rem; max-width: 600px; }
+        .ds-header span { color: #00c9d4; }
+        .ds-section { margin-bottom: 4rem; }
+        .ds-section-title { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 700; color: #004d52; margin-bottom: 0.25rem; padding-bottom: 0.5rem; border-bottom: 3px solid #006A71; display: inline-block; }
+        .ds-subtitle { color: #5a7273; font-size: 0.95rem; margin-bottom: 2rem; }
+        .ds-grid { display: grid; gap: 1.5rem; }
+        .ds-grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .ds-grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .ds-grid-4 { grid-template-columns: repeat(4, 1fr); }
+        .ds-grid-5 { grid-template-columns: repeat(5, 1fr); }
+        .ds-card { background: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e8edee; }
+        .ds-card h4 { font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #5a7273; margin-bottom: 0.75rem; }
+        .ds-color-swatch { height: 60px; border-radius: 10px; margin-bottom: 0.5rem; border: 1px solid rgba(0,0,0,0.06); }
+        .ds-label { font-size: 0.8rem; color: #5a7273; font-family: 'SF Mono', 'Fira Code', monospace; }
+        .ds-label strong { color: #1a2e2f; display: block; font-family: 'Inter', sans-serif; }
+        .ds-shadow-box { height: 60px; border-radius: 12px; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: #5a7273; }
+        .ds-token-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.85rem; }
+        .ds-token-row:last-child { border: none; }
+        .ds-token-row code { font-family: 'SF Mono', 'Fira Code', monospace; color: #006A71; }
+        .ds-component-demo { background: #f8fafa; border-radius: 12px; padding: 2rem; margin: 1rem 0; border: 1px solid #e8edee; }
+        .ds-code { background: #1a2e2f; color: #e0f0f1; border-radius: 10px; padding: 1rem 1.25rem; font-size: 0.8rem; font-family: 'SF Mono', 'Fira Code', monospace; overflow-x: auto; white-space: pre; margin-top: 1rem; line-height: 1.6; }
+        .ds-code .hl { color: #00c9d4; }
+        .ds-code .cm { color: #5a7273; }
+        .ds-code .tag { color: #f59e0b; }
+        .ds-sidebar { position: sticky; top: 2rem; }
+        .ds-nav { background: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e8edee; }
+        .ds-nav a { display: block; padding: 0.4rem 0; color: #2d4546; text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+        .ds-nav a:hover { color: #006A71; }
+        .ds-nav .ds-nav-label { font-family: 'Outfit', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #006A71; font-weight: 600; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid #e8edee; }
+        .ds-nav .ds-nav-label:first-child { margin-top: 0; border: none; padding-top: 0; }
+        .ds-nav a.active { color: #006A71; font-weight: 600; }
+        .ds-layout { display: grid; grid-template-columns: 240px 1fr; gap: 2rem; }
+        .ds-inline-flex { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+        .ds-mb { margin-bottom: 1rem; }
+        .ds-mb-2 { margin-bottom: 2rem; }
+        .ds-tag { display: inline-block; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.2rem 0.6rem; border-radius: 4px; background: #e6f4f5; color: #006A71; margin-bottom: 1rem; }
+        .ds-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .ds-table th { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 2px solid #e8edee; font-family: 'Outfit', sans-serif; font-weight: 600; color: #004d52; }
+        .ds-table td { padding: 0.6rem 0.75rem; border-bottom: 1px solid #f0f0f0; }
+        .ds-table td code { font-family: 'SF Mono', 'Fira Code', monospace; color: #006A71; font-size: 0.8rem; }
+        .ds-table tr:hover td { background: #f8fafa; }
+        .ds-icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 0.5rem; }
+        .ds-icon-item { background: #fff; border-radius: 8px; padding: 0.75rem; text-align: center; border: 1px solid #e8edee; }
+        .ds-icon-item svg { width: 24px; height: 24px; color: #006A71; }
+        .ds-icon-item span { display: block; font-size: 0.65rem; color: #5a7273; margin-top: 0.25rem; }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .ds-layout { grid-template-columns: 1fr; }
+            .ds-sidebar { display: none; }
+            .ds-grid-2, .ds-grid-3, .ds-grid-4, .ds-grid-5 { grid-template-columns: 1fr; }
+        }
+
+        /* preview helpers */
+        .demo-container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+        .demo-section-pad { padding: 3rem 0; }
+        .demo-bg-light { background: #f8fafa; }
+    </style>
+</head>
+<body class="ds-body">
+
+<div class="ds-header">
+    <div class="ds-wrap">
+        <h1>Haven Hands <span>Design System</span></h1>
+        <p>Complete component library, design tokens, layouts, and patterns for the Haven Hands website. Use this as a reference to make consistent changes across the site.</p>
+    </div>
+</div>
+
+<div class="ds-wrap ds-layout">
+
+    <!-- SIDEBAR NAV -->
+    <aside class="ds-sidebar">
+        <nav class="ds-nav">
+            <div class="ds-nav-label">Foundations</div>
+            <a href="#tokens">Design Tokens</a>
+            <a href="#typography">Typography</a>
+            <a href="#spacing">Spacing &amp; Layout</a>
+            <a href="#grids">Grids</a>
+
+            <div class="ds-nav-label">Components</div>
+            <a href="#buttons">Buttons</a>
+            <a href="#navigation">Navigation</a>
+            <a href="#hero">Hero</a>
+            <a href="#cards">Cards</a>
+            <a href="#forms">Forms</a>
+            <a href="#faq">FAQ</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#sections">Section Headers</a>
+            <a href="#cta">CTA Banner</a>
+            <a href="#footer">Footer</a>
+
+            <div class="ds-nav-label">Patterns</div>
+            <a href="#blog-posts">Blog Posts</a>
+            <a href="#workers">Workers Grid</a>
+            <a href="#modals">Modals</a>
+            <a href="#utilities">Utilities</a>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- FOUNDATIONS                              -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="tokens">
+            <div class="ds-tag">Foundations</div>
+            <h2 class="ds-section-title">Design Tokens</h2>
+            <p class="ds-subtitle">All CSS custom properties used across the site. Edit these in <code>style.css</code> `:root` to change brand globally.</p>
+
+            <h4 style="margin: 1.5rem 0 0.75rem; font-family: 'Outfit', sans-serif;">Brand Colors</h4>
+            <div class="ds-grid ds-grid-5">
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#006A71;"></div><div class="ds-label"><strong>Primary</strong>--primary<br>#006A71</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#004d52;"></div><div class="ds-label"><strong>Primary Dark</strong>--primary-dark<br>#004d52</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#008a93;"></div><div class="ds-label"><strong>Primary Light</strong>--primary-light<br>#008a93</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#e6f4f5;"></div><div class="ds-label"><strong>Primary Pale</strong>--primary-pale<br>#e6f4f5</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#00c9d4;"></div><div class="ds-label"><strong>Accent</strong>--accent<br>#00c9d4</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#A6A8AB;"></div><div class="ds-label"><strong>Secondary</strong>--secondary<br>#A6A8AB</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#c9a227;"></div><div class="ds-label"><strong>Gold</strong>--gold<br>#c9a227</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#FFFFFF; border-color:#ddd;"></div><div class="ds-label"><strong>White</strong>--white<br>#FFFFFF</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#f8fafa;"></div><div class="ds-label"><strong>Off White</strong>--off-white<br>#f8fafa</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#f0f7f7;"></div><div class="ds-label"><strong>Light</strong>--light<br>#f0f7f7</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#1a2e2f;"></div><div class="ds-label"><strong>Dark</strong>--dark<br>#1a2e2f</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#2d4546;"></div><div class="ds-label"><strong>Text</strong>--text<br>#2d4546</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#5a7273;"></div><div class="ds-label"><strong>Text Muted</strong>--text-muted<br>#5a7273</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:#d4e8e9;"></div><div class="ds-label"><strong>Border</strong>--border<br>#d4e8e9</div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:rgba(0,106,113,0.12);"></div><div class="ds-label"><strong>Border Light</strong>--border-light<br>rgba(0,106,113,0.12)</div></div>
+            </div>
+
+            <h4 style="margin: 1.5rem 0 0.75rem; font-family: 'Outfit', sans-serif;">Gradients</h4>
+            <div class="ds-grid ds-grid-4">
+                <div class="ds-card"><div class="ds-color-swatch" style="background:linear-gradient(135deg, #006A71 0%, #00a3ad 100%);"></div><div class="ds-label"><strong>--grad-primary</strong></div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:linear-gradient(135deg, #004d52 0%, #006A71 100%);"></div><div class="ds-label"><strong>--grad-dark</strong></div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:linear-gradient(135deg, #e6f4f5 0%, #f0fafa 100%);"></div><div class="ds-label"><strong>--grad-light</strong></div></div>
+                <div class="ds-card"><div class="ds-color-swatch" style="background:linear-gradient(135deg, #f0f7f7 0%, #e0f0f1 50%, #f8fafa 100%);"></div><div class="ds-label"><strong>--grad-hero</strong></div></div>
+            </div>
+
+            <h4 style="margin: 1.5rem 0 0.75rem; font-family: 'Outfit', sans-serif;">Shadows</h4>
+            <div class="ds-grid ds-grid-5">
+                <div class="ds-card"><div class="ds-shadow-box" style="box-shadow: 0 2px 8px rgba(0,106,113,0.06);">--shadow-sm</div></div>
+                <div class="ds-card"><div class="ds-shadow-box" style="box-shadow: 0 4px 16px rgba(0,106,113,0.10);">--shadow</div></div>
+                <div class="ds-card"><div class="ds-shadow-box" style="box-shadow: 0 8px 32px rgba(0,106,113,0.13);">--shadow-md</div></div>
+                <div class="ds-card"><div class="ds-shadow-box" style="box-shadow: 0 16px 48px rgba(0,106,113,0.16);">--shadow-lg</div></div>
+                <div class="ds-card"><div class="ds-shadow-box" style="box-shadow: 0 24px 80px rgba(0,106,113,0.20);">--shadow-xl</div></div>
+            </div>
+
+            <h4 style="margin: 1.5rem 0 0.75rem; font-family: 'Outfit', sans-serif;">Border Radius</h4>
+            <div class="ds-grid ds-grid-5">
+                <div class="ds-card"><div style="height:50px; border-radius:8px; background:#e6f4f5; display:flex; align-items:center; justify-content:center; font-size:0.8rem;">--radius-sm (8px)</div></div>
+                <div class="ds-card"><div style="height:50px; border-radius:16px; background:#e6f4f5; display:flex; align-items:center; justify-content:center; font-size:0.8rem;">--radius (16px)</div></div>
+                <div class="ds-card"><div style="height:50px; border-radius:24px; background:#e6f4f5; display:flex; align-items:center; justify-content:center; font-size:0.8rem;">--radius-lg (24px)</div></div>
+                <div class="ds-card"><div style="height:50px; border-radius:40px; background:#e6f4f5; display:flex; align-items:center; justify-content:center; font-size:0.8rem;">--radius-xl (40px)</div></div>
+                <div class="ds-card"><div style="height:50px; border-radius:9999px; background:#e6f4f5; display:flex; align-items:center; justify-content:center; font-size:0.8rem;">--radius-full (9999px)</div></div>
+            </div>
+
+            <h4 style="margin: 1.5rem 0 0.75rem; font-family: 'Outfit', sans-serif;">Transitions</h4>
+            <div class="ds-grid ds-grid-2">
+                <div class="ds-card"><div class="ds-label"><strong>--transition</strong><br><code>all 0.35s cubic-bezier(0.4, 0, 0.2, 1)</code></div></div>
+                <div class="ds-card"><div class="ds-label"><strong>--bounce</strong><br><code>cubic-bezier(0.34, 1.56, 0.64, 1)</code></div></div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- TYPOGRAPHY                              -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="typography">
+            <div class="ds-tag">Foundations</div>
+            <h2 class="ds-section-title">Typography</h2>
+            <p class="ds-subtitle">Two font families: <strong>Outfit</strong> (headings) and <strong>Inter</strong> (body). Loaded from Google Fonts.</p>
+
+            <div class="ds-grid ds-grid-2">
+                <div class="ds-card">
+                    <h4>Outfit (Headings)</h4>
+                    <p style="font-family:'Outfit',sans-serif; font-size:2.5rem; font-weight:800; margin:0;">Heading 1</p>
+                    <p style="font-family:'Outfit',sans-serif; font-size:2rem; font-weight:700; margin:0.5rem 0 0;">Heading 2</p>
+                    <p style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:600; margin:0.5rem 0 0;">Heading 3</p>
+                    <p style="font-family:'Outfit',sans-serif; font-size:1.15rem; font-weight:600; margin:0.5rem 0 0;">Heading 4</p>
+                    <div class="ds-code" style="margin-top:1rem;">font-family: 'Outfit', sans-serif;<br>font-weight: 300, 400, 500, 600, 700, 800</div>
+                </div>
+                <div class="ds-card">
+                    <h4>Inter (Body)</h4>
+                    <p style="font-family:'Inter',sans-serif; font-size:1rem; line-height:1.65;">Body text — this is how regular paragraph text looks. The line height is 1.65 for comfortable reading. Color uses <code>--text</code>.</p>
+                    <p style="font-family:'Inter',sans-serif; font-size:0.85rem; color:#5a7273; margin-top:0.75rem;">Small / muted text using <code>--text-muted</code>.</p>
+                    <div class="ds-code" style="margin-top:1rem;">font-family: 'Inter', sans-serif;<br>line-height: 1.65;<br>color: var(--text) or var(--text-muted)</div>
+                </div>
+            </div>
+
+            <h4 style="margin: 1.5rem 0 0.75rem; font-family: 'Outfit', sans-serif;">Headings CSS</h4>
+            <div class="ds-code">h1, h2, h3, h4, h5, h6 {<br>    font-family: 'Outfit', sans-serif;<br>    line-height: 1.2;<br>    color: var(--dark);<br>}</div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- SPACING & LAYOUT                        -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="spacing">
+            <div class="ds-tag">Foundations</div>
+            <h2 class="ds-section-title">Spacing &amp; Layout</h2>
+            <p class="ds-subtitle">Standard containers, section padding, and gap values.</p>
+
+            <table class="ds-table">
+                <thead><tr><th>Class / Selector</th><th>Value</th><th>Use</th></tr></thead>
+                <tbody>
+                    <tr><td><code>.container</code></td><td>max-width: 1200px; padding: 0 clamp(1.25rem, 5vw, 2.5rem)</td><td>Main wrapper — every section uses this</td></tr>
+                    <tr><td><code>.container-narrow</code></td><td>max-width: 720px</td><td>Narrow content (FAQ, forms)</td></tr>
+                    <tr><td><code>.section-pad</code></td><td>padding: 5rem 0</td><td>Standard section spacing</td></tr>
+                    <tr><td><code>.section-pad-sm</code></td><td>padding: 1.5rem 0</td><td>Thin section spacing</td></tr>
+                    <tr><td><code>.site-wrapper</code></td><td>display: flex; flex-direction: column; min-height: 100vh</td><td>Every page wrapper</td></tr>
+                    <tr><td><code>main</code></td><td>flex: 1 0 auto</td><td>Pushes footer down</td></tr>
+                    <tr><td><code>.mt-4</code></td><td>margin-top: 2rem</td><td>Utility spacing</td></tr>
+                    <tr><td><code>.text-center</code></td><td>text-align: center</td><td>Utility alignment</td></tr>
+                </tbody>
+            </table>
+
+            <h4 style="margin: 1.5rem 0 0.75rem; font-family: 'Outfit', sans-serif;">Breakpoints</h4>
+            <table class="ds-table">
+                <thead><tr><th>Breakpoint</th><th>Changes</th></tr></thead>
+                <tbody>
+                    <tr><td><code>max-width: 968px</code></td><td>Tablet — grid stacks, nav collapses, hero height reduces</td></tr>
+                    <tr><td><code>max-width: 768px</code></td><td>Mobile — header height 70px, hamburger visible, 1-column grids</td></tr>
+                    <tr><td><code>max-width: 640px</code></td><td>Small mobile — smaller font sizes, tighter spacing</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- GRIDS                                   -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="grids">
+            <div class="ds-tag">Foundations</div>
+            <h2 class="ds-section-title">Grid &amp; Flex Patterns</h2>
+            <p class="ds-subtitle">Reusable grid and flex layouts used for different content types.</p>
+
+            <table class="ds-table">
+                <thead><tr><th>Class</th><th>CSS</th><th>Used On</th></tr></thead>
+                <tbody>
+                    <tr><td><code>.services-grid</code></td><td>grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem</td><td>Services page cards</td></tr>
+                    <tr><td><code>.workers-grid</code></td><td>grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem</td><td>Workers page / Staff Profiles</td></tr>
+                    <tr><td><code>.blog-grid</code></td><td>grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem</td><td>Blog listing / homepage preview</td></tr>
+                    <tr><td><code>.blog-featured</code></td><td>grid-template-columns: 1.2fr 0.8fr; gap: 0</td><td>Featured blog post</td></tr>
+                    <tr><td><code>.steps-grid</code></td><td>grid-template-columns: repeat(3, 1fr); gap: 2rem</td><td>How-it-works sections</td></tr>
+                    <tr><td><code>.steps-grid-thin</code></td><td>grid-template-columns: repeat(3, 1fr); gap: 1.5rem</td><td>Caregiver process (thin)</td></tr>
+                    <tr><td><code>.testimonials-long-grid</code></td><td>grid-template-columns: repeat(3, 1fr); gap: 1.5rem</td><td>Testimonials section</td></tr>
+                    <tr><td><code>.why-grid</code></td><td>grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem</td><td>Why-us cards</td></tr>
+                    <tr><td><code>.training-clean-grid</code></td><td>grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem</td><td>Training modules preview</td></tr>
+                    <tr><td><code>.modules-grid</code></td><td>grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0.75rem</td><td>Full training modules</td></tr>
+                    <tr><td><code>.pricing-grid</code></td><td>grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem</td><td>Pricing cards</td></tr>
+                    <tr><td><code>.footer-grid</code></td><td>grid-template-columns: 1.6fr 1fr 1fr 1.2fr; gap: 2.5rem</td><td>Footer columns</td></tr>
+                    <tr><td><code>.hero-layout</code></td><td>grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center</td><td>Original hero (2-col)</td></tr>
+                    <tr><td><code>.page-hero-grid</code></td><td>grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center</td><td>Inner page heroes</td></tr>
+                    <tr><td><code>.locations-flex</code></td><td>grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center</td><td>Homepage locations section</td></tr>
+                    <tr><td><code>.article-layout</code></td><td>grid-template-columns: 1fr 300px; gap: 3rem</td><td>Blog post layout</td></tr>
+                    <tr><td><code>.nav-center</code></td><td>display: flex; justify-content: space-between; align-items: center</td><td>Centered nav bar</td></tr>
+                    <tr><td><code>.hero-ctas</code></td><td>display: flex; gap: 1rem; flex-wrap: wrap</td><td>Hero button groups</td></tr>
+                    <tr><td><code>.cta-actions</code></td><td>display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center</td><td>CTA banner buttons</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- BUTTONS                                 -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="buttons">
+            <div class="ds-tag">Components</div>
+            <h2 class="ds-section-title">Buttons</h2>
+            <p class="ds-subtitle">Base <code>.btn</code> class with modifier variants. All buttons inherit <code>inline-flex</code>, pill shape, and smooth transition.</p>
+
+            <div class="ds-card ds-mb">
+                <h4>Button Variants</h4>
+                <div class="ds-component-demo">
+                    <div class="ds-inline-flex">
+                        <a href="#" class="btn btn-primary">Primary</a>
+                        <a href="#" class="btn btn-outline">Outline</a>
+                        <a href="#" class="btn btn-whatsapp">WhatsApp</a>
+                        <a href="#" class="btn btn-white" style="background:#fff;color:#006A71;">White</a>
+                    </div>
+                </div>
+                <div class="ds-code">&lt;a href="#" class="btn <span class="hl">btn-primary</span>"&gt;Primary&lt;/a&gt;
+&lt;a href="#" class="btn <span class="hl">btn-outline</span>"&gt;Outline&lt;/a&gt;
+&lt;a href="#" class="btn <span class="hl">btn-whatsapp</span>"&gt;WhatsApp&lt;/a&gt;
+&lt;a href="#" class="btn <span class="hl">btn-white</span>"&gt;White&lt;/a&gt;</div>
+            </div>
+
+            <div class="ds-card ds-mb">
+                <h4>Button Sizes</h4>
+                <div class="ds-component-demo">
+                    <div class="ds-inline-flex">
+                        <a href="#" class="btn btn-primary btn-sm">Small</a>
+                        <a href="#" class="btn btn-primary">Default</a>
+                        <a href="#" class="btn btn-primary btn-lg">Large</a>
+                        <a href="#" class="btn btn-primary btn-full" style="width:auto;flex:0;">Full Width</a>
+                    </div>
+                </div>
+                <div class="ds-code">&lt;a href="#" class="btn btn-primary <span class="hl">btn-sm</span>"&gt;Small&lt;/a&gt;
+&lt;a href="#" class="btn btn-primary"&gt;Default&lt;/a&gt;
+&lt;a href="#" class="btn btn-primary <span class="hl">btn-lg</span>"&gt;Large&lt;/a&gt;
+&lt;button class="btn btn-primary <span class="hl">btn-full</span>"&gt;Full Width&lt;/button&gt;</div>
+            </div>
+
+            <div class="ds-card">
+                <h4>CSS Source</h4>
+                <div class="ds-code">.btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.8rem; border-radius: var(--radius-full);
+    font-family: 'Outfit', sans-serif; font-weight: 600;
+    font-size: 0.9rem; transition: var(--transition);
+    border: 2px solid transparent; cursor: pointer;
+    text-decoration: none;
+}
+.btn-primary { background: var(--grad-primary); color: var(--white); box-shadow: var(--shadow); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn-outline { background: transparent; color: var(--primary); border-color: var(--primary); }
+.btn-outline:hover { background: var(--primary); color: var(--white); }
+.btn-whatsapp { background: #25D366; color: var(--white); }
+.btn-white { background: var(--white); color: var(--primary); }
+.btn-sm { padding: 0.5rem 1.2rem; font-size: 0.85rem; }
+.btn-lg { padding: 1rem 2.4rem; font-size: 1.05rem; }
+.btn-full { width: 100%; justify-content: center; }</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- NAVIGATION                              -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="navigation">
+            <div class="ds-tag">Components</div>
+            <h2 class="ds-section-title">Navigation</h2>
+            <p class="ds-subtitle">Centered logo with left/right nav link groups. Teal background (non-blog pages). Glass white background (blog pages).</p>
+
+            <div class="ds-card ds-mb">
+                <h4>Desktop Nav Structure</h4>
+                <div class="ds-component-demo" style="background:#006A71;padding:0.75rem 1.5rem;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;">
+                        <div style="display:flex;gap:1.5rem;align-items:center;">
+                            <a href="#" style="color:rgba(255,255,255,0.85);font-size:0.85rem;text-decoration:none;">About</a>
+                            <a href="#" style="color:rgba(255,255,255,0.85);font-size:0.85rem;text-decoration:none;">Services</a>
+                            <a href="#" style="color:rgba(255,255,255,0.85);font-size:0.85rem;text-decoration:none;">Staff</a>
+                        </div>
+                        <div style="width:56px;height:56px;background:rgba(255,255,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:#fff;">Logo</div>
+                        <div style="display:flex;gap:1.5rem;align-items:center;">
+                            <a href="#" style="color:rgba(255,255,255,0.85);font-size:0.85rem;text-decoration:none;">Pricing</a>
+                            <a href="#" style="color:rgba(255,255,255,0.85);font-size:0.85rem;text-decoration:none;">Blog</a>
+                            <a href="#" style="color:rgba(255,255,255,0.85);font-size:0.85rem;text-decoration:none;">Contact</a>
+                            <span style="background:rgba(255,255,255,0.15);color:#fff;padding:0.4rem 1rem;border-radius:9999px;font-size:0.8rem;border:1px solid rgba(255,255,255,0.3);">WhatsApp us →</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ds-code">&lt;header <span class="tag">id</span>="header"&gt;
+    &lt;nav <span class="tag">class</span>="container nav-center"&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">nav-left</span>"&gt;
+            &lt;a <span class="tag">class</span>="<span class="hl">nav-link-alt</span>"&gt;About&lt;/a&gt;
+            &lt;div <span class="tag">class</span>="<span class="hl">nav-dropdown</span>"&gt;
+                &lt;a&gt;Staff&lt;/a&gt;
+                &lt;div <span class="tag">class</span>="<span class="hl">nav-dropdown-menu</span>"&gt;
+                    &lt;a&gt;Find Staff&lt;/a&gt;
+                    &lt;a&gt;Jobs&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;a <span class="tag">class</span>="<span class="hl">logo-center</span>"&gt;
+            &lt;img <span class="tag">class</span>="<span class="hl">logo-img-center</span>"&gt;
+        &lt;/a&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">nav-right</span>"&gt;
+            &lt;a <span class="tag">class</span>="nav-link-alt"&gt;Pricing&lt;/a&gt;
+            &lt;a <span class="tag">class</span>="btn btn-whatsapp <span class="hl">btn-nav</span>"&gt;WhatsApp us →&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+    &lt;button <span class="tag">class</span>="<span class="hl">menu-toggle</span>"&gt;
+        &lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;
+    &lt;/button&gt;
+&lt;/header&gt;</div>
+            </div>
+
+            <div class="ds-card">
+                <h4>Mobile Nav Overlay</h4>
+                <div class="ds-component-demo" style="background:#006A71;height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;">
+                    <div style="width:50px;height:50px;background:rgba(255,255,255,0.2);border-radius:8px;"></div>
+                    <div style="width:28px;height:20px;display:flex;flex-direction:column;justify-content:space-between;">
+                        <span style="height:3px;background:#fff;border-radius:2px;"></span>
+                        <span style="height:3px;background:#fff;border-radius:2px;"></span>
+                        <span style="height:3px;background:#fff;border-radius:2px;"></span>
+                    </div>
+                </div>
+                <div class="ds-code">&lt;div <span class="tag">class</span>="<span class="hl">mobile-nav-overlay</span>" <span class="tag">id</span>="mobileNav"&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">mobile-nav-content</span>"&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">mobile-nav-links</span>"&gt;
+            &lt;a <span class="tag">class</span>="<span class="hl">mobile-link</span>"&gt;Home&lt;/a&gt;
+            &lt;a <span class="tag">class</span>="mobile-link <span class="hl">active</span>"&gt;About&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">mobile-nav-socials</span>"&gt;
+            &lt;a&gt;WhatsApp&lt;/a&gt;&lt;a&gt;Instagram&lt;/a&gt;&lt;a&gt;TikTok&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- HERO                                    -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="hero">
+            <div class="ds-tag">Components</div>
+            <h2 class="ds-section-title">Hero Sections</h2>
+            <p class="ds-subtitle">Two hero types: Hero Slider (homepage) and Page Hero (inner pages).</p>
+
+            <div class="ds-card ds-mb">
+                <h4>Hero Slider (Homepage)</h4>
+                <div class="ds-component-demo" style="background:linear-gradient(135deg, rgba(0,77,82,0.85), rgba(0,106,113,0.7)), url('onehaven.jpg');background-size:cover;background-position:center;color:#fff;height:200px;display:flex;align-items:center;padding:0 2rem;">
+                    <div>
+                        <h2 style="color:#fff;font-size:1.6rem;margin:0;">Trusted homecare <span style="color:#00c9d4;">staff</span></h2>
+                        <p style="opacity:0.9;font-size:0.85rem;">Background-checked, trained professionals for Nairobi families.</p>
+                        <span class="btn btn-whatsapp btn-sm" style="margin-top:0.75rem;">WhatsApp us</span>
+                    </div>
+                </div>
+                <div class="ds-code">&lt;section <span class="tag">class</span>="<span class="hl">hero-slider</span>"&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">hero-slides</span>"&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">hero-slide active</span>" style="background-image: url('...');"&gt;
+            &lt;div <span class="tag">class</span>="<span class="hl">hero-overlay</span>"&gt;&lt;/div&gt;
+            &lt;div <span class="tag">class</span>="container <span class="hl">hero-slide-content</span>"&gt;
+                &lt;h1&gt;Trusted homecare &lt;span&gt;staff&lt;/span&gt;&lt;/h1&gt;
+                &lt;p&gt;...&lt;/p&gt;
+                &lt;div <span class="tag">class</span>="<span class="hl">hero-ctas</span>"&gt;
+                    &lt;a <span class="tag">class</span>="btn btn-whatsapp"&gt;WhatsApp us&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">hero-dots</span>"&gt;
+        &lt;button <span class="tag">class</span>="<span class="hl">hero-dot active</span>"&gt;&lt;/button&gt;
+        &lt;button <span class="tag">class</span>="hero-dot"&gt;&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</div>
+            </div>
+
+            <div class="ds-card">
+                <h4>Page Hero (Inner Pages)</h4>
+                <div class="ds-component-demo">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;">
+                        <div>
+                            <span style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#006A71;">Page Tag</span>
+                            <h2 style="font-size:1.8rem;margin:0.5rem 0;">Page title <span style="color:#006A71;">here</span></h2>
+                            <p style="color:#5a7273;font-size:0.9rem;">Subtitle text explaining the page.</p>
+                            <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+                                <span class="btn btn-primary btn-sm">Primary CTA</span>
+                                <span class="btn btn-outline btn-sm">Secondary</span>
+                            </div>
+                        </div>
+                        <div style="background:#e6f4f5;border-radius:16px;height:160px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:#006A71;">Image</div>
+                    </div>
+                </div>
+                <div class="ds-code">&lt;section <span class="tag">class</span>="page-hero"&gt;
+    &lt;div <span class="tag">class</span>="container <span class="hl">page-hero-grid</span>"&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">page-hero-content</span>"&gt;
+            &lt;span <span class="tag">class</span>="<span class="hl">section-tag</span>"&gt;What We Offer&lt;/span&gt;
+            &lt;h1&gt;Title &lt;span&gt;highlight&lt;/span&gt;&lt;/h1&gt;
+            &lt;p <span class="tag">class</span>="<span class="hl">sub</span>"&gt;Subtitle text.&lt;/p&gt;
+            &lt;div <span class="tag">class</span>="<span class="hl">hero-ctas</span>"&gt;
+                &lt;a <span class="tag">class</span>="btn btn-primary"&gt;CTA&lt;/a&gt;
+                &lt;a <span class="tag">class</span>="btn btn-outline"&gt;Link&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">page-hero-img</span>"&gt;
+            &lt;img src="..."&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- CARDS                                   -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="cards">
+            <div class="ds-tag">Components</div>
+            <h2 class="ds-section-title">Cards</h2>
+            <p class="ds-subtitle">Six card types used across the site. All share white background, border, and border-radius.</p>
+
+            <div class="ds-grid ds-grid-2">
+                <!-- Service Card -->
+                <div class="ds-card">
+                    <h4>Service Card</h4>
+                    <div style="background:#fff;border:1px solid #d4e8e9;border-radius:24px;overflow:hidden;">
+                        <div style="height:130px;background:#e6f4f5;display:flex;align-items:center;justify-content:center;color:#006A71;font-size:0.8rem;">Image</div>
+                        <div style="padding:1rem;">
+                            <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">Service Name</h3>
+                            <p style="font-size:0.85rem;color:#5a7273;">Description text goes here.</p>
+                        </div>
+                    </div>
+                    <div class="ds-code" style="margin-top:0.75rem;">&lt;div <span class="tag">class</span>="<span class="hl">service-card</span>"&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">service-card-img</span>"&gt;
+        &lt;img src="..."&gt;
+    &lt;/div&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">service-card-body</span>"&gt;
+        &lt;h3&gt;Title&lt;/h3&gt;
+        &lt;p&gt;Description&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</div>
+                </div>
+
+                <!-- Worker Card -->
+                <div class="ds-card">
+                    <h4>Worker Card</h4>
+                    <div style="background:#fff;border:1px solid #d4e8e9;border-radius:16px;overflow:hidden;">
+                        <div style="height:140px;background:#e6f4f5;display:flex;align-items:center;justify-content:center;color:#006A71;font-size:0.8rem;">Photo</div>
+                        <div style="padding:1rem;">
+                            <span style="font-size:0.7rem;font-weight:600;text-transform:uppercase;color:#006A71;">Position</span>
+                            <span style="font-size:0.7rem;background:#dcfce7;color:#166534;padding:0.15rem 0.5rem;border-radius:999px;margin-left:0.5rem;">Available</span>
+                            <h3 style="font-size:1.15rem;margin:0.25rem 0;">Name</h3>
+                            <p style="font-size:0.85rem;color:#5a7273;">Experience &amp; description.</p>
+                        </div>
+                    </div>
+                    <div class="ds-code" style="margin-top:0.75rem;">&lt;div <span class="tag">class</span>="<span class="hl">worker-card</span>"&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">worker-img-wrap</span>"&gt;
+        &lt;img <span class="tag">class</span>="<span class="hl">worker-img</span>"&gt;
+    &lt;/div&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">worker-info</span>"&gt;
+        &lt;span <span class="tag">class</span>="<span class="hl">worker-type</span>"&gt;House Help&lt;/span&gt;
+        &lt;span <span class="tag">class</span>="<span class="hl">worker-status available</span>"&gt;Available&lt;/span&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">worker-name</span>"&gt;Name&lt;/div&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">worker-actions</span>"&gt;
+            &lt;a <span class="tag">class</span>="btn btn-primary btn-sm"&gt;Request Interview&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</div>
+                </div>
+
+                <!-- Blog Card -->
+                <div class="ds-card">
+                    <h4>Blog Card</h4>
+                    <div style="background:#fff;border:1px solid #d4e8e9;border-radius:16px;overflow:hidden;">
+                        <div style="height:180px;background:#e6f4f5;display:flex;align-items:center;justify-content:center;color:#006A71;font-size:0.8rem;">Image</div>
+                        <div style="padding:1.25rem;">
+                            <span style="font-size:0.65rem;font-weight:600;text-transform:uppercase;color:#006A71;letter-spacing:0.05em;">Category</span>
+                            <h3 style="font-size:1.05rem;margin:0.25rem 0;">Blog Title</h3>
+                            <p style="font-size:0.85rem;color:#5a7273;">Excerpt text.</p>
+                        </div>
+                        <div style="padding:0.75rem 1.25rem;border-top:1px solid #f0f0f0;display:flex;justify-content:space-between;font-size:0.8rem;color:#5a7273;">
+                            <span>Date</span>
+                            <a href="#" style="color:#006A71;">Read More →</a>
+                        </div>
+                    </div>
+                    <div class="ds-code" style="margin-top:0.75rem;">&lt;article <span class="tag">class</span>="<span class="hl">blog-card</span>"&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">blog-card-img-wrap</span>"&gt;
+        &lt;img <span class="tag">class</span>="<span class="hl">blog-card-img</span>"&gt;
+    &lt;/div&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">blog-card-body</span>"&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">blog-cat</span>"&gt;Category&lt;/div&gt;
+        &lt;h3 <span class="tag">class</span>="<span class="hl">blog-title</span>"&gt;Title&lt;/h3&gt;
+        &lt;p <span class="tag">class</span>="<span class="hl">blog-excerpt</span>"&gt;Excerpt&lt;/p&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">blog-meta</span>"&gt;
+            &lt;span&gt;Date&lt;/span&gt;
+            &lt;a <span class="tag">class</span>="<span class="hl">read-more</span>"&gt;Read More&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/article&gt;</div>
+                </div>
+
+                <!-- Step Card -->
+                <div class="ds-card">
+                    <h4>Step Card</h4>
+                    <div style="text-align:center;padding:1.5rem;">
+                        <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#006A71 0%,#00a3ad 100%);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;margin:0 auto 0.75rem;">1</div>
+                        <h4 style="font-size:1rem;">Step Title</h4>
+                        <p style="font-size:0.85rem;color:#5a7273;">Step description text.</p>
+                    </div>
+                    <div class="ds-code" style="margin-top:0.75rem;">&lt;div <span class="tag">class</span>="<span class="hl">step-card</span>"&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">step-num</span>"&gt;1&lt;/div&gt;
+    &lt;h4&gt;Title&lt;/h4&gt;
+    &lt;p&gt;Description&lt;/p&gt;
+&lt;/div&gt;</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- FORMS                                   -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="forms">
+            <div class="ds-tag">Components</div>
+            <h2 class="ds-section-title">Forms</h2>
+            <p class="ds-subtitle">Standardized form elements using <code>.contact-form</code> wrapper.</p>
+
+            <div class="ds-card">
+                <h4>Form Structure</h4>
+                <div class="ds-component-demo">
+                    <div style="max-width:500px;">
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                            <div>
+                                <label style="display:block;font-size:0.8rem;font-weight:500;color:#2d4546;margin-bottom:0.35rem;">Full Name *</label>
+                                <input type="text" placeholder="e.g. Grace Muthoni" style="width:100%;padding:0.7rem 1rem;border:2px solid #d4e8e9;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.9rem;background:#fff;">
+                            </div>
+                            <div>
+                                <label style="display:block;font-size:0.8rem;font-weight:500;color:#2d4546;margin-bottom:0.35rem;">Phone *</label>
+                                <input type="tel" placeholder="e.g. 0712 345 678" style="width:100%;padding:0.7rem 1rem;border:2px solid #d4e8e9;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.9rem;background:#fff;">
+                            </div>
+                        </div>
+                        <div style="margin-top:1rem;">
+                            <label style="display:block;font-size:0.8rem;font-weight:500;color:#2d4546;margin-bottom:0.35rem;">Message</label>
+                            <textarea rows="3" placeholder="Your message..." style="width:100%;padding:0.7rem 1rem;border:2px solid #d4e8e9;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.9rem;background:#fff;resize:vertical;"></textarea>
+                        </div>
+                        <button class="btn btn-primary btn-full" style="margin-top:1rem;">Submit</button>
+                    </div>
+                </div>
+                <div class="ds-code">&lt;form <span class="tag">class</span>="<span class="hl">contact-form</span>"&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">form-row</span>"&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">form-group</span>"&gt;
+            &lt;label&gt;Full Name *&lt;/label&gt;
+            &lt;input <span class="tag">type</span>="text" <span class="tag">required</span>&gt;
+        &lt;/div&gt;
+        &lt;div <span class="tag">class</span>="form-group"&gt;
+            &lt;label&gt;Phone *&lt;/label&gt;
+            &lt;input <span class="tag">type</span>="tel" <span class="tag">required</span>&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div <span class="tag">class</span>="form-group"&gt;
+        &lt;label&gt;Message&lt;/label&gt;
+        &lt;textarea&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+    &lt;button <span class="tag">type</span>="submit" <span class="tag">class</span>="btn btn-primary btn-full"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</div>
+            </div>
+
+            <div class="ds-card ds-mb-2">
+                <h4>File Upload Input</h4>
+                <div class="ds-component-demo">
+                    <input type="file" class="form-file" style="max-width:400px;">
+                    <small style="display:block;color:#5a7273;font-size:0.8rem;margin-top:0.25rem;">JPG or PNG, max 2MB</small>
+                </div>
+                <div class="ds-code">&lt;input <span class="tag">type</span>="file" <span class="tag">class</span>="<span class="hl">form-file</span>" <span class="tag">accept</span>="image/*"&gt;
+&lt;small&gt;JPG or PNG, max 2MB&lt;/small&gt;</div>
+            </div>
+
+            <div class="ds-card">
+                <h4>CSS Reference</h4>
+                <div class="ds-code">.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    width: 100%; padding: 0.7rem 1rem;
+    border: 2px solid var(--border); border-radius: var(--radius-sm);
+    font-family: 'Inter', sans-serif; font-size: 0.9rem;
+    background: var(--white); transition: var(--transition);
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none; border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-glass);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text); margin-bottom: 0.35rem; }
+.form-file { width: 100%; padding: 0.75rem; border: 2px dashed var(--border); border-radius: var(--radius-sm); cursor: pointer; }</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- FAQ                                     -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="faq">
+            <div class="ds-tag">Components</div>
+            <h2 class="ds-section-title">FAQ Accordion</h2>
+            <p class="ds-subtitle">Click-to-toggle accordion. Works with JS in <code>main.js</code>.</p>
+
+            <div class="ds-card">
+                <div class="ds-component-demo" style="max-width:600px;">
+                    <div style="border:1px solid #d4e8e9;border-radius:16px;padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;">
+                        <span style="font-weight:500;">How do you check your Staff?</span>
+                        <span style="color:#006A71;font-size:1.2rem;">+</span>
+                    </div>
+                </div>
+                <div class="ds-code">&lt;div <span class="tag">class</span>="<span class="hl">faq-list</span>"&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">faq-item</span>"&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">faq-q</span>"&gt;
+            &lt;span&gt;Question text?&lt;/span&gt;
+            &lt;span <span class="tag">class</span>="<span class="hl">faq-icon</span>"&gt;...&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">faq-a</span>"&gt;
+            &lt;p&gt;Answer text.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- TESTIMONIALS                            -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="testimonials">
+            <div class="ds-tag">Components</div>
+            <h2 class="ds-section-title">Testimonials</h2>
+            <p class="ds-subtitle">Full testimonials displayed in a 3-column grid with author info.</p>
+
+            <div class="ds-card">
+                <div class="ds-component-demo">
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
+                        <div style="background:#fff;border:1px solid #d4e8e9;border-radius:16px;padding:1.5rem;">
+                            <div style="color:#f59e0b;font-size:1rem;">★★★★★</div>
+                            <p style="font-size:0.85rem;font-style:italic;color:#5a7273;margin:0.75rem 0;line-height:1.6;">"Great service, very professional."</p>
+                            <div style="display:flex;align-items:center;gap:0.75rem;">
+                                <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#006A71 0%,#00a3ad 100%);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:0.8rem;">SK</div>
+                                <div>
+                                    <div style="font-size:0.85rem;font-weight:600;">Sarah K.</div>
+                                    <div style="font-size:0.75rem;color:#5a7273;">Kilimani, Nairobi</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ds-code">&lt;div <span class="tag">class</span>="<span class="hl">testimonials-long-grid</span>"&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">testimonial-long</span>"&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">testimonial-stars</span>"&gt;★★★★★&lt;/div&gt;
+        &lt;p <span class="tag">class</span>="<span class="hl">testimonial-long-quote</span>"&gt;"Quote text."&lt;/p&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">t-author</span>"&gt;
+            &lt;div <span class="tag">class</span>="<span class="hl">t-avatar</span>"&gt;SK&lt;/div&gt;
+            &lt;div&gt;
+                &lt;div <span class="tag">class</span>="<span class="hl">t-author-name</span>"&gt;Sarah K.&lt;/div&gt;
+                &lt;div <span class="tag">class</span>="<span class="hl">t-author-loc</span>"&gt;Kilimani, Nairobi&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- SECTION HEADERS                         -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="sections">
+            <div class="ds-tag">Components</div>
+            <h2 class="ds-section-title">Section Headers</h2>
+            <p class="ds-subtitle">Standard centered section headers with optional tagline.</p>
+
+            <div class="ds-card">
+                <div class="ds-component-demo" style="text-align:center;">
+                    <span style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#006A71;">Section Tag</span>
+                    <h2 style="font-size:1.8rem;font-weight:700;color:#1a2e2f;margin:0.5rem 0;">Section Title <span style="color:#006A71;">Highlight</span></h2>
+                    <p style="color:#5a7273;max-width:550px;margin:0 auto;">Section introduction text explaining what this section contains.</p>
+                </div>
+                <div class="ds-code">&lt;div <span class="tag">class</span>="<span class="hl">section-header centered</span>"&gt;
+    &lt;span <span class="tag">class</span>="<span class="hl">section-tag</span>"&gt;Tagline&lt;/span&gt;
+    &lt;h2 <span class="tag">class</span>="<span class="hl">section-title</span>"&gt;Title &lt;span&gt;Highlight&lt;/span&gt;&lt;/h2&gt;
+    &lt;p <span class="tag">class</span>="<span class="hl">section-intro</span>"&gt;Description text.&lt;/p&gt;
+&lt;/div&gt;</div>
+            </div>
+
+            <div class="ds-card ds-mt-2">
+                <h4>Section Background Classes</h4>
+                <table class="ds-table">
+                    <thead><tr><th>Class</th><th>Result</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>.bg-light</code></td><td>Light teal background (#f0f7f7)</td></tr>
+                        <tr><td><code>.bg-off-white</code></td><td>Off-white background (#f8fafa)</td></tr>
+                        <tr><td><code>.bg-primary</code></td><td>Teal background with white text</td></tr>
+                        <tr><td><code>.section-pad</code></td><td>Standard 5rem vertical padding</td></tr>
+                        <tr><td><code>.section-pad-sm</code></td><td>Small 1.5rem vertical padding</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- CTA BANNER                              -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="cta">
+            <div class="ds-tag">Components</div>
+            <h2 class="ds-section-title">CTA Banner</h2>
+            <p class="ds-subtitle">Full-width call-to-action with teal gradient background, used at bottom of pages.</p>
+
+            <div class="ds-card">
+                <div class="ds-component-demo">
+                    <div style="background:linear-gradient(135deg,#006A71 0%,#00a3ad 100%);border-radius:24px;padding:3rem;text-align:center;color:#fff;">
+                        <h2 style="color:#fff;font-size:1.6rem;margin-bottom:0.5rem;">Need help at home? Let's talk.</h2>
+                        <p style="opacity:0.85;margin-bottom:1.5rem;">Tell us what you're looking for and we'll match you within a week.</p>
+                        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+                            <span class="btn btn-white btn-sm">WhatsApp us now</span>
+                            <span class="btn btn-outline-white btn-sm">Send us a message</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ds-code">&lt;div <span class="tag">class</span>="<span class="hl">cta-banner</span>"&gt;
+    &lt;h2&gt;Headline&lt;/h2&gt;
+    &lt;p&gt;Supporting text.&lt;/p&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">cta-actions</span>"&gt;
+        &lt;a <span class="tag">class</span>="btn btn-white"&gt;Primary CTA&lt;/a&gt;
+        &lt;a <span class="tag">class</span>="btn btn-outline-white"&gt;Secondary CTA&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- FOOTER                                  -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="footer">
+            <div class="ds-tag">Components</div>
+            <h2 class="ds-section-title">Footer</h2>
+            <p class="ds-subtitle">Teal gradient footer with 4-column grid layout.</p>
+
+            <div class="ds-card">
+                <div class="ds-component-demo" style="background:linear-gradient(135deg,#006A71 0%,#004d52 100%);color:#fff;padding:2rem;border-radius:16px;">
+                    <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:2rem;font-size:0.85rem;">
+                        <div>
+                            <div style="width:50px;height:20px;background:rgba(255,255,255,0.3);border-radius:4px;margin-bottom:0.75rem;"></div>
+                            <p style="opacity:0.8;">Footer description text about the company.</p>
+                        </div>
+                        <div><h4 style="color:#fff;font-size:0.9rem;margin-bottom:0.75rem;">Quick Links</h4><div style="opacity:0.8;">About / Services / Pricing / Blog</div></div>
+                        <div><h4 style="color:#fff;font-size:0.9rem;margin-bottom:0.75rem;">Services</h4><div style="opacity:0.8;">Nannies / House Managers / Elderly Care</div></div>
+                        <div><h4 style="color:#fff;font-size:0.9rem;margin-bottom:0.75rem;">Contact</h4><div style="opacity:0.8;">Nairobi / info@... / +254</div></div>
+                    </div>
+                    <div style="border-top:1px solid rgba(255,255,255,0.15);margin-top:2rem;padding-top:1.5rem;text-align:center;opacity:0.7;font-size:0.8rem;">&copy; 2026 Haven Hands Services.</div>
+                </div>
+                <div class="ds-code">&lt;footer <span class="tag">class</span>="<span class="hl">footer</span>"&gt;
+    &lt;div <span class="tag">class</span>="container"&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">footer-grid</span>"&gt;
+            &lt;div <span class="tag">class</span>="<span class="hl">footer-brand</span>"&gt;
+                &lt;img <span class="tag">class</span>="<span class="hl">logo-img</span>"&gt;
+                &lt;p&gt;Description&lt;/p&gt;
+                &lt;div <span class="tag">class</span>="<span class="hl">footer-socials</span>"&gt;...&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div <span class="tag">class</span>="<span class="hl">footer-col</span>"&gt;
+                &lt;h4&gt;Quick Links&lt;/h4&gt;
+                &lt;ul&gt;&lt;li&gt;&lt;a&gt;Link&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+            &lt;/div&gt;
+            &lt;div <span class="tag">class</span>="footer-col"&gt;...&lt;/div&gt;
+            &lt;div <span class="tag">class</span>="footer-col"&gt;...&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">footer-bottom</span>"&gt;
+            &lt;p&gt;&amp;copy; 2026 Haven Hands Services.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/footer&gt;</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- BLOG POSTS                              -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="blog-posts">
+            <div class="ds-tag">Patterns</div>
+            <h2 class="ds-section-title">Blog Post Layout</h2>
+            <p class="ds-subtitle">Two-column layout: article body (left) + sidebar (right).</p>
+
+            <div class="ds-card">
+                <div class="ds-component-demo">
+                    <div style="display:grid;grid-template-columns:1fr 300px;gap:3rem;">
+                        <div>
+                            <span class="blog-cat">Category</span>
+                            <h1 style="font-size:1.8rem;font-weight:800;margin:0.5rem 0;">Blog Post Title</h1>
+                            <div style="display:flex;gap:1.5rem;color:#5a7273;font-size:0.85rem;margin-bottom:1.5rem;">
+                                <span>Published: July 10, 2026</span>
+                                <span>By: Haven Hands Editorial</span>
+                            </div>
+                            <div style="height:200px;background:#e6f4f5;border-radius:16px;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;color:#006A71;">Featured Image</div>
+                            <p style="font-size:0.9rem;line-height:1.7;color:#2d4546;">Article body text goes here. This is the main content of the blog post.</p>
+                        </div>
+                        <div>
+                            <div style="background:#fff;border:1px solid #d4e8e9;border-radius:16px;padding:1.25rem;margin-bottom:1rem;">
+                                <h4 style="font-size:0.95rem;">About Haven Hands</h4>
+                                <p style="font-size:0.85rem;color:#5a7273;">Description text.</p>
+                            </div>
+                            <div style="background:#e6f4f5;border:1px solid #d4e8e9;border-radius:16px;padding:1.25rem;">
+                                <h4 style="font-size:0.95rem;">Hire a Staff</h4>
+                                <span class="btn btn-primary btn-sm btn-full">Contact Us</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ds-code">&lt;div <span class="tag">class</span>="<span class="hl">article-layout</span>"&gt;
+    &lt;article <span class="tag">class</span>="<span class="hl">article-body</span>"&gt;
+        &lt;span <span class="tag">class</span>="blog-cat"&gt;Category&lt;/span&gt;
+        &lt;h1&gt;Title&lt;/h1&gt;
+        &lt;img <span class="tag">class</span>="<span class="hl">article-img</span>"&gt;
+        &lt;p&gt;Content...&lt;/p&gt;
+    &lt;/article&gt;
+    &lt;aside <span class="tag">class</span>="<span class="hl">article-sidebar</span>"&gt;
+        &lt;div <span class="tag">class</span>="<span class="hl">sidebar-widget</span>"&gt;
+            &lt;h4&gt;Widget Title&lt;/h4&gt;
+            &lt;p&gt;...&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/aside&gt;
+&lt;/div&gt;</div>
+            </div>
+
+            <div class="ds-card ds-mt-2">
+                <h4>Breadcrumbs</h4>
+                <div class="ds-component-demo">
+                    <div style="font-size:0.85rem;color:#5a7273;display:flex;align-items:center;gap:0.5rem;">
+                        <a href="#" style="color:#006A71;">Home</a>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                        <a href="#" style="color:#006A71;">Blog</a>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                        <span>Post Title</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- WORKERS GRID                            -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="workers">
+            <div class="ds-tag">Patterns</div>
+            <h2 class="ds-section-title">Workers Grid</h2>
+            <p class="ds-subtitle">Staff profile cards displayed in a responsive grid. Also used as "Staff Profiles" section on homepage.</p>
+
+            <div class="ds-card">
+                <div class="ds-code">.workers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}</div>
+            </div>
+
+            <div class="ds-card ds-mt-2">
+                <h4>Worker Status Badges</h4>
+                <table class="ds-table">
+                    <thead><tr><th>Class</th><th>Color</th><th>Use</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>.worker-status.available</code></td><td style="color:#166534;">Green (#dcfce7 bg)</td><td>Available for placement</td></tr>
+                        <tr><td><code>.worker-status.booked</code></td><td style="color:#92400e;">Yellow (#fef3c7 bg)</td><td>Booked for interview</td></tr>
+                        <tr><td><code>.worker-status.not-available</code></td><td style="color:#6b7280;">Gray (#f3f4f6 bg)</td><td>Not currently available</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- MODALS                                  -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="modals">
+            <div class="ds-tag">Patterns</div>
+            <h2 class="ds-section-title">Modals</h2>
+            <p class="ds-subtitle">Used for the testimonials "Read All Reviews" popup.</p>
+
+            <div class="ds-card">
+                <div class="ds-component-demo" style="display:flex;justify-content:center;">
+                    <div style="background:#fff;border-radius:24px;padding:2.5rem;max-width:500px;box-shadow:0 24px 80px rgba(0,0,0,0.2);position:relative;">
+                        <div style="position:absolute;top:1rem;right:1.25rem;font-size:1.5rem;cursor:pointer;color:#5a7273;">×</div>
+                        <h3 style="margin-bottom:1rem;">All Reviews</h3>
+                        <div style="border-bottom:1px solid #f0f0f0;padding-bottom:1rem;margin-bottom:1rem;">
+                            <div style="color:#f59e0b;">★★★★★</div>
+                            <p style="font-style:italic;font-size:0.9rem;color:#5a7273;margin:0.5rem 0;">Review text.</p>
+                        </div>
+                        <span class="btn btn-primary btn-full">Close</span>
+                    </div>
+                </div>
+                <div class="ds-code">&lt;div <span class="tag">class</span>="<span class="hl">testimonial-modal</span>" <span class="tag">id</span>="testimonialModal"&gt;
+    &lt;div <span class="tag">class</span>="<span class="hl">modal-content</span>"&gt;
+        &lt;button <span class="tag">class</span>="<span class="hl">modal-close</span>"&gt;&amp;times;&lt;/button&gt;
+        &lt;!-- modal content --&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- UTILITIES                               -->
+        <!-- ════════════════════════════════════════ -->
+
+        <section class="ds-section" id="utilities">
+            <div class="ds-tag">Patterns</div>
+            <h2 class="ds-section-title">Utility Classes &amp; Patterns</h2>
+            <p class="ds-subtitle">Helper classes and common patterns used across pages.</p>
+
+            <table class="ds-table">
+                <thead><tr><th>Class / Pattern</th><th>CSS</th><th>Use</th></tr></thead>
+                <tbody>
+                    <tr><td><code>.data-reveal</code></td><td>Scroll-triggered animation (JS controlled)</td><td>Fade-in on scroll</td></tr>
+                    <tr><td><code>.whatsapp-fab</code></td><td>Fixed bottom-right green circle, z-index 100</td><td>Floating WhatsApp button on every page</td></tr>
+                    <tr><td><code>.section-tag</code></td><td>font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); font-weight: 600</td><td>Small tag above section titles</td></tr>
+                    <tr><td><code>.section-tag-light</code></td><td>Same but color: rgba(255,255,255,0.7)</td><td>On teal/dark backgrounds</td></tr>
+                    <tr><td><code>.text-center</code></td><td>text-align: center</td><td>Center alignment</td></tr>
+                    <tr><td><code>.mt-4</code></td><td>margin-top: 2rem</td><td>Spacing after grids</td></tr>
+                    <tr><td><code>body.blog-page</code></td><td>Class on body for blog pages</td><td>Blog page has different nav styling (white, not teal)</td></tr>
+                    <tr><td><code>.article-img</code></td><td>border-radius: var(--radius-lg); margin-bottom: 2rem; width: 100%;</td><td>Featured image in blog posts</td></tr>
+                </tbody>
+            </table>
+
+            <div class="ds-card ds-mt-2">
+                <h4>Lucide Icons</h4>
+                <p style="font-size:0.85rem;color:#5a7273;margin-bottom:0.75rem;">Most icons use Lucide Icons. Loaded via CDN. Initialize with <code>lucide.createIcons()</code> in JS.</p>
+                <div class="ds-code">&lt;!-- Load in head --&gt;
+&lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
+
+&lt;!-- Use any icon --&gt;
+&lt;svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+     viewBox="0 0 24 24" fill="none" stroke="currentColor"
+     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+    &lt;path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/&gt;
+&lt;/svg&gt;
+
+&lt;!-- Initialize --&gt;
+if (typeof lucide !== 'undefined') lucide.createIcons();</div>
+            </div>
+
+            <div class="ds-card ds-mt-2">
+                <h4>WhatsApp Floating Button</h4>
+                <div class="ds-component-demo">
+                    <div style="position:relative;height:80px;">
+                        <div style="position:absolute;bottom:0;right:0;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.3);">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="ds-code">&lt;a <span class="tag">class</span>="<span class="hl">whatsapp-fab</span>" <span class="tag">href</span>="https://wa.me/254118971254?text=..."&gt;
+    &lt;svg&gt;...&lt;/svg&gt;
+&lt;/a&gt;</div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- END                                     -->
+        <!-- ════════════════════════════════════════ -->
+
+        <div style="text-align:center;padding:3rem 0;color:#5a7273;font-size:0.9rem;border-top:1px solid #e8edee;margin-top:3rem;">
+            <p><strong>Haven Hands Design System</strong> — v1.0</p>
+            <p style="margin-top:0.25rem;">Built from <code>style.css</code> (3100 lines) + <code>main.js</code> + all HTML templates.</p>
+            <p style="margin-top:0.25rem;">Brand colors: Teal <code>#006A71</code> · Grey <code>#A6A8AB</code> · White</p>
+        </div>
+
+    </main>
+
+</div>
+
+<script>if (typeof lucide !== 'undefined') lucide.createIcons();</script>
+</body>
+</html>
