@@ -3035,6 +3035,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 50% 25%;
     transition: transform 0.4s ease;
 }
 .service-card:hover .service-card-img img {
@@ -3116,6 +3117,76 @@ body .menu-toggle span {
 }
 
 /* ══════════════════════════════════════
+   HOME SERVICES (stylish grid)
+══════════════════════════════════════ */
+.home-services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+.home-service-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.25rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+.home-service-card:hover {
+    border-color: var(--primary-light);
+    box-shadow: 0 10px 30px rgba(0, 106, 113, 0.12);
+    transform: translateY(-4px);
+}
+.hs-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    background: var(--primary-pale);
+    color: var(--primary);
+    transition: all 0.3s ease;
+}
+.home-service-card:hover .hs-icon {
+    background: var(--primary);
+    color: var(--white);
+}
+.hs-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+}
+.hs-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1.3;
+}
+.hs-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+}
+.hs-arrow {
+    margin-left: auto;
+    flex-shrink: 0;
+    color: var(--secondary-light);
+    transition: all 0.3s ease;
+}
+.home-service-card:hover .hs-arrow {
+    color: var(--accent);
+    transform: translateX(3px);
+}
+
+/* ══════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════ */
 @media (max-width: 968px) {
@@ -3141,6 +3212,9 @@ body .menu-toggle span {
     .service-card-img {
         height: 150px;
     }
+    .home-services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 @media (max-width: 640px) {
     .hero-slider {
@@ -3156,5 +3230,8 @@ body .menu-toggle span {
     }
     .service-card-img {
         height: 130px;
+    }
+    .home-services-grid {
+        grid-template-columns: 1fr;
     }
 }
