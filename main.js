@@ -150,14 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ── Contact Form (EmailJS) ── */
+    /* ── Contact Form (cPanel PHP) ── */
     const form = document.getElementById('contactForm');
     if (form) {
-        // Init EmailJS if config available
-        if (typeof emailjs !== 'undefined' && typeof EMAILJS_CONFIG !== 'undefined') {
-            emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
-        }
-
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = form.querySelector('[type="submit"]');
@@ -167,29 +162,14 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.disabled = true;
             btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Sending…`;
 
-            const phone = form.querySelector('#phone')?.value || '';
-            const service = form.querySelector('#service')?.value || '';
-            const message = form.querySelector('#message')?.value || '';
-
-            // Robust Fallback: Append phone and service directly to the message body. 
-            // Even if the user's EmailJS template only has {{message}}, they will never lose the phone or service details.
-            const enhancedMessage = `${message}\n\n---\n[Client Details]\nPhone: ${phone}\nService Requested: ${service}`;
-
-            const formData = {
-                from_name:    form.querySelector('#name')?.value    || '',
-                from_email:   form.querySelector('#email')?.value   || '',
-                phone:        phone,
-                service:      service,
-                message:      enhancedMessage,
-            };
+            const formData = new FormData(form);
 
             try {
-                if (typeof emailjs !== 'undefined' && typeof EMAILJS_CONFIG !== 'undefined') {
-                    await emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, formData);
-                } else {
-                    // Simulate success for demo
-                    await new Promise(r => setTimeout(r, 1500));
-                }
+                const res = await fetch('send_contact.php', { method: 'POST', body: formData });
+                let data = {};
+                try { data = await res.json(); } catch (e) { /* non-JSON response */ }
+                if (!res.ok || !data.success) throw new Error((data && data.message) || 'Send failed');
+
                 form.reset();
                 btn.disabled = false;
                 btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Message Sent!`;
@@ -248,19 +228,14 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.disabled = true;
             btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Sending...`;
 
-            const formData = {
-                name:     cgForm.querySelector('#cg-name')?.value || '',
-                phone:    cgForm.querySelector('#cg-phone')?.value || '',
-                location: cgForm.querySelector('#cg-location')?.value || '',
-                experience: cgForm.querySelector('#cg-experience')?.value || '',
-                type:     cgForm.querySelector('#cg-type')?.value || '',
-                certs:    cgForm.querySelector('#cg-certs')?.value || '',
-                why:      cgForm.querySelector('#cg-why')?.value || '',
-                reference: cgForm.querySelector('#cg-ref')?.value || '',
-            };
+            const formData = new FormData(cgForm);
 
             try {
-                await new Promise(r => setTimeout(r, 1500));
+                const res = await fetch('send_staff_application.php', { method: 'POST', body: formData });
+                let data = {};
+                try { data = await res.json(); } catch (e) { /* non-JSON response */ }
+                if (!res.ok || !data.success) throw new Error((data && data.message) || 'Send failed');
+
                 cgForm.reset();
                 btn.disabled = false;
                 btn.innerHTML = `Submit Application <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Submitted!`;
