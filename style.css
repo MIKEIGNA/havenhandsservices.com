@@ -426,8 +426,8 @@ body:has(.splash-screen:not(.hidden)) {
     transition: var(--transition);
 }
 #header.scrolled {
-    background: rgba(255,255,255,0.95);
-    box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+    background: var(--primary);
+    box-shadow: 0 4px 30px rgba(0,40,42,0.35);
 }
 #header nav {
     display: flex;
@@ -3075,40 +3075,40 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* ══════════════════════════════════════
    NAV TEAL BACKGROUND
 ══════════════════════════════════════ */
-body:not(.blog-page) header#header {
+body header#header {
     background: var(--primary);
 }
-body:not(.blog-page) .nav-link-alt,
-body:not(.blog-page) .nav-link-alt {
+body .nav-link-alt,
+body .nav-link-alt {
     color: rgba(255,255,255,0.85);
 }
-body:not(.blog-page) .nav-link-alt:hover,
-body:not(.blog-page) .nav-link-alt:hover {
+body .nav-link-alt:hover,
+body .nav-link-alt:hover {
     color: var(--white);
 }
-body:not(.blog-page) .nav-dropdown-menu {
+body .nav-dropdown-menu {
     background: var(--white);
     border: 1px solid var(--border);
 }
-body:not(.blog-page) .nav-dropdown-menu a {
+body .nav-dropdown-menu a {
     color: var(--text);
 }
-body:not(.blog-page) .nav-dropdown-menu a:hover {
+body .nav-dropdown-menu a:hover {
     background: var(--primary-pale);
     color: var(--primary);
 }
-body:not(.blog-page) .btn-nav.btn-whatsapp {
+body .btn-nav.btn-whatsapp {
     background: rgba(255,255,255,0.15);
     color: var(--white);
     border: 1px solid rgba(255,255,255,0.3);
 }
-body:not(.blog-page) .btn-nav.btn-whatsapp:hover {
+body .btn-nav.btn-whatsapp:hover {
     background: rgba(255,255,255,0.25);
 }
-body:not(.blog-page) .logo-img-center {
+body .logo-img-center {
     filter: brightness(0) invert(1);
 }
-body:not(.blog-page) .menu-toggle span {
+body .menu-toggle span {
     background: var(--white);
 }
 
