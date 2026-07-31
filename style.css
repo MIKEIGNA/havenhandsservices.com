@@ -1430,6 +1430,62 @@ body:has(.splash-screen:not(.hidden)) {
 }
 .worker-actions .btn { flex: 1; font-size: 0.85rem; padding: 0.6rem 1rem; }
 
+/* Worker Rich Profile */
+.worker-facts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+    padding: 0.85rem;
+    background: var(--off-white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+}
+.worker-fact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+.wf-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+}
+.wf-value {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+.worker-char {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    line-height: 1.55;
+}
+.worker-char strong {
+    color: var(--dark);
+}
+.worker-salary {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-glass);
+    border: 1px dashed var(--primary-light);
+    padding: 0.55rem 0.85rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.25rem;
+}
+.worker-salary svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
 /* ── Testimonials ── */
 .testimonials-grid {
     display: grid;
