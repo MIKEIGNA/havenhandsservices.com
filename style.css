@@ -2907,6 +2907,59 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     font-size: 0.95rem;
     line-height: 1.7;
 }
+.loc-intro {
+    margin-bottom: 1.25rem;
+}
+.locations-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    padding: 0.25rem 0;
+}
+.locations-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: locations-scroll 28s linear infinite;
+}
+.locations-marquee:hover .locations-marquee-track {
+    animation-play-state: paused;
+}
+.locations-marquee-group {
+    display: flex;
+    gap: 0.75rem;
+    padding-right: 0.75rem;
+    align-items: center;
+}
+.loc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: var(--white);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+.loc-chip::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+}
+.loc-chip:hover {
+    background: rgba(255,255,255,0.22);
+    transform: translateY(-2px);
+}
+@keyframes locations-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
 .loc-right {
     display: flex;
     gap: 2rem;
