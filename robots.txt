@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /design-system.html
+Disallow: /haven_hands_redesign_plan.html
+Disallow: /instagram_planner.html
+Disallow: /cdn-cgi/
+
+Sitemap: https://havenhandsservices.com/sitemap.xml

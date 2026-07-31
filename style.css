@@ -2805,6 +2805,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     background: linear-gradient(to bottom, rgba(0,77,82,0.05) 0%, rgba(0,77,82,0.15) 40%, rgba(0,77,82,0.65) 100%);
 }
 .hero-slide-content h1,
+.hero-slide-content h2,
 .hero-slide-content p {
     text-shadow: 0 2px 12px rgba(0, 40, 42, 0.5);
 }
@@ -2814,13 +2815,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     color: var(--white);
     max-width: 600px;
 }
-.hero-slide-content h1 {
+.hero-slide-content h1,
+.hero-slide-content h2 {
     font-size: clamp(2.2rem, 5vw, 3.5rem);
     color: var(--white);
     margin-bottom: 1rem;
     line-height: 1.1;
 }
-.hero-slide-content h1 span {
+.hero-slide-content h1 span,
+.hero-slide-content h2 span {
     display: block;
     color: var(--accent);
 }
