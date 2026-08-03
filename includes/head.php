@@ -14,6 +14,7 @@
  *   $extraHead   (string) extra <head> markup, e.g. JSON-LD scripts
  *   $bodyClass   (string) extra <body> class, e.g. 'blog-page'
  */
+require __DIR__ . '/config.php';
 $ogType  = $ogType  ?? 'website';
 $ogImage = $ogImage ?? 'https://havenhandsservices.com/onehaven.jpg';
 $ogTitle = $ogTitle ?? $pageTitle;
@@ -27,7 +28,7 @@ function e_attr($v) { return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8'); 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo e_attr($pageTitle); ?></title>
     <meta name="description" content="<?php echo e_attr($pageDesc); ?>">
-    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="icon" type="image/png" href="<?php echo $SITE_BASE; ?>logo.png">
     <meta name="theme-color" content="#006A71">
 
     <!-- GEO / SEO -->
@@ -58,7 +59,7 @@ function e_attr($v) { return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8'); 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="<?php echo $SITE_BASE; ?>style.css">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>

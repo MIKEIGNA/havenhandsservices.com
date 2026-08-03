@@ -57,6 +57,18 @@ form messages** reach you by email.
 6. **Optional but recommended:** delete `design-system.html`, `haven_hands_redesign_plan.html`,
    and `instagram_planner.html` from the server (they are internal-only pages).
 
+### Local testing (XAMPP)
+
+The site auto-detects its install folder, so it works both at the domain root (cPanel) and
+in a local subfolder:
+
+- Copy the whole project into `C:\xampp\htdocs\hands` (or any subfolder)
+- Open `http://localhost/hands/`
+- `includes/config.php` computes the base path automatically (e.g. `/hands/` locally, `/`
+  on production) — no manual config needed
+- Remember to copy your PHP files (including `send_*.php`, `includes/`, `.htaccess`) after
+  making changes, and keep the old `.html` files removed
+
 ---
 
 ## 3. Set up your email accounts (cPanel)

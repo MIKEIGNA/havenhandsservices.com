@@ -8,7 +8,7 @@
     <div class="container">
         <div class="footer-grid">
             <div class="footer-brand">
-                <img src="/logo.png" alt="Haven Hands Logo" class="logo-img">
+                <img src="<?php echo $SITE_BASE; ?>logo.png" alt="Haven Hands Logo" class="logo-img">
                 <p>Matching Nairobi families with trained, verified, and ethical Staff for the modern home. Because every home deserves peace of mind.</p>
                 <div class="footer-socials">
                     <a href="https://www.instagram.com/havenhandsservices" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -25,22 +25,22 @@
             <div class="footer-col">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="/about.html">About Us</a></li>
-                    <li><a href="/services.html">Our Services</a></li>
-                    <li><a href="/workers.html">Our Workers</a></li>
-                    <li><a href="/pricing.html">Pricing</a></li>
-                    <li><a href="/blog/index.html">Blog</a></li>
-                    <li><a href="/caregivers.html">Join as Staff</a></li>
+                    <li><a href="<?php echo $SITE_BASE; ?>about.html">About Us</a></li>
+                    <li><a href="<?php echo $SITE_BASE; ?>services.html">Our Services</a></li>
+                    <li><a href="<?php echo $SITE_BASE; ?>workers.html">Our Workers</a></li>
+                    <li><a href="<?php echo $SITE_BASE; ?>pricing.html">Pricing</a></li>
+                    <li><a href="<?php echo $SITE_BASE; ?>blog/index.html">Blog</a></li>
+                    <li><a href="<?php echo $SITE_BASE; ?>caregivers.html">Join as Staff</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Services</h4>
                 <ul>
-                    <li><a href="/services.html">Full-time House Managers</a></li>
-                    <li><a href="/services.html">Professional Nannies</a></li>
-                    <li><a href="/services.html">Elderly Care</a></li>
-                    <li><a href="/services.html">Staff Training</a></li>
-                    <li><a href="/caregivers.html">Jobs</a></li>
+                    <li><a href="<?php echo $SITE_BASE; ?>services.html">Full-time House Managers</a></li>
+                    <li><a href="<?php echo $SITE_BASE; ?>services.html">Professional Nannies</a></li>
+                    <li><a href="<?php echo $SITE_BASE; ?>services.html">Elderly Care</a></li>
+                    <li><a href="<?php echo $SITE_BASE; ?>services.html">Staff Training</a></li>
+                    <li><a href="<?php echo $SITE_BASE; ?>caregivers.html">Jobs</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -78,7 +78,7 @@
     </svg>
 </a>
 
-<script src="/main.js"></script>
+<script src="<?php echo $SITE_BASE; ?>main.js"></script>
 </div>
 </body>
 </html>
