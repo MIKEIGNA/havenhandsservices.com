@@ -10,18 +10,24 @@ form messages** reach you by email.
 
 | File/folder                 | What it is                                                         |
 | --------------------------- | ------------------------------------------------------------------ |
-| `*.html` (root)             | The website pages: `index`, `about`, `services`, `workers`, `caregivers`, `pricing`, `contact` |
-| `blog/`                     | Blog listing (`index.html`) + 6 article pages (`post-1.html` … `post-6.html`) |
+| `*.php` (root)              | The website pages: `index`, `about`, `services`, `workers`, `caregivers`, `pricing`, `contact` — built with PHP includes |
+| `includes/`                 | Shared partials: `head.php`, `header.php`, `footer.php` — edit the nav/footer once here, every page updates |
+| `.htaccess`                 | Rewrites `.html` URLs to the `.php` files so existing URLs, canonicals and the sitemap keep working |
+| `blog/`                     | Blog listing (`index.php`) + 6 article pages (`post-1.php` … `post-6.php`) |
 | `style.css`                 | The single stylesheet used by every page                           |
 | `main.js`                   | Site JavaScript: menus, hero slider, forms, animations             |
-| `config.js`                 | *(removed — no longer used)*                                  |
-| `send_staff_application.php`| PHP handler that emails **job applications** (caregivers.html)     |
-| `send_contact.php`          | PHP handler that emails **contact form** inquiries (contact.html)  |
+| `send_staff_application.php`| PHP handler that emails **job applications** (caregivers.html URL)  |
+| `send_contact.php`          | PHP handler that emails **contact form** inquiries (contact.html URL) |
 | `form-backups/`             | Failsafe folder — saves any submission that couldn't be emailed (protected by `.htaccess`) |
-| `sitemap.xml`               | SEO sitemap for Google                                            |
+| `sitemap.xml`               | SEO sitemap for Google (still points to `.html` URLs — they work via the rewrite) |
 | `robots.txt`                | SEO crawler rules                                                 |
 | `.jpg` / `.jpeg` / `.png`   | Photos & images used by the pages                                  |
 | `design-system.html`, `haven_hands_redesign_plan.html`, `instagram_planner.html` | Internal/reference pages (not indexed, safe to skip uploading) |
+
+> **Why PHP?** The header, navigation, and footer used to be duplicated in every page.
+> Now they live once in `includes/`, so editing them in one place updates the whole site.
+> Pages use root-relative paths (`/style.css`, `/about.html`) — this assumes the site is
+> installed at the domain root (public_html), which is the normal cPanel setup.
 
 > Note: `implementation_plan.md`, `walkthrough.md`, `walkthrough_planned.md`, the `.docx`
 > files, and the duplicate images (`.png` versions of `.jpg`s) are working files — you
@@ -35,15 +41,20 @@ form messages** reach you by email.
 2. Open **File Manager** → go to `public_html` (or the correct document root for your
    domain).
 3. Upload **all** of the files below into `public_html`:
-   - All root `.html` files
+   - All root `.php` files
+   - The **`includes/`** folder (head.php, header.php, footer.php)
+   - The **`.htaccess`** file (enables the `.html` → `.php` rewrite)
    - `style.css`, `main.js`
    - `send_staff_application.php`, `send_contact.php`
-   - The **`form-backups/`** folder (contains the `.htaccess` that blocks public access — upload it too)
+   - The **`form-backups/`** folder (contains its own `.htaccess` guard — upload it too)
    - `sitemap.xml`, `robots.txt`
    - All image files (`.jpg`, `.jpeg`, `.png`) at the root
-   - The **`blog/`** folder (with its `index.html` + `post-1.html`…`post-6.html`)
-4. Open `https://yourdomain.com/` to confirm the site loads.
-5. **Optional but recommended:** delete `design-system.html`, `haven_hands_redesign_plan.html`,
+   - The **`blog/`** folder (with `index.php` + `post-1.php`…`post-6.php`)
+4. **Remove the old `.html` files** from `public_html` and `blog/` (index.html, about.html,
+   … and the old post-*.html) — the rewrite serves the `.php` files for those URLs.
+   If an old `.html` file is still present, it will be served instead.
+5. Open `https://yourdomain.com/` to confirm the site loads.
+6. **Optional but recommended:** delete `design-system.html`, `haven_hands_redesign_plan.html`,
    and `instagram_planner.html` from the server (they are internal-only pages).
 
 ---
@@ -195,10 +206,12 @@ Once the site is live:
 
 | Problem                                    | Likely fix                                                                 |
 | ------------------------------------------ | -------------------------------------------------------------------------- |
+| `.html` URL returns 404                    | `.htaccess` not uploaded or `mod_rewrite` off. Re-upload `.htaccess`; if still failing, ensure the matching `.php` file exists. |
+| Page shows raw PHP code                    | PHP not enabled for the folder — enable PHP in cPanel → **Select PHP Version** (apply to the domain). |
+| Nav/footer look broken                     | The `includes/` folder wasn't uploaded, or a page is missing its `require` lines. |
 | "Email sending failed" on caregivers form  | Wrong `$SMTP_PASS` or `$SMTP_HOST`. Check Email Deliverability + account password. |
 | Email goes to Spam                         | Enable SPF/DKIM (Step 5) and wait for DNS propagation.                      |
 | CV upload always fails                     | Raise `upload_max_filesize` / `post_max_size` (Step 6).                     |
 | Contact form never sends                   | Wrong `$SMTP_PASS`/`$SMTP_HOST` in `send_contact.php`, or `send_contact.php` not uploaded. |
 | Submission saved but no email received     | Email failed → it's in `form-backups/`. Check File Manager; fix SMTP config, then re-send manually. |
-| PHP script shows raw text / 500 error      | Your host may not run PHP — enable PHP in cPanel → **Select PHP Version**.  |
 | 404 on images                              | Keep the folder structure — all images must be at the root, `blog/` files inside `blog/`. |

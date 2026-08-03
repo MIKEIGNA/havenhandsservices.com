@@ -1,0 +1,17 @@
+# ── Haven Hands — PHP URL preservation ─────────────────────────
+# The site now runs on PHP (.php files + includes/), but all URLs,
+# internal links, canonicals and the sitemap still use .html paths.
+# These rules serve the .php file when the .html URL is requested,
+# WITHOUT redirecting — so the address bar and existing URLs stay
+# exactly the same (no SEO impact).
+# ────────────────────────────────────────────────────────────────
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)\.html$ $1.php [L]
+
+# Remove the old .html files from public_html after uploading the
+# .php versions — the rewrite will then serve the .php file for the
+# same .html URL. (If a .html file is still present, it wins.)

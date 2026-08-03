@@ -1,102 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing Packages | Haven Hands — Nanny &amp; Staff Placement in Kenya</title>
-    <meta name="description" content="Transparent pricing for domestic manager placements in Nairobi. Choose from Silver, Bronze, and Gold packages starting at KSH 5,000. Verified and trained care.">
-    <link rel="icon" type="image/png" href="logo.png">
-    <meta name="theme-color" content="#006A71">
-
-    <!-- GEO / SEO -->
-    <meta name="geo.region" content="KE">
-    <meta name="geo.placename" content="Nairobi">
-    <meta name="geo.position" content="-1.286389;36.817223">
-    <meta name="ICBM" content="-1.286389, 36.817223">
-    <link rel="canonical" href="https://havenhandsservices.com/pricing.html">
-    <link rel="alternate" hreflang="en-ke" href="https://havenhandsservices.com/pricing.html">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="en_KE">
-    <meta property="og:url" content="https://havenhandsservices.com/pricing.html">
-    <meta property="og:title" content="Pricing Packages | Haven Hands — Nanny &amp; Staff Placement">
-    <meta property="og:description" content="Transparent pricing plans for domestic helps, nannies, and Staff in Nairobi. Plans start from KSH 5,000.">
-    <meta property="og:image" content="https://havenhandsservices.com/onehaven.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Pricing Packages | Haven Hands — Nanny &amp; Staff Placement">
-    <meta name="twitter:description" content="Transparent pricing plans for domestic helps, nannies, and Staff in Nairobi. Plans start from KSH 5,000.">
-    <meta name="twitter:image" content="https://havenhandsservices.com/onehaven.jpg">
-
-    <!-- Fonts & CSS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body>
-<div class="site-wrapper">
-
-<!-- HEADER -->
-<header id="header">
-    <nav class="container nav-center">
-        <div class="nav-left">
-            <a href="about.html" class="nav-link-alt">About</a>
-            <a href="services.html" class="nav-link-alt">Services</a>
-            <div class="nav-dropdown">
-                <a href="workers.html" class="nav-link-alt">Staff</a>
-                <div class="nav-dropdown-menu">
-                    <a href="workers.html">Find Staff</a>
-                    <a href="caregivers.html">Jobs</a>
-                </div>
-            </div>
-        </div>
-        <a href="index.html" class="logo-center" aria-label="Haven Hands Home">
-            <img src="logo.png" alt="Haven Hands Logo" class="logo-img-center">
-        </a>
-        <div class="nav-right">
-            <div class="nav-dropdown">
-                <a href="pricing.html" class="nav-link-alt active">Pricing</a>
-                <div class="nav-dropdown-menu">
-                    <a href="pricing.html#employers">For Employers</a>
-                    <a href="pricing.html#training">Training Program</a>
-                </div>
-            </div>
-            <a href="blog/index.html" class="nav-link-alt">Blog</a>
-            <a href="contact.html" class="nav-link-alt">Contact</a>
-            <a href="https://wa.me/254118971254?text=Hello%20Haven%20Hands%2C%20I'd%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-nav" id="nav-whatsapp">WhatsApp us →</a>
-        </div>
-    </nav>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-    </button>
-</header>
-
-<!-- Mobile Nav Overlay -->
-<div class="mobile-nav-overlay" id="mobileNav">
-    <div class="mobile-nav-content">
-        <a href="index.html" class="mobile-nav-logo">
-            <img src="logo.png" alt="Haven Hands Logo">
-        </a>
-        <div class="mobile-nav-links">
-            <a href="index.html" class="mobile-link">Home</a>
-            <a href="about.html" class="mobile-link">About</a>
-            <a href="services.html" class="mobile-link">Services</a>
-            <a href="workers.html" class="mobile-link">Staff</a>
-            <a href="caregivers.html" class="mobile-link">Jobs</a>
-            <a href="pricing.html" class="mobile-link active">Pricing</a>
-            <a href="blog/index.html" class="mobile-link">Blog</a>
-        </div>
-        <a href="contact.html" class="btn btn-primary btn-full btn-mobile">Get Started</a>
-        <div class="mobile-nav-socials">
-            <a href="https://wa.me/254118971254" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-            <a href="https://www.instagram.com/havenhandsservices" target="_blank" rel="noopener noreferrer">Instagram</a>
-            <a href="https://www.tiktok.com/@havenhandsservices" target="_blank" rel="noopener noreferrer">TikTok</a>
-        </div>
-    </div>
-</div>
+<?php
+// Page: pricing
+$pageTitle = "Pricing Packages | Haven Hands — Nanny &amp; Staff Placement in Kenya";
+$pageDesc  = "Transparent pricing for domestic manager placements in Nairobi. Choose from Silver, Bronze, and Gold packages starting at KSH 5,000. Verified and trained care.";
+$canonical = "https://havenhandsservices.com/pricing.html";
+$ogImage   = "https://havenhandsservices.com/onehaven.jpg";
+$ogType    = "website";
+$hreflang  = "https://havenhandsservices.com/pricing.html";
+$ogTitle   = "Pricing Packages | Haven Hands — Nanny &amp; Staff Placement";
+$ogDesc    = "Transparent pricing plans for domestic helps, nannies, and Staff in Nairobi. Plans start from KSH 5,000.";
+$active    = "pricing";
+$bodyClass = "";
+require 'includes/head.php';
+require 'includes/header.php';
+?>
 
 <main>
 
@@ -380,34 +296,4 @@
 
 </main>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <img src="logo.png" alt="Haven Hands Logo" class="logo-img">
-                <p>Matching Nairobi families with trained, verified, and ethical Staff for the modern home. Because every home deserves peace of mind.</p>
-                <div class="footer-socials">
-                    <a href="https://www.instagram.com/havenhandsservices" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                    </a>
-                    <a href="https://www.tiktok.com/@havenhandsservices" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.37 6.37 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.19 8.19 0 004.77 1.52V6.73a4.85 4.85 0 01-1-.04z"/></svg>
-                    </a>
-                    <a href="https://wa.me/254118971254" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; <span id="year">2026</span> Haven Hands Services. All rights reserved.</p>
-            <p>Developed &amp; Maintained by <a href="https://brightlab.africa" target="_blank" rel="noopener noreferrer">Brightlab Technologies</a></p>
-        </div>
-    </div>
-</footer>
-
-<script src="main.js"></script>
-</div>
-</body>
-</html>
+<?php require 'includes/footer.php'; ?>
