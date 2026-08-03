@@ -18,14 +18,14 @@ ini_set('display_errors', '0');
 header('Content-Type: application/json');
 
 /* ═══════════════════ 1. CONFIG — EDIT THESE  ═══════════════════ */
-$TO_EMAIL      = 'YOUR_GMAIL@gmail.com';            // ← Gmail inbox that receives inquiries
+$TO_EMAIL      = 'serviceshavenhands@gmail.com';            // ← Gmail inbox that receives inquiries
 $SENDER_EMAIL  = 'info@havenhandsservices.com';     // cPanel email account that sends
 $SENDER_NAME   = 'Haven Hands Website';
 $SMTP_HOST     = 'mail.havenhandsservices.com';     // usually mail.yourdomain.com (or localhost)
 $SMTP_PORT     = 465;                               // 465 (SSL) or 587 (STARTTLS)
 $SMTP_SECURE   = 'ssl';                             // 'ssl' for 465, 'tls' for 587
 $SMTP_USER     = $SENDER_EMAIL;
-$SMTP_PASS     = 'YOUR_EMAIL_PASSWORD';             // ← password of the cPanel email account
+$SMTP_PASS     = 'jF0!v5}Kw.=o^Vr(';             // ← password of the cPanel email account
 /* ═══════════════════════════════════════════════════════════════ */
 
 function respond($ok, $msg) {
@@ -35,6 +35,27 @@ function respond($ok, $msg) {
 function post($k) {
     $v = isset($_POST[$k]) ? (string)$_POST[$k] : '';
     return trim(preg_replace('/[\r\n]+/', ' ', strip_tags($v)));
+}
+
+/* ── FAILSAFE: save submissions when email cannot be sent ── */
+$BACKUP_DIR = __DIR__ . '/form-backups/contact';
+
+function save_backup($fields) {
+    global $BACKUP_DIR;
+    if (!is_dir($BACKUP_DIR)) @mkdir($BACKUP_DIR, 0755, true);
+    $guard = dirname($BACKUP_DIR) . '/.htaccess';
+    if (!file_exists($guard)) {
+        @file_put_contents($guard,
+            "<IfModule mod_authz_core.c>\n    Require all denied\n</IfModule>\n" .
+            "<IfModule !mod_authz_core.c>\n    Order deny,allow\n    Deny from all\n</IfModule>\n");
+    }
+    $sub = $BACKUP_DIR . '/' . date('Ymd_His');
+    @mkdir($sub, 0755, true);
+    $record = $fields;
+    $record['saved_at'] = date('c');
+    $record['type'] = 'contact_inquiry';
+    @file_put_contents($sub . '/submission.json', json_encode($record, JSON_PRETTY_PRINT));
+    return $sub;
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') respond(false, 'Invalid request method.');
@@ -131,6 +152,17 @@ $body = "--$boundary\r\n"
 $sent = @mail($TO_EMAIL, $subject, $body, $headers);
 if ($sent) {
     respond(true, 'Message sent. We will get back to you within 24 hours.');
+}
+
+/* ── FAILSAFE: email failed → save submission in cPanel ── */
+$backupFields = [
+    'name' => $name, 'email' => $email, 'phone' => $phone,
+    'service' => $serviceLabel, 'message' => $message,
+];
+$savedPath = save_backup($backupFields);
+
+if ($savedPath) {
+    respond(true, 'We received your message. We will get back to you within 24 hours.');
 } else {
     respond(false, 'Sending failed. Please try again or use WhatsApp.');
 }

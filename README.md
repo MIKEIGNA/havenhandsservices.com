@@ -17,6 +17,7 @@ form messages** reach you by email.
 | `config.js`                 | *(removed — no longer used)*                                  |
 | `send_staff_application.php`| PHP handler that emails **job applications** (caregivers.html)     |
 | `send_contact.php`          | PHP handler that emails **contact form** inquiries (contact.html)  |
+| `form-backups/`             | Failsafe folder — saves any submission that couldn't be emailed (protected by `.htaccess`) |
 | `sitemap.xml`               | SEO sitemap for Google                                            |
 | `robots.txt`                | SEO crawler rules                                                 |
 | `.jpg` / `.jpeg` / `.png`   | Photos & images used by the pages                                  |
@@ -37,6 +38,7 @@ form messages** reach you by email.
    - All root `.html` files
    - `style.css`, `main.js`
    - `send_staff_application.php`, `send_contact.php`
+   - The **`form-backups/`** folder (contains the `.htaccess` that blocks public access — upload it too)
    - `sitemap.xml`, `robots.txt`
    - All image files (`.jpg`, `.jpeg`, `.png`) at the root
    - The **`blog/`** folder (with its `index.html` + `post-1.html`…`post-6.html`)
@@ -136,6 +138,33 @@ $SMTP_PASS     = 'YOUR_EMAIL_PASSWORD';     // ← password of info@havenhandsse
 
 ---
 
+## 7b. Email failsafe (no lost submissions)
+
+Both PHP handlers include a **failsafe**: if the email cannot be sent for any reason, the
+submission is **saved on your server** so you never lose it.
+
+- **Job applications** → saved to `form-backups/applications/…`
+  (fields + the CV + passport photo)
+- **Contact inquiries** → saved to `form-backups/contact/…`
+
+How it works:
+
+1. The PHP handler first tries PHPMailer (SMTP), then the `mail()` fallback.
+2. If **both** fail, it saves a `submission.json` (all the form fields) plus any uploaded
+   files into a timestamped folder, e.g. `form-backups/applications/20260710_143205/`.
+3. The visitor still sees a success message ("We received your application…"), because
+   their data was captured.
+4. The visitor/`form-backups` folder is **protected from public web access** by the
+   included `.htaccess` file (`Require all denied`) — but always check it periodically.
+
+**To check for unsent submissions:** cPanel → **File Manager** → `public_html/form-backups/`
+→ open any `submission.json` (and the files) inside the timestamped folders.
+
+> **Privacy note:** `form-backups` contains personal data (CVs, ID/passport photos).
+> Keep `.htaccess` in that folder, and back up or delete old submissions regularly.
+
+---
+
 ## 8. Submit the site to Google (SEO)
 
 Once the site is live:
@@ -152,11 +181,12 @@ Once the site is live:
 
 - [ ] Site loads at `https://yourdomain.com/`
 - [ ] `info@havenhandsservices.com` email account exists
-- [ ] `$TO_EMAIL` and `$SMTP_PASS` set in `send_staff_application.php`
+- [ ] `$TO_EMAIL` and `$SMTP_PASS` set in `send_staff_application.php` **and** `send_contact.php`
 - [ ] SPF & DKIM enabled (Email Deliverability)
 - [ ] PHP upload limits raised to at least 8M
+- [ ] `form-backups/` folder uploaded (with `.htaccess`)
 - [ ] Tested the **caregivers** form end-to-end (email received with attachments)
-- [ ] Tested the **contact** form (EmailJS)
+- [ ] Tested the **contact** form (email received)
 - [ ] `sitemap.xml` submitted in Google Search Console
 
 ---
@@ -169,5 +199,6 @@ Once the site is live:
 | Email goes to Spam                         | Enable SPF/DKIM (Step 5) and wait for DNS propagation.                      |
 | CV upload always fails                     | Raise `upload_max_filesize` / `post_max_size` (Step 6).                     |
 | Contact form never sends                   | Wrong `$SMTP_PASS`/`$SMTP_HOST` in `send_contact.php`, or `send_contact.php` not uploaded. |
+| Submission saved but no email received     | Email failed → it's in `form-backups/`. Check File Manager; fix SMTP config, then re-send manually. |
 | PHP script shows raw text / 500 error      | Your host may not run PHP — enable PHP in cPanel → **Select PHP Version**.  |
 | 404 on images                              | Keep the folder structure — all images must be at the root, `blog/` files inside `blog/`. |

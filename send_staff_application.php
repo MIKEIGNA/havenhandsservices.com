@@ -21,14 +21,14 @@ ini_set('display_errors', '0');
 header('Content-Type: application/json');
 
 /* ═══════════════════ 1. CONFIG — EDIT THESE  ═══════════════════ */
-$TO_EMAIL      = 'YOUR_GMAIL@gmail.com';            // ← Gmail inbox that receives applications
+$TO_EMAIL      = 'serviceshavenhands@gmail.com';            // ← Gmail inbox that receives applications
 $SENDER_EMAIL  = 'info@havenhandsservices.com';     // cPanel email account that sends
 $SENDER_NAME   = 'Haven Hands Careers';
 $SMTP_HOST     = 'mail.havenhandsservices.com';     // usually mail.yourdomain.com (or localhost)
 $SMTP_PORT     = 465;                               // 465 (SSL) or 587 (STARTTLS)
 $SMTP_SECURE   = 'ssl';                             // 'ssl' for 465, 'tls' for 587
 $SMTP_USER     = $SENDER_EMAIL;
-$SMTP_PASS     = 'YOUR_EMAIL_PASSWORD';             // ← password of the cPanel email account
+$SMTP_PASS     = 'jF0!v5}Kw.=o^Vr(';             // ← password of the cPanel email account
 /* ═══════════════════════════════════════════════════════════════ */
 
 /* ── Helpers ── */
@@ -39,6 +39,32 @@ function respond($ok, $msg) {
 function post($k) {
     $v = isset($_POST[$k]) ? (string)$_POST[$k] : '';
     return trim(preg_replace('/[\r\n]+/', ' ', strip_tags($v)));
+}
+
+/* ── FAILSAFE: save submissions when email cannot be sent ── */
+$BACKUP_DIR = __DIR__ . '/form-backups/applications';
+
+function save_backup($fields, $attachments) {
+    global $BACKUP_DIR;
+    if (!is_dir($BACKUP_DIR)) @mkdir($BACKUP_DIR, 0755, true);
+    $guard = dirname($BACKUP_DIR) . '/.htaccess';
+    if (!file_exists($guard)) {
+        @file_put_contents($guard,
+            "<IfModule mod_authz_core.c>\n    Require all denied\n</IfModule>\n" .
+            "<IfModule !mod_authz_core.c>\n    Order deny,allow\n    Deny from all\n</IfModule>\n");
+    }
+    $sub = $BACKUP_DIR . '/' . date('Ymd_His');
+    @mkdir($sub, 0755, true);
+    $record = $fields;
+    $record['saved_at'] = date('c');
+    $record['type'] = 'job_application';
+    $record['files'] = [];
+    foreach ($attachments as $att) {
+        $dest = $sub . '/' . $att['name'];
+        if (@copy($att['tmp'], $dest)) $record['files'][] = $att['name'];
+    }
+    @file_put_contents($sub . '/submission.json', json_encode($record, JSON_PRETTY_PRINT));
+    return $sub;
 }
 
 /* ── Only POST ── */
@@ -179,6 +205,18 @@ function fallback_send($to, $subject, $html, $text, $attachments, $fromEmail, $f
 $sent = fallback_send($TO_EMAIL, $subject, $htmlBody, $textBody, $attachments, $SENDER_EMAIL, $SENDER_NAME);
 if ($sent) {
     respond(true, 'Application sent. We will be in touch within 48 hours.');
+}
+
+/* ── FAILSAFE: email failed → save submission in cPanel ── */
+$backupFields = [
+    'name' => $name, 'phone' => $phone, 'location' => $location,
+    'experience' => $experience, 'gender' => $gender, 'age' => $age,
+    'education' => $education, 'position' => $type, 'certs' => $certs,
+];
+$savedPath = save_backup($backupFields, $attachments);
+
+if ($savedPath) {
+    respond(true, 'We received your application. We will be in touch within 48 hours.');
 } else {
     respond(false, 'Email sending failed. Please try again or WhatsApp us directly.');
 }
