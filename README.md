@@ -18,6 +18,7 @@ form messages** reach you by email.
 | `main.js`                   | Site JavaScript: menus, hero slider, forms, animations             |
 | `send_staff_application.php`| PHP handler that emails **job applications** (caregivers.html URL)  |
 | `send_contact.php`          | PHP handler that emails **contact form** inquiries (contact.html URL) |
+| `PHPMailer/`                | Bundled PHPMailer library — sends over SMTP since `mail()` is disabled on this host |
 | `form-backups/`             | Failsafe folder — saves any submission that couldn't be emailed (protected by `.htaccess`) |
 | `sitemap.xml`               | SEO sitemap for Google (still points to `.html` URLs — they work via the rewrite) |
 | `robots.txt`                | SEO crawler rules                                                 |
@@ -106,8 +107,14 @@ $SMTP_PASS     = 'YOUR_EMAIL_PASSWORD';     // ← password of info@havenhandsse
 
 **Upload & test**
 1. After editing, upload `send_staff_application.php` to `public_html`.
-2. Open `https://yourdomain.com/caregivers.html`, fill the form, attach a CV + photo, submit.
-3. Check your Gmail inbox — you should receive the application with the attachments.
+2. **This host has `mail()` disabled**, so you must also upload the bundled **`PHPMailer/`**
+   folder (contains `src/PHPMailer.php`, `src/SMTP.php`, `src/Exception.php`) into
+   `public_html` — the handlers detect it there and send over SMTP instead.
+3. Open `https://yourdomain.com/caregivers.html`, fill the form, attach a CV + photo, submit.
+4. Check your Gmail inbox — you should receive the application with the attachments.
+5. If it still doesn't send, open `public_html/form-backups/…/debug.txt` — it records
+   `mail_function_exists`, `phpmailer_available`, and any `smtp_error`, which tells us
+   exactly what to change (port/secure mode/account).
 
 **If the email lands in Gmail's Spam folder**
 - Enable **SPF & DKIM** (see Step 5) and re-test. Wait a few hours for DNS to propagate.
@@ -116,17 +123,27 @@ $SMTP_PASS     = 'YOUR_EMAIL_PASSWORD';     // ← password of info@havenhandsse
 
 ## 5. Configure SPF & DKIM (so emails don't go to spam)
 
-**Already done for this domain.** The Cloudflare zone export for `havenhandsservices.com`
-already contains everything email-sending needs:
+**This domain needs 2 DNS records updated in Cloudflare** (your DNS is on Cloudflare —
+`archer`/`peaches.ns.cloudflare.com` — so the cPanel "Email Deliverability" suggestions
+must be added there, not in cPanel). The current Cloudflare records don't match the
+cPanel mail server, which is why email isn't being delivered.
 
-- **MX** → `0 _dc-mx.21bf1973c5c5.havenhandsservices.com.` (cPanel delivery center)
-- **SPF** → `v=spf1 +a +mx include:_spf.truehostcloud.com ~all` (passes, since the site
-  and mail share server IP `102.212.246.90`)
-- **DKIM** → `default._domainkey` TXT record is present
-- **DMARC** → `v=DMARC1; p=quarantine; ...`
+In **Cloudflare → DNS → Records**:
 
-No DNS changes are required. If you ever re-check and one is missing, fix it in cPanel →
-**Email Deliverability** → **Manage** → **Repair/Generate**, then wait up to 24h for DNS.
+1. **DKIM** — replace the existing `default._domainkey.havenhandsservices.com` TXT with the
+   value cPanel suggests (Email Deliverability → Manage → DKIM). It changes every time the
+   server's key is regenerated, so copy it fresh from cPanel. It looks like:
+   `v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwg4Q8...`
+2. **SPF** — edit the `havenhandsservices.com` TXT to add the server IP:
+   `v=spf1 +a +mx +ip4:102.212.246.90 +include:_spf.truehostcloud.com ~all`
+3. **DMARC** — already present (`v=DMARC1; p=quarantine; …`); it will validate once SPF/DKIM
+   are correct.
+
+DNS changes take a few minutes to a few hours on Cloudflare. After they propagate, re-check
+cPanel → **Email Deliverability** — all three should show green.
+
+> The mail server's HELO is `das118.truehost.cloud`, and the PTR is valid, so the remaining
+> requirements are just the correct DKIM + SPF records above.
 
 ---
 

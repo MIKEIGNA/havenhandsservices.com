@@ -148,8 +148,10 @@ $backupFields = ['name' => $name, 'phone' => $phone, 'location' => $location,
 $savedPath = save_backup($backupFields, $attachments);
 
 $sent = false;
+$debug = ['php' => PHP_VERSION, 'time' => date('c')];
 
 /* ── 2. Try mail() — reliable on cPanel (local Exim, DKIM-signed) ── */
+$debug['mail_function_exists'] = function_exists('mail');
 if (!$sent && function_exists('mail') && function_exists('file_get_contents')
     && function_exists('base64_encode') && function_exists('chunk_split')) {
     $boundary = md5(uniqid(mt_rand(), true));
@@ -172,28 +174,51 @@ if (!$sent && function_exists('mail') && function_exists('file_get_contents')
     }
     $body .= "--$boundary--\r\n";
     $sent = @mail($TO_EMAIL, $subject, $body, $headers);
+    $debug['mail_result'] = $sent;
+} else {
+    $debug['mail_result'] = 'not_called';
 }
 
-/* ── 3. Fallback: PHPMailer over SMTP if available ── */
+/* ── 3. Fallback: PHPMailer over SMTP — try common cPanel configs ── */
 if (!$sent) {
+    $debug['openssl'] = extension_loaded('openssl');
     $phpmailerLoaded = false;
     foreach ([__DIR__ . '/vendor/autoload.php', __DIR__ . '/PHPMailer/src/PHPMailer.php',
               '/usr/share/php/PHPMailer/PHPMailer.php', '/usr/share/php/PHPMailer/src/PHPMailer.php'] as $path) {
-        if (file_exists($path)) { require_once $path; $phpmailerLoaded = true; break; }
+        if (file_exists($path)) {
+            $srcDir = dirname($path);
+            if (file_exists($srcDir . '/Exception.php')) require_once $srcDir . '/Exception.php';
+            if (file_exists($srcDir . '/SMTP.php')) require_once $srcDir . '/SMTP.php';
+            require_once $path;
+            $phpmailerLoaded = true;
+            break;
+        }
     }
-    if ($phpmailerLoaded && class_exists('PHPMailer\PHPMailer\PHPMailer')) {
+    $debug['phpmailer_available'] = $phpmailerLoaded && class_exists('PHPMailer\PHPMailer\PHPMailer');
+
+    $attempts = [
+        ['host' => $SMTP_HOST, 'port' => 587, 'secure' => 'tls',  'auth' => true],
+        ['host' => $SMTP_HOST, 'port' => 465, 'secure' => 'ssl',  'auth' => true],
+        ['host' => $SMTP_HOST, 'port' => 25,  'secure' => '',     'auth' => true],
+        ['host' => $SMTP_HOST, 'port' => 25,  'secure' => '',     'auth' => false],
+    ];
+    $attemptLog = [];
+    foreach ($attempts as $a) {
+        if ($sent) break;
+        if (!$phpmailerLoaded || !class_exists('PHPMailer\PHPMailer\PHPMailer')) break;
+        $label = $a['host'] . ':' . $a['port'] . '/' . ($a['secure'] ?: 'plain') . '/' . ($a['auth'] ? 'auth' : 'noauth');
         try {
             $mail = new PHPMailer\PHPMailer\PHPMailer(true);
             $mail->isSMTP();
-            $mail->Host              = $SMTP_HOST;
-            $mail->SMTPAuth          = true;
-            $mail->Username          = $SMTP_USER;
-            $mail->Password          = $SMTP_PASS;
-            $mail->Port              = $SMTP_PORT;
-            $mail->SMTPSecure        = ($SMTP_SECURE === 'tls') ? PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS : PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Timeout           = 10;
-            $mail->SMTPConnectTimeout = 10;
-            $mail->CharSet           = 'UTF-8';
+            $mail->Host               = $a['host'];
+            $mail->Port               = $a['port'];
+            $mail->SMTPSecure         = $a['secure'];
+            $mail->SMTPAuth           = $a['auth'];
+            $mail->SMTPAutoTLS        = ($a['secure'] === 'tls');
+            if ($a['auth']) { $mail->Username = $SMTP_USER; $mail->Password = $SMTP_PASS; }
+            $mail->Timeout            = 5;
+            $mail->SMTPConnectTimeout = 5;
+            $mail->CharSet            = 'UTF-8';
             $mail->setFrom($SENDER_EMAIL, $SENDER_NAME);
             $mail->addAddress($TO_EMAIL);
             $mail->addReplyTo($SENDER_EMAIL, $SENDER_NAME);
@@ -204,10 +229,12 @@ if (!$sent) {
             foreach ($attachments as $att) $mail->addAttachment($att['tmp'], $att['name']);
             $mail->send();
             $sent = true;
+            $debug['smtp_used'] = $label;
         } catch (Exception $e) {
-            $sent = false;
+            $attemptLog[] = $label . ' => ' . $e->getMessage();
         }
     }
+    if ($attemptLog) { $debug['smtp_attempts'] = $attemptLog; }
 }
 
 /* ── 4. Email sent → remove the backup. Not sent → keep it (failsafe). ── */
@@ -216,4 +243,5 @@ if ($sent) {
     respond(true, 'Application sent. We will be in touch within 48 hours.');
 }
 
+@file_put_contents($savedPath . '/debug.txt', json_encode($debug, JSON_PRETTY_PRINT));
 respond(true, 'We received your application. We will be in touch within 48 hours.');
