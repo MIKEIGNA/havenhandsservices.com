@@ -169,28 +169,27 @@ $SMTP_PASS     = 'YOUR_EMAIL_PASSWORD';     // ← password of info@havenhandsse
 
 ## 7b. Email failsafe (no lost submissions)
 
-Both PHP handlers include a **failsafe**: if the email cannot be sent for any reason, the
-submission is **saved on your server** so you never lose it.
+Both PHP handlers use a **save-first** design: the submission (and any uploaded
+CV/passport photo) is **saved to `form-backups/` immediately on submit**, *before* email
+is even attempted. Email is then tried via `mail()` (cPanel local Exim, DKIM-signed) or,
+if unavailable, PHPMailer over SMTP.
 
-- **Job applications** → saved to `form-backups/applications/…`
-  (fields + the CV + passport photo)
+- If the email **sends** → the saved copy is removed automatically.
+- If the email **fails** (e.g. `mail()` is disabled on the host, or SMTP is blocked) →
+  the saved copy stays on the server. The visitor still sees a success message, because
+  their data was captured.
+
+This means a server restriction can **never cause a 500** or lose a submission — worst
+case, the application/inquiry sits in `form-backups/` for you to check.
+
+- **Job applications** → saved to `form-backups/applications/…` (fields + CV + photo)
 - **Contact inquiries** → saved to `form-backups/contact/…`
 
-How it works:
-
-1. The PHP handler first tries PHPMailer (SMTP), then the `mail()` fallback.
-2. If **both** fail, it saves a `submission.json` (all the form fields) plus any uploaded
-   files into a timestamped folder, e.g. `form-backups/applications/20260710_143205/`.
-3. The visitor still sees a success message ("We received your application…"), because
-   their data was captured.
-4. The visitor/`form-backups` folder is **protected from public web access** by the
-   included `.htaccess` file (`Require all denied`) — but always check it periodically.
-
-**To check for unsent submissions:** cPanel → **File Manager** → `public_html/form-backups/`
-→ open any `submission.json` (and the files) inside the timestamped folders.
+**To check for unsent submissions:** cPanel → **File Manager** →
+`public_html/form-backups/` → open the timestamped folders' `submission.json` (and files).
 
 > **Privacy note:** `form-backups` contains personal data (CVs, ID/passport photos).
-> Keep `.htaccess` in that folder, and back up or delete old submissions regularly.
+> Keep the `.htaccess` in that folder, and back up or delete old submissions regularly.
 
 ---
 
