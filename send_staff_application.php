@@ -24,7 +24,7 @@ header('Content-Type: application/json');
 $TO_EMAIL      = 'serviceshavenhands@gmail.com';            // ← Gmail inbox that receives applications
 $SENDER_EMAIL  = 'info@havenhandsservices.com';     // cPanel email account that sends
 $SENDER_NAME   = 'Haven Hands Careers';
-$SMTP_HOST     = 'mail.havenhandsservices.com';     // usually mail.yourdomain.com (or localhost)
+$SMTP_HOST     = 'localhost';                       // site + mail share the same server; 'mail.havenhandsservices.com' also works
 $SMTP_PORT     = 465;                               // 465 (SSL) or 587 (STARTTLS)
 $SMTP_SECURE   = 'ssl';                             // 'ssl' for 465, 'tls' for 587
 $SMTP_USER     = $SENDER_EMAIL;

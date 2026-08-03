@@ -78,7 +78,7 @@ application form**. Open it in a text editor and edit the top section:
 ```php
 $TO_EMAIL      = 'YOUR_GMAIL@gmail.com';   // ← your Gmail inbox (receives applications)
 $SENDER_EMAIL  = 'info@havenhandsservices.com';
-$SMTP_HOST     = 'mail.havenhandsservices.com';  // usually mail.yourdomain.com
+$SMTP_HOST     = 'localhost';                 // same server; mail.havenhandsservices.com also works
 $SMTP_PORT     = 465;                       // 465 (SSL) or 587 (STARTTLS)
 $SMTP_SECURE   = 'ssl';                     // 'ssl' for 465, 'tls' for 587
 $SMTP_USER     = $SENDER_EMAIL;
@@ -104,11 +104,17 @@ $SMTP_PASS     = 'YOUR_EMAIL_PASSWORD';     // ← password of info@havenhandsse
 
 ## 5. Configure SPF & DKIM (so emails don't go to spam)
 
-1. In cPanel open **Email Deliverability**.
-2. Find `havenhandsservices.com` and click **Manage**.
-3. Confirm **SPF** and **DKIM** are **Enabled**. If anything is missing, click
-   **Repair** / **Generate** and follow cPanel's instructions to add the DNS records.
-4. DNS changes can take up to 24 hours to fully propagate.
+**Already done for this domain.** The Cloudflare zone export for `havenhandsservices.com`
+already contains everything email-sending needs:
+
+- **MX** → `0 _dc-mx.21bf1973c5c5.havenhandsservices.com.` (cPanel delivery center)
+- **SPF** → `v=spf1 +a +mx include:_spf.truehostcloud.com ~all` (passes, since the site
+  and mail share server IP `102.212.246.90`)
+- **DKIM** → `default._domainkey` TXT record is present
+- **DMARC** → `v=DMARC1; p=quarantine; ...`
+
+No DNS changes are required. If you ever re-check and one is missing, fix it in cPanel →
+**Email Deliverability** → **Manage** → **Repair/Generate**, then wait up to 24h for DNS.
 
 ---
 
@@ -133,7 +139,7 @@ to `send_contact.php`, which has its own config block at the top:
 ```php
 $TO_EMAIL      = 'YOUR_GMAIL@gmail.com';   // ← your Gmail inbox (receives inquiries)
 $SENDER_EMAIL  = 'info@havenhandsservices.com';
-$SMTP_HOST     = 'mail.havenhandsservices.com';
+$SMTP_HOST     = 'localhost';                 // same server
 $SMTP_PORT     = 465;                       // 465 (SSL) or 587 (STARTTLS)
 $SMTP_SECURE   = 'ssl';
 $SMTP_USER     = $SENDER_EMAIL;

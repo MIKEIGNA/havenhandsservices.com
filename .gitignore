@@ -1,0 +1,7 @@
+# Email handlers contain SMTP credentials — never commit
+send_staff_application.php
+send_contact.php
+
+# Runtime form-backup submissions contain personal data (CVs, passport photos)
+form-backups/applications/
+form-backups/contact/
