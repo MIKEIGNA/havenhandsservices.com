@@ -48,7 +48,7 @@ require 'includes/header.php';
             <div class="split-content" data-reveal="right">
                 <span class="section-tag">How we began</span>
                 <h2>It started with a bad experience</h2>
-                <p>Like most Nairobi families, we'd tried hiring househelps through word of mouth, social media groups, and other agencies. It rarely ended well. Someone would steal. Someone else would just stop showing up. And the ones who were decent had never been trained on basic things like kitchen hygiene or how to use a washing machine.</p>
+                <p>Like most Nairobi families, we'd tried hiring house managers through word of mouth, social media groups, and other agencies. It rarely ended well. Someone would steal. Someone else would just stop showing up. And the ones who were decent had never been trained on basic things like kitchen hygiene or how to use a washing machine.</p>
                 <p>So we decided to do things differently. We started Haven Hands to give families access to Staff who are actually vetted, properly trained, and treated with dignity. Because when you take care of your staff, they take care of your home.</p>
                 <ul class="check-list">
                     <li>
