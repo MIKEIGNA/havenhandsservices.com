@@ -201,12 +201,12 @@ require 'includes/header.php';
             <!-- Worker 2: Millicent -->
             <div class="worker-card" data-reveal data-delay="200">
                 <div class="worker-img-wrap">
-                    <img src="staff-another.jpeg" alt="Millicent Akinyi Wasonga - Daybug" class="worker-img">
+                    <img src="staff-another.jpeg" alt="Millicent A. - Daybug" class="worker-img">
                 </div>
                 <div class="worker-info">
                     <span class="worker-type">Daybug (Part-Time Help)</span>
                     <span class="worker-status not-available">Not Available</span>
-                    <div class="worker-name">Millicent Akinyi Wasonga</div>
+                    <div class="worker-name">Millicent A.</div>
                     <div class="worker-exp">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                         5+ years experience
@@ -226,12 +226,12 @@ require 'includes/header.php';
             <!-- Worker 3: Audrey -->
             <div class="worker-card" data-reveal data-delay="300">
                 <div class="worker-img-wrap">
-                    <img src="Audrey-profile.png" alt="Audrey Christine - House Manager" class="worker-img">
+                    <img src="Audrey-profile.png" alt="Audrey C. - House Manager" class="worker-img">
                 </div>
                 <div class="worker-info">
                     <span class="worker-type">House Manager</span>
                     <span class="worker-status not-available">Not Available</span>
-                    <div class="worker-name">Audrey Christine</div>
+                    <div class="worker-name">Audrey C.</div>
                     <div class="worker-skills">
                         <span class="skill-chip">Household Management</span>
                         <span class="skill-chip">Childcare</span>

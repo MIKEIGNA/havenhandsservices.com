@@ -38,8 +38,12 @@ require 'includes/header.php';
 <section class="section-pad" id="story">
     <div class="container">
         <div class="split-section">
-            <div class="split-img-wrap" data-reveal="left">
-                <img src="staff-another.jpeg" alt="Haven Hands story background">
+            <div class="split-img-wrap" data-reveal="left" style="position:relative;">
+                <img src="shao-ceo.jpeg" alt="Sharon W. O. - Founder, Haven Hands Services">
+                <div style="position:absolute;bottom:0;left:0;right:0;padding:1.25rem 1.5rem;background:linear-gradient(to top,rgba(0,40,42,0.85) 0%,transparent 100%);color:#fff;font-size:0.85rem;">
+                    <strong style="display:block;font-size:1rem;">Sharon W. O.</strong>
+                    <span style="opacity:0.85;">Founder, Haven Hands Services</span>
+                </div>
             </div>
             <div class="split-content" data-reveal="right">
                 <span class="section-tag">How we began</span>

@@ -28,7 +28,7 @@ function e_attr($v) { return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8'); 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo e_attr($pageTitle); ?></title>
     <meta name="description" content="<?php echo e_attr($pageDesc); ?>">
-    <link rel="icon" type="image/png" href="<?php echo $SITE_BASE; ?>logo.png">
+    <link rel="icon" type="image/png" href="<?php echo $SITE_BASE; ?>favicon.png">
     <meta name="theme-color" content="#006A71">
 
     <!-- GEO / SEO -->
