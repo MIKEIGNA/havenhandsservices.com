@@ -236,7 +236,7 @@ require 'includes/header.php';
             <!-- Worker 6: Judy -->
             <div class="worker-card" data-type="elderly">
                 <div class="worker-img-wrap">
-                    <img src="placeholder.svg" alt="Judy S. - Caregiver" class="worker-img">
+                    <img src="judy-profile.jpeg" alt="Judy S. - Caregiver" class="worker-img">
                     <span class="worker-availability">Available</span>
                 </div>
                 <div class="worker-info">
@@ -341,6 +341,41 @@ require 'includes/header.php';
                     </div>
                     <div class="worker-actions">
                         <a href="https://wa.me/254118971254?text=Hello%20Haven%20Hands%2C%20I%27d%20like%20to%20request%20an%20interview%20with%20Scholastika%20for%20a%20Housekeeper%20role." target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full">Request Interview</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Worker 9: Lydia -->
+            <div class="worker-card" data-type="househelp">
+                <div class="worker-img-wrap">
+                    <img src="Lydia Namasambu.jpeg" alt="Lydia N. - Housekeeper / Cleaner" class="worker-img">
+                    <span class="worker-availability">Available</span>
+                </div>
+                <div class="worker-info">
+                    <span class="worker-type">Housekeeper / Cleaner</span>
+                    <div class="worker-name">Lydia N.</div>
+                    <div class="worker-exp">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        7+ years experience
+                    </div>
+                    <div class="worker-facts">
+                        <div class="worker-fact"><span class="wf-label">Location</span><span class="wf-value">Utawala, Nairobi</span></div>
+                        <div class="worker-fact"><span class="wf-label">Education</span><span class="wf-value">KCSE (St. Charles Lwanga HS)</span></div>
+                        <div class="worker-fact"><span class="wf-label">Experience</span><span class="wf-value">Daystar University, Teule House</span></div>
+                        <div class="worker-fact"><span class="wf-label">References</span><span class="wf-value">Available on request</span></div>
+                    </div>
+                    <p class="worker-char"><strong>Profile:</strong> Dedicated, reliable, and hardworking Housekeeper with over 7 years of experience in housekeeping, hospitality, and cleaning services. Experienced in general and deep cleaning, laundry, ironing, and maintaining high standards of hygiene. Excellent attention to detail and customer service skills.</p>
+                    <div class="worker-skills">
+                        <span class="skill-chip">General &amp; Deep Cleaning</span>
+                        <span class="skill-chip">Laundry &amp; Ironing</span>
+                        <span class="skill-chip">Housekeeping &amp; Home Organization</span>
+                        <span class="skill-chip">Hygiene &amp; Sanitation</span>
+                        <span class="skill-chip">Hospitality &amp; Customer Service</span>
+                        <span class="skill-chip">Time Management</span>
+                        <span class="skill-chip">Attention to Detail</span>
+                    </div>
+                    <div class="worker-actions">
+                        <a href="https://wa.me/254118971254?text=Hello%20Haven%20Hands%2C%20I%27d%20like%20to%20request%20an%20interview%20with%20Lydia%20for%20a%20Housekeeper%20role." target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full">Request Interview</a>
                     </div>
                 </div>
             </div>
